@@ -12,8 +12,14 @@
         Title="MainWindow" Height="450" Width="800">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" GlassFrameThickness="0" CornerRadius="0"/>
+        <WindowChrome     
+            CaptionHeight="1"  
+            CornerRadius ="0"
+            ResizeBorderThickness="5"         
+            GlassFrameThickness="0">
+        </WindowChrome>
     </WindowChrome.WindowChrome>
+    
 
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" 
@@ -23,6 +29,22 @@
     </Window.CommandBindings>
 
     <Grid Background="#FF151414">
+        <Grid.Style>
+            <Style TargetType="{x:Type Grid}">
+                <Style.Triggers>
+                    <!-- Add to avoid border disappearing when window is maximised -->
+                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                 Value="Maximized">
+                        <Setter Property="Margin" Value="8"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                 Value="Normal">
+                        <Setter Property="Margin" Value="0"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
@@ -48,7 +70,7 @@
             </ToggleButton>
             <Button Height="30" 
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Foreground="#FFAC1818">
+                    Foreground="Red">
                 <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" Foreground="#d9ebe9" HorizontalAlignment="Left"/>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
@@ -65,25 +87,37 @@
         <!-- Навигационное меню -->
 
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <RadioButton Height="50" Style="{StaticResource MaterialDesignTabRadioButton}" BorderBrush="#d9ebe9" Padding="0">
+            <RadioButton Height="50"
+                         Style="{StaticResource MaterialDesignTabRadioButton}" 
+                         BorderBrush="#d9ebe9" Padding="0"
+                         Command="{Binding HomeClickCommand}">
                 <StackPanel Orientation="Horizontal" Width="130">
                     <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
                     <TextBlock Text="Home" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 </StackPanel>
             </RadioButton>
-            <RadioButton Height="50" Style="{StaticResource MaterialDesignTabRadioButton}" BorderBrush="#d9ebe9" Padding="0">
+            <RadioButton Height="50" 
+                         Style="{StaticResource MaterialDesignTabRadioButton}" 
+                         BorderBrush="#d9ebe9" Padding="0"
+                         Command="{Binding LikedClickCommand}">
                 <StackPanel Orientation="Horizontal" Width="130">
                     <materialDesign:PackIcon Kind="Heart" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
                     <TextBlock Text="Liked" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 </StackPanel>
             </RadioButton>
-            <RadioButton Height="50" Style="{StaticResource MaterialDesignTabRadioButton}" BorderBrush="#d9ebe9" Padding="0">
+            <RadioButton Height="50" 
+                         Style="{StaticResource MaterialDesignTabRadioButton}" 
+                         BorderBrush="#d9ebe9" Padding="0"
+                         Command="{Binding PlaylistsClickCommand}">
                 <StackPanel Orientation="Horizontal" Width="130">
                     <materialDesign:PackIcon Kind="PlaylistMusic" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
                     <TextBlock Text="Playlists" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 </StackPanel>
             </RadioButton>
-            <Button Height="50" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#d9ebe9" BorderBrush="#d9ebe9" Padding="0">
+            <Button Height="50"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="#d9ebe9" BorderBrush="#d9ebe9" Padding="0"
+                    Command="{Binding SleepClickCommand}">
                 <StackPanel Orientation="Horizontal" Width="130">
                     <materialDesign:PackIcon Kind="Sleep" 
                                              Height="40" Width="40" 
@@ -98,7 +132,8 @@
 
         <Frame Grid.Column="1" Grid.Row="1"
                Content="{Binding CurrentPage}"
-               NavigationUIVisibility="Hidden"/>
+               NavigationUIVisibility="Hidden"
+              />
 
         <!-- Панель управления аудио -->
 
