@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,7 @@ namespace dipl.ViewModels
             LikedPage = new Pages.LikedPage();
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
+            FrameOpacity = 1;
         }
 
         private Page _currentPage;
@@ -37,13 +39,27 @@ namespace dipl.ViewModels
             }
         }
 
+        private double _frameOpacity;
+        public double FrameOpacity
+        {
+            get
+            {
+                return _frameOpacity;
+            }
+            set
+            {
+                _frameOpacity = value;
+                OnPropertyChanged("FrameOpacity");
+            }
+        }
+
         public ICommand LikedClickCommand
         {
             get
             {
                 return new RelayCommand((obj) =>
                 {
-                    CurrentPage = LikedPage;
+                    SlowOpacity(LikedPage);
                 });
             }
         }
@@ -54,7 +70,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    CurrentPage = HomePage;
+                    SlowOpacity(HomePage);
                 });
             }
         }
@@ -65,9 +81,27 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    CurrentPage = PlaylistsPage;
+                    SlowOpacity(PlaylistsPage);
                 });
             }
+        }
+
+        private async void SlowOpacity(Page page)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                for (double i = 1; i > 0; i -= 0.1)
+                {
+                    FrameOpacity = i;
+                    Thread.Sleep(10);
+                }
+                CurrentPage = page;
+                for (double i = 0; i < 1.1; i += 0.1)
+                {
+                    FrameOpacity = i;
+                    Thread.Sleep(20);
+                }
+            });
         }
     }
 }

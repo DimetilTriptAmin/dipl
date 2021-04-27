@@ -46,7 +46,7 @@
         </Grid.Style>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="160"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -91,39 +91,47 @@
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding HomeClickCommand}">
-                <StackPanel Orientation="Horizontal" Width="130">
+                <StackPanel Orientation="Horizontal" Width="145">
                     <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                    <TextBlock Text="Home" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock FontFamily="Arial Black"
+                               Text="Home" Foreground="#d9ebe9" 
+                               FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 </StackPanel>
             </RadioButton>
             <RadioButton Height="50" 
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding LikedClickCommand}">
-                <StackPanel Orientation="Horizontal" Width="130">
+                <StackPanel Orientation="Horizontal" Width="145">
                     <materialDesign:PackIcon Kind="Heart" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                    <TextBlock Text="Liked" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock Text="Liked" Foreground="#d9ebe9"
+                               FontSize="20" VerticalAlignment="Center"
+                               Margin="10,0,0,0" FontFamily="Arial Black"/>
                 </StackPanel>
             </RadioButton>
             <RadioButton Height="50" 
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding PlaylistsClickCommand}">
-                <StackPanel Orientation="Horizontal" Width="130">
+                <StackPanel Orientation="Horizontal" Width="145">
                     <materialDesign:PackIcon Kind="PlaylistMusic" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                    <TextBlock Text="Playlists" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock Text="Playlists" Foreground="#d9ebe9"
+                               FontSize="20" VerticalAlignment="Center"
+                               Margin="10,0,0,0" FontFamily="Arial Black"/>
                 </StackPanel>
             </RadioButton>
             <Button Height="50"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Foreground="#d9ebe9" BorderBrush="#d9ebe9" Padding="0"
                     Command="{Binding SleepClickCommand}">
-                <StackPanel Orientation="Horizontal" Width="130">
+                <StackPanel Orientation="Horizontal" Width="145">
                     <materialDesign:PackIcon Kind="Sleep" 
                                              Height="40" Width="40" 
                                              VerticalAlignment="Center" Foreground="#d9ebe9"
                                              HorizontalAlignment="Left"/>
-                    <TextBlock Text="Sleep" Foreground="#d9ebe9" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock Text="Sleep" Foreground="#d9ebe9"
+                               FontSize="20" VerticalAlignment="Center"
+                               Margin="10,0,0,0" FontFamily="Arial Black"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -133,6 +141,7 @@
         <Frame Grid.Column="1" Grid.Row="1"
                Content="{Binding CurrentPage}"
                NavigationUIVisibility="Hidden"
+               Opacity="{Binding FrameOpacity}"
               />
 
         <!-- Панель управления аудио -->
