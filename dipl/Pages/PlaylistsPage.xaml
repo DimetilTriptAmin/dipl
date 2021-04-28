@@ -22,6 +22,30 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="Header">
+            <Border>
+                <Rectangle x:Name="BlurringShape" Margin="3,3,3,-130">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" />
+                    </Rectangle.Fill>
+                    <Rectangle.Effect>
+                        <BlurEffect KernelType="Gaussian" Radius="3" />
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Border.CacheMode>
+                    <BitmapCache />
+                </Border.CacheMode>
+            </Border>
+            <Border Margin="0,0,0,-140">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#E5000000" Offset="0.85"/>
+                        <GradientStop Color="#4C000000"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <BlurEffect KernelType="Gaussian" Radius="6" />
+                </Border.Effect>
+            </Border>
             <TextBlock VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="50"

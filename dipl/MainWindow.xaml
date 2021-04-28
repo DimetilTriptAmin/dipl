@@ -70,7 +70,7 @@
             </ToggleButton>
             <Button Height="30" 
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Foreground="Red">
+                    Foreground="Red" BorderBrush="Red" Background="{x:Null}">
                 <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" Foreground="#d9ebe9" HorizontalAlignment="Left"/>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
@@ -112,7 +112,7 @@
             <RadioButton Height="50" 
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
-                         Command="{Binding PlaylistsClickCommand}">
+                         Command="{Binding PlaylistsClickCommand}" Foreground="#FFD9EBE9">
                 <StackPanel Orientation="Horizontal" Width="145">
                     <materialDesign:PackIcon Kind="PlaylistMusic" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
                     <TextBlock Text="Playlists" Foreground="#d9ebe9"
@@ -121,9 +121,9 @@
                 </StackPanel>
             </RadioButton>
             <Button Height="50"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Foreground="#d9ebe9" BorderBrush="#d9ebe9" Padding="0"
-                    Command="{Binding SleepClickCommand}">
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                    Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
+                    Command="{Binding SleepClickCommand}" Background="{x:Null}">
                 <StackPanel Orientation="Horizontal" Width="145">
                     <materialDesign:PackIcon Kind="Sleep" 
                                              Height="40" Width="40" 
@@ -137,7 +137,6 @@
         </StackPanel>
 
         <!-- Основная панель -->
-
         <Frame Grid.Column="1" Grid.Row="1"
                Content="{Binding CurrentPage}"
                NavigationUIVisibility="Hidden"
