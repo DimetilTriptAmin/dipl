@@ -25,6 +25,22 @@ namespace dipl.ViewModels
             FrameOpacity = 1;
         }
 
+        private bool _isPlaying = true;
+        public string IsPlaying
+        {
+            get
+            {
+                return _isPlaying? "Pause":"Play";
+            }
+            set
+            {
+                if (value == "Pause") _isPlaying = true;
+                else _isPlaying = false;
+                OnPropertyChanged("IsPlaying");
+            }
+
+        }
+
         private Page _currentPage;
         public Page CurrentPage
         {
@@ -50,6 +66,19 @@ namespace dipl.ViewModels
             {
                 _frameOpacity = value;
                 OnPropertyChanged("FrameOpacity");
+            }
+        }
+
+        public ICommand PlayClickCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    if(_isPlaying)
+                    IsPlaying="Play";
+                    else IsPlaying = "Pause";
+                });
             }
         }
 

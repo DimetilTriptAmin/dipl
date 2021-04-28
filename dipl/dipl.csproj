@@ -71,6 +71,8 @@
     </ApplicationDefinition>
     <Compile Include="Models\Audio.cs" />
     <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\AbstractUser.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Pages\Converters\WidthConverter.cs" />
     <Compile Include="Pages\PlaylistPage.xaml.cs">
       <DependentUpon>PlaylistPage.xaml</DependentUpon>
