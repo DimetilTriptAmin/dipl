@@ -19,7 +19,7 @@
             <Border>
                 <Rectangle x:Name="BlurringShape" Margin="3,3,3,-130">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" />
+                        <ImageBrush ImageSource="{Binding Playlist.Image}" Stretch="UniformToFill" />
                     </Rectangle.Fill>
                     <Rectangle.Effect>
                         <BlurEffect KernelType="Gaussian" Radius="3" />
@@ -44,10 +44,17 @@
                        HorizontalAlignment="Left"
                        Margin="50"
                        FontSize="50"
-                       Text="Liked"
+                       Text="{Binding Playlist.Name}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
-            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+			<Button HorizontalAlignment="Right"
+							Margin="50"
+                            Height="50" Width="50"
+                            Style="{StaticResource MaterialDesignFloatingActionButton}"                               
+							BorderBrush="#00000000" Background="{x:Null}">
+				<materialDesign:PackIcon Kind="Edit" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+			</Button>
+			<Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1"
@@ -56,20 +63,67 @@
             <ItemsControl ItemsSource="{Binding Audios}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="10" Orientation="Horizontal">
-                            <Border Width="50" Height="50">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="{Binding Image}"/>
-                                </Border.Background>
-                            </Border>
-                            <TextBlock Text="{Binding Name}" 
-                                           FontSize="18" Foreground="#d9ebe9" 
-                                           TextAlignment="Center" 
-                                           TextWrapping="WrapWithOverflow"
-                                           FontFamily="Arial Black"
-                                           Margin="10"/>
-                        </StackPanel>
-                    </DataTemplate>
+						<Grid Margin="10" Background="#26D9EBE9">
+							<StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+								<Border Width="50" Height="50">
+									<Border.Background>
+										<ImageBrush ImageSource="{Binding Image}"/>
+									</Border.Background>
+								</Border>
+
+								<TextBlock Text="{Binding Name}" 
+                                       FontSize="18" Foreground="#d9ebe9" 
+                                       TextAlignment="Center"
+						        	   VerticalAlignment="Center"
+                                       TextWrapping="WrapWithOverflow"
+                                       FontFamily="Arial Black"
+                                       Margin="10"/>
+							</StackPanel>
+
+							<TextBlock Text="04:12" 
+                                       FontSize="18" Foreground="#d9ebe9" 
+                                       TextAlignment="Center"
+						        	   VerticalAlignment="Center"
+									   HorizontalAlignment="Right"
+                                       TextWrapping="WrapWithOverflow"
+                                       FontFamily="Arial Black"
+                                       Margin="10"/>
+
+							<Border>
+								<Grid>
+									<Grid.Style>
+										<Style TargetType="{x:Type Grid}">
+											<Setter Property="Opacity" Value="0"/>
+											<Style.Triggers>
+												<Trigger Property="IsMouseOver" Value="True">
+													<Setter Property="Opacity" Value="1"/>
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</Grid.Style>
+									<Grid.Background>
+										<SolidColorBrush Color="Black" Opacity="0.6"/>
+									</Grid.Background>
+									<Button x:Name="PlayButton"
+											HorizontalAlignment="Left"
+                                            Height="50" Width="50"
+                                            Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                                            BorderBrush="#00000000" Background="{x:Null}"
+                                            >
+										<materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+									</Button>
+									<Button
+											HorizontalAlignment="Right"
+                                            Height="50" Width="50"
+                                            Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                                            BorderBrush="#00000000" Background="{x:Null}"
+                                            >
+										<materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+									</Button>
+								</Grid>
+							</Border>
+						</Grid>
+					</DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

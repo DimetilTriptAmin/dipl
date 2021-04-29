@@ -40,10 +40,11 @@ namespace dipl.Models
                 }
                 else
                 {
-                    return new BitmapImage(new Uri("", UriKind.Absolute));
+                    return new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
                 }
             }
-            catch { return null; }
+            ///////////////////////////////////////////////////////////////////////////////////
+            catch { return new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative)); }
         }
     }
 }

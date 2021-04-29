@@ -35,7 +35,7 @@
                     <!-- Add to avoid border disappearing when window is maximised -->
                     <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
                                  Value="Maximized">
-                        <Setter Property="Margin" Value="8"/>
+                        <Setter Property="Margin" Value="7"/>
                     </DataTrigger>
                     <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
                                  Value="Normal">
@@ -98,18 +98,18 @@
                                FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 </StackPanel>
             </RadioButton>
-            <RadioButton Height="50" 
+			<RadioButton Height="50" 
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding LikedClickCommand}">
-                <StackPanel Orientation="Horizontal" Width="145">
-                    <materialDesign:PackIcon Kind="Heart" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                    <TextBlock Text="Liked" Foreground="#d9ebe9"
+				<StackPanel Orientation="Horizontal" Width="145">
+					<materialDesign:PackIcon Kind="Heart" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
+					<TextBlock Text="Liked" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton Height="50" 
+				</StackPanel>
+			</RadioButton>
+			<RadioButton Height="50" 
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding PlaylistsClickCommand}" Foreground="#FFD9EBE9">
@@ -132,8 +132,14 @@
                     <TextBlock Text="Sleep" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
-                </StackPanel>
-            </Button>
+					
+					</StackPanel>
+				<Button.Triggers>
+					<EventTrigger RoutedEvent="MouseDown">
+						
+					</EventTrigger>
+				</Button.Triggers>
+			</Button>
         </StackPanel>
 
         <!-- Основная панель -->

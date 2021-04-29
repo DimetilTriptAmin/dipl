@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dipl.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace dipl.Pages
         public PlaylistPage()
         {
             InitializeComponent();
+            this.DataContext = new PlaylistViewModel();
         }
     }
 }

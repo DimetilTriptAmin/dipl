@@ -19,7 +19,7 @@ namespace dipl.ViewModels
 
         public MainViewModel()
         {
-            LikedPage = new Pages.LikedPage();
+            LikedPage = new Pages.PlaylistPage();
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
             FrameOpacity = 1;
