@@ -1,4 +1,5 @@
-﻿using dipl.ViewModels;
+﻿using dipl.Models;
+using dipl.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,14 @@ using System.Windows.Shapes;
 namespace dipl.Pages
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Логика взаимодействия для PlaylistEditPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class PlaylistEditPage : Page
     {
-        public HomePage()
+        public PlaylistEditPage(ref Playlist playlistToEdit)
         {
             InitializeComponent();
-            DataContext = new HomeViewModel();
+            DataContext = new PlaylistEditViewModel(ref playlistToEdit);
         }
     }
 }

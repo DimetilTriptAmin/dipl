@@ -23,6 +23,7 @@ namespace dipl.ViewModels
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
             FrameOpacity = 1;
+            CurrentPage = HomePage;
         }
 
         private bool _isPlaying = true;

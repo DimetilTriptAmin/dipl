@@ -1,53 +1,61 @@
 ﻿using dipl.Models;
-using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace dipl.ViewModels
 {
-    class PlaylistViewModel : ViewModelBase
+    class HomeViewModel : ViewModelBase
     {
-        private Playlist _playlist;
-        public Playlist Playlist
+        private ObservableCollection<Playlist> _playlists;
+
+        public ObservableCollection<Playlist> Playlists
         {
             get
             {
-                return _playlist;
+                return _playlists;
             }
             set
             {
-                _playlist = value;
-                OnPropertyChanged("Playlist");
+                _playlists = value;
+                OnPropertyChanged("Playlists");
             }
         }
 
-        public ObservableCollection<Audio> Audios
+        private ObservableCollection<Audio> _recent;
+
+        public ObservableCollection<Audio> Recent
         {
             get
             {
-                return _playlist.Audios;
+                return _recent;
             }
-        }
-
-        public ICommand EditCommand
-        {
-            get
+            set
             {
-                return new RelayCommand((obj) =>
-                {
-
-                });
+                _recent = value;
+                OnPropertyChanged("Recent");
             }
         }
 
-        public PlaylistViewModel()
+        public HomeViewModel()
         {
+            ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            Playlists = playlists;
+
             Playlist pl = new Playlist("Liked");
             pl.Audios.Add(new Audio("Linkin Park - Numb"));
             pl.Audios.Add(new Audio("Linkin Park - Numb"));
@@ -64,13 +72,8 @@ namespace dipl.ViewModels
             pl.Audios.Add(new Audio("Linkin Park - Numb"));
             pl.Audios.Add(new Audio("Linkin Park - Numb"));
             pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            Playlist = pl;
+
+            Recent = pl.Audios;
         }
     }
 }

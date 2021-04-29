@@ -85,62 +85,90 @@
         </WrapPanel>
 
         <!-- Навигационное меню -->
-
-        <StackPanel Grid.Column="0" Grid.Row="1">
-            <RadioButton Height="50"
+        <Grid Grid.Column="0" Grid.Row="1">
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <RadioButton Height="50" GroupName="Pages"
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding HomeClickCommand}">
-                <StackPanel Orientation="Horizontal" Width="145">
-                    <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                    <TextBlock FontFamily="Arial Black"
+                    <StackPanel Orientation="Horizontal" Width="145">
+                        <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <TextBlock FontFamily="Arial Black"
                                Text="Home" Foreground="#d9ebe9" 
                                FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                </StackPanel>
-            </RadioButton>
-			<RadioButton Height="50" 
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Height="50" GroupName="Pages"
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding LikedClickCommand}">
-				<StackPanel Orientation="Horizontal" Width="145">
-					<materialDesign:PackIcon Kind="Heart" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-					<TextBlock Text="Liked" Foreground="#d9ebe9"
+                    <StackPanel Orientation="Horizontal" Width="145">
+                        <materialDesign:PackIcon Kind="Heart" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <TextBlock Text="Liked" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
-				</StackPanel>
-			</RadioButton>
-			<RadioButton Height="50" 
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Height="50" GroupName="Pages"
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
                          Command="{Binding PlaylistsClickCommand}" Foreground="#FFD9EBE9">
-                <StackPanel Orientation="Horizontal" Width="145">
-                    <materialDesign:PackIcon Kind="PlaylistMusic" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                    <TextBlock Text="Playlists" Foreground="#d9ebe9"
+                    <StackPanel Orientation="Horizontal" Width="145">
+                        <materialDesign:PackIcon Kind="PlaylistMusic" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <TextBlock Text="Playlists" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
-                </StackPanel>
-            </RadioButton>
-            <Button Height="50"
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,40">
+                <Button Height="50"
                     Style="{StaticResource MaterialDesignFlatLightBgButton}"
                     Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
                     Command="{Binding SleepClickCommand}" Background="{x:Null}">
-                <StackPanel Orientation="Horizontal" Width="145">
-                    <materialDesign:PackIcon Kind="Sleep" 
+                    <StackPanel Orientation="Horizontal" Width="145">
+                        <materialDesign:PackIcon Kind="Sleep" 
                                              Height="40" Width="40" 
                                              VerticalAlignment="Center" Foreground="#d9ebe9"
                                              HorizontalAlignment="Left"/>
-                    <TextBlock Text="Sleep" Foreground="#d9ebe9"
+                        <TextBlock Text="Sleep" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
-					
-					</StackPanel>
-				<Button.Triggers>
-					<EventTrigger RoutedEvent="MouseDown">
-						
-					</EventTrigger>
-				</Button.Triggers>
-			</Button>
-        </StackPanel>
+
+                    </StackPanel>
+                </Button>
+                <Button Height="50"
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                    Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
+                    Command="{Binding ProfileClickCommand}" Background="{x:Null}">
+                    <StackPanel Orientation="Horizontal" Width="145">
+                        <materialDesign:PackIcon Kind="Account" 
+                                             Height="40" Width="40" 
+                                             VerticalAlignment="Center" Foreground="#d9ebe9"
+                                             HorizontalAlignment="Left"/>
+                        <TextBlock Text="Profile" Foreground="#d9ebe9"
+                               FontSize="20" VerticalAlignment="Center"
+                               Margin="10,0,0,0" FontFamily="Arial Black"/>
+
+                    </StackPanel>
+                </Button>
+                <Button Height="50"
+                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                    Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
+                    Command="{Binding SettingsClickCommand}" Background="{x:Null}">
+                    <StackPanel Orientation="Horizontal" Width="145">
+                        <materialDesign:PackIcon Kind="Settings" 
+                                             Height="40" Width="40" 
+                                             VerticalAlignment="Center" Foreground="#d9ebe9"
+                                             HorizontalAlignment="Left"/>
+                        <TextBlock Text="Settings" Foreground="#d9ebe9"
+                               FontSize="20" VerticalAlignment="Center"
+                               Margin="10,0,0,0" FontFamily="Arial Black"/>
+
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
 
         <!-- Основная панель -->
         <Frame Grid.Column="1" Grid.Row="1"
@@ -228,10 +256,21 @@
 
             <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="50"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Background="#00000000" BorderBrush="#00000000">
+                <RadioButton Height="40" Width="40"
+                             GroupName="Pages"
+                             Style="{StaticResource MaterialDesignFlatToggleButton}" 
+                             Background="#4CE0E0E0">
+                    <materialDesign:PackIcon Kind="PlaylistPlay" Height="30" Width="30" VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                </RadioButton>
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                        Background="#00000000"
+                        BorderBrush="#00000000"
+                        Height="45" Width="45"
+                        Grid.Column="1">
                     <materialDesign:PackIcon Kind="VolumeOff" Height="30" Width="30"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
                 </Button>
                 <Slider Maximum="100"
@@ -239,7 +278,7 @@
                         IsMoveToPointEnabled="True"
                         VerticalAlignment="Center"
                         Foreground="#d9ebe9"
-                        Grid.Column="1"/>
+                        Grid.Column="2"/>
             </Grid>
 
         </Grid>

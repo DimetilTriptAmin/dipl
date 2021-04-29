@@ -9,9 +9,9 @@ using System.Windows.Media.Imaging;
 
 namespace dipl.Models
 {
-    class Playlist
+    public class Playlist
     {
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public ImageSource Image { get; set; }
         public ObservableCollection<Audio> Audios;
 
