@@ -122,10 +122,10 @@
                 </RadioButton>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,40">
-                <Button Height="50"
+                <ToggleButton Height="50" Width="160" Name="Sleeper"
                     Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
-                    Command="{Binding SleepClickCommand}" Background="{x:Null}">
+                    
+                    Foreground="#d9ebe9" Background="#00DDDDDD" BorderBrush="{x:Null}">
                     <StackPanel Orientation="Horizontal" Width="145">
                         <materialDesign:PackIcon Kind="Sleep" 
                                              Height="40" Width="40" 
@@ -134,10 +134,44 @@
                         <TextBlock Text="Sleep" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
+                        <Popup IsOpen="{Binding IsChecked, ElementName=Sleeper}"
+                               Placement="Right">
+                            <Grid Height="150" Background="#FF151414">
+                                <Grid Margin="20">
+                                    <TextBlock Text="{Binding Value, ElementName=SleepSlider, StringFormat={}{0:F0}}" FontSize="25" VerticalAlignment="Top" Foreground="#d9ebe9"/>
+                                    <TextBlock Text="{Binding RemainingTime}" FontSize="25" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="#d9ebe9"/>
 
+                                    <Slider 
+                                        Name ="SleepSlider"
+                                        VerticalAlignment="Center"
+                                        Value="{Binding TimeToSleep}"
+                                        Width="380" IsMoveToPointEnabled="True" 
+                                        Minimum="1" Maximum="60" Foreground="#d9ebe9"/>
+
+                                    <Button x:Name="StopButton" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        Background="#00000000" BorderBrush="#00000000"
+                                        Width="40" Height="40"
+                                        Command="{Binding StopSleepClickCommand}"
+                                        >
+                                        <materialDesign:PackIcon Kind="Stop" VerticalAlignment="Center" Width="30" Height="30" Foreground="#d9ebe9"/>
+                                    </Button>
+
+                                    <Button x:Name="OkButton" HorizontalAlignment="Right" 
+                                        VerticalAlignment="Bottom"
+                                        Command="{Binding SleepClickCommand}"
+                                        Width="40" Height="40"
+                                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        Background="#00000000" BorderBrush="#00000000">
+                                        <materialDesign:PackIcon Kind="PlayArrow" VerticalAlignment="Center" Width="30" Height="30" Foreground="#d9ebe9"/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+
+                        </Popup>
                     </StackPanel>
-                   
-                </Button>
+
+                </ToggleButton>
                 
                 <Button Height="50"
                     Style="{StaticResource MaterialDesignFlatLightBgButton}"

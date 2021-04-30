@@ -1,4 +1,5 @@
-﻿using dipl.View.ViewModel;
+﻿using dipl.Models;
+using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace dipl.ViewModels
         private readonly Page ProfilePage;
         private readonly Page HomePage;
         private readonly Page PlaylistsPage;
+        private readonly Sleeper sleeper;
 
         public MainViewModel()
         {
@@ -24,6 +26,8 @@ namespace dipl.ViewModels
             LikedPage = new Pages.PlaylistPage();
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
+            sleeper = new Sleeper();
+            sleeper.PropertyChanged += (s, arg) => RemainingTime = arg.PropertyName;
             FrameOpacity = 1;
             CurrentPage = HomePage;
         }
@@ -69,6 +73,56 @@ namespace dipl.ViewModels
             {
                 _frameOpacity = value;
                 OnPropertyChanged("FrameOpacity");
+            }
+        }
+
+        private int _timeToSleep = 1;
+        public int TimeToSleep
+        {
+            get
+            {
+                return _timeToSleep;
+            }
+            set
+            {
+                _timeToSleep = value;
+                OnPropertyChanged("TimeToSleep");
+            }
+        }
+
+        public string _remainingTime;
+        public string RemainingTime
+        {
+            get
+            {
+                return _remainingTime;
+            }
+            set
+            {
+                _remainingTime = value;
+                OnPropertyChanged("RemainingTime");
+            }
+        }
+
+        public ICommand SleepClickCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    sleeper.Sleep(TimeToSleep);
+                });
+            }
+        }
+
+        public ICommand StopSleepClickCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    sleeper.Stop();
+                });
             }
         }
 
