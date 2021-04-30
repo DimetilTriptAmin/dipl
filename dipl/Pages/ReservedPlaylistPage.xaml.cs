@@ -18,14 +18,14 @@ using System.Windows.Shapes;
 namespace dipl.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PlaylistPage.xaml
+    /// Логика взаимодействия для ReservedPlaylistPage.xaml
     /// </summary>
-    public partial class PlaylistPage : Page
+    public partial class ReservedPlaylistPage : Page
     {
-        public PlaylistPage(Playlist pl)
+        public ReservedPlaylistPage(Playlist pl, bool isLiked)
         {
             InitializeComponent();
-            this.DataContext = new PlaylistViewModel(pl);
+            DataContext = new ReservedPlaylistViewModel(pl, isLiked);
         }
     }
 }

@@ -285,7 +285,8 @@
                 <RadioButton Height="40" Width="40"
                              GroupName="Pages"
                              Style="{StaticResource MaterialDesignFlatToggleButton}" 
-                             Background="#4CE0E0E0">
+                             Background="#4CE0E0E0"
+                             Command="{Binding QueueClickCommand}">
                     <materialDesign:PackIcon Kind="PlaylistPlay" Height="30" Width="30" VerticalAlignment="Center" Foreground="#d9ebe9"/>
                 </RadioButton>
                 <Button Style="{StaticResource MaterialDesignFloatingActionButton}" 

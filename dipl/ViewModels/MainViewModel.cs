@@ -18,14 +18,55 @@ namespace dipl.ViewModels
         private readonly Page ProfilePage;
         private readonly Page HomePage;
         private readonly Page PlaylistsPage;
+        private readonly Page QueuePage;
         private readonly Sleeper sleeper;
 
         public MainViewModel()
         {
+
+            #region
+            Playlist pl = new Playlist("Liked");
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+
+            Playlist pl1 = new Playlist("Queue");
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            #endregion
+
             ProfilePage = new Pages.ProfilePage();
-            LikedPage = new Pages.PlaylistPage();
+            LikedPage = new Pages.ReservedPlaylistPage(pl, true);
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
+            QueuePage = new Pages.ReservedPlaylistPage(pl1, false);
+
             sleeper = new Sleeper();
             sleeper.PropertyChanged += (s, arg) => RemainingTime = sleeper.RemainingTime.ToString(@"mm\:ss");
             FrameOpacity = 1;
@@ -181,6 +222,17 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     SlowOpacity(PlaylistsPage);
+                });
+            }
+        }
+
+        public ICommand QueueClickCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    SlowOpacity(QueuePage);
                 });
             }
         }

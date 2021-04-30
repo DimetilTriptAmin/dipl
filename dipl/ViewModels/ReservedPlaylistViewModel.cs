@@ -8,11 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace dipl.ViewModels
 {
-    class PlaylistViewModel : ViewModelBase
+    class ReservedPlaylistViewModel : ViewModelBase
     {
         private Playlist _playlist;
         public Playlist Playlist
@@ -28,6 +27,32 @@ namespace dipl.ViewModels
             }
         }
 
+        bool _isQueue;
+        public Visibility IsQueue
+        {
+            get
+            {
+                if (_isQueue)
+                {
+                    return Visibility.Collapsed;
+                }
+                else return Visibility.Visible;
+            }
+        }
+
+        bool _isLiked;
+        public Visibility IsLiked
+        {
+            get
+            {
+                if (_isLiked)
+                {
+                    return Visibility.Collapsed;
+                }
+                else return Visibility.Visible;
+            }
+        }
+
         public ObservableCollection<Audio> Audios
         {
             get
@@ -36,20 +61,11 @@ namespace dipl.ViewModels
             }
         }
 
-        public ICommand EditCommand
-        {
-            get
-            {
-                return new RelayCommand((obj) =>
-                {
-
-                });
-            }
-        }
-
-        public PlaylistViewModel(Playlist playlist)
+        public ReservedPlaylistViewModel(Playlist playlist, bool isLiked)
         {
             Playlist = playlist;
+            _isLiked = isLiked;
+            _isQueue = !isLiked;
         }
     }
 }
