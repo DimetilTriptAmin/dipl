@@ -24,7 +24,7 @@ namespace dipl.Models
             set
             {
                 _remainingTime = value;
-                OnPropertyChanged(_remainingTime.ToString(@"mm\:ss"));
+                OnPropertyChanged("RemainingTime");
             }
         }
 
@@ -40,7 +40,7 @@ namespace dipl.Models
 
         public void Stop()
         {
-            timer.Stop();
+            timer?.Stop();
         }
 
         private void Timer_Tick(object sender, EventArgs e)

@@ -27,7 +27,7 @@ namespace dipl.ViewModels
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
             sleeper = new Sleeper();
-            sleeper.PropertyChanged += (s, arg) => RemainingTime = arg.PropertyName;
+            sleeper.PropertyChanged += (s, arg) => RemainingTime = sleeper.RemainingTime.ToString(@"mm\:ss");
             FrameOpacity = 1;
             CurrentPage = HomePage;
         }

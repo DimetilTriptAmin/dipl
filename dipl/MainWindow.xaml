@@ -135,7 +135,8 @@
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
                         <Popup IsOpen="{Binding IsChecked, ElementName=Sleeper}"
-                               Placement="Right">
+                               Placement="Right" StaysOpen="False">
+
                             <Grid Height="150" Background="#FF151414">
                                 <Grid Margin="20">
                                     <TextBlock Text="{Binding Value, ElementName=SleepSlider, StringFormat={}{0:F0}}" FontSize="25" VerticalAlignment="Top" Foreground="#d9ebe9"/>
