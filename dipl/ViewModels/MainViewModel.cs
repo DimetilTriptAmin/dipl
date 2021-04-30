@@ -14,11 +14,13 @@ namespace dipl.ViewModels
     class MainViewModel : ViewModelBase
     {
         private readonly Page LikedPage;
+        private readonly Page ProfilePage;
         private readonly Page HomePage;
         private readonly Page PlaylistsPage;
 
         public MainViewModel()
         {
+            ProfilePage = new Pages.ProfilePage();
             LikedPage = new Pages.PlaylistPage();
             HomePage = new Pages.HomePage();
             PlaylistsPage = new Pages.PlaylistsPage();
@@ -76,8 +78,10 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    if(_isPlaying)
-                    IsPlaying="Play";
+                    if (_isPlaying)
+                    {
+                        IsPlaying = "Play";
+                    }
                     else IsPlaying = "Pause";
                 });
             }
@@ -90,6 +94,17 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     SlowOpacity(LikedPage);
+                });
+            }
+        }
+
+        public ICommand ProfileClickCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    SlowOpacity(ProfilePage);
                 });
             }
         }

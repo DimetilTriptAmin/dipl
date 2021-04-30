@@ -136,7 +136,9 @@
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
 
                     </StackPanel>
+                   
                 </Button>
+                
                 <Button Height="50"
                     Style="{StaticResource MaterialDesignFlatLightBgButton}"
                     Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
@@ -147,21 +149,6 @@
                                              VerticalAlignment="Center" Foreground="#d9ebe9"
                                              HorizontalAlignment="Left"/>
                         <TextBlock Text="Profile" Foreground="#d9ebe9"
-                               FontSize="20" VerticalAlignment="Center"
-                               Margin="10,0,0,0" FontFamily="Arial Black"/>
-
-                    </StackPanel>
-                </Button>
-                <Button Height="50"
-                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    Foreground="#d9ebe9" BorderBrush="{x:Null}" Padding="0"
-                    Command="{Binding SettingsClickCommand}" Background="{x:Null}">
-                    <StackPanel Orientation="Horizontal" Width="145">
-                        <materialDesign:PackIcon Kind="Settings" 
-                                             Height="40" Width="40" 
-                                             VerticalAlignment="Center" Foreground="#d9ebe9"
-                                             HorizontalAlignment="Left"/>
-                        <TextBlock Text="Settings" Foreground="#d9ebe9"
                                FontSize="20" VerticalAlignment="Center"
                                Margin="10,0,0,0" FontFamily="Arial Black"/>
 
