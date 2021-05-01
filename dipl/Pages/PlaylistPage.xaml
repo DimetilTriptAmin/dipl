@@ -60,7 +60,7 @@
 
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                      Style="{StaticResource MaterialDesignScrollViewer}" Margin="40,0,40,0">
+                      Style="{StaticResource MaterialDesignScrollViewer}" Margin="50">
             <ItemsControl ItemsSource="{Binding Audios}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

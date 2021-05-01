@@ -50,9 +50,9 @@
             <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
         </Grid>
 
-        <ScrollViewer Grid.Row="1"
+        <ScrollViewer Grid.Row="1" Margin="50"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                      Style="{StaticResource MaterialDesignScrollViewer}" Margin="40,0,40,0">
+                      Style="{StaticResource MaterialDesignScrollViewer}">
             <StackPanel>
                 
                 <TextBlock VerticalAlignment="Center"
@@ -65,10 +65,36 @@
                 <Line X1="0" Y1="0" 
                           X2="{Binding ActualWidth, ElementName=Header}" Y2="0" 
                           Stroke="#d9ebe9" Margin="40,0,40,0"/>
-                <StackPanel Margin="50,20,50,20">
+                <Grid Margin="50,70,50,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     
-                    
-                </StackPanel>
+                    <StackPanel Margin="20,0,20,0">
+                        <Viewbox MaxHeight="450" MaxWidth="450">
+                            <Image Source="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" 
+                                   Width="200" Height="200"/>
+                        </Viewbox>
+                        <Button Content="Change" Height="50"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
+                            Margin="0,20,0,20" FontSize="20">
+                        </Button>
+                    </StackPanel>
+                    <Grid Grid.Column="1" Margin="20,0,20,0">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <DockPanel>
+                                <TextBlock Text="Login" Foreground="#d9ebe9"
+                                   FontSize="20" FontFamily="Arial Black"
+                                           DockPanel.Dock="Left"/>
+                                <TextBlock Text="username1" Foreground="#d9ebe9"
+                                   FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap"
+                                   DockPanel.Dock="Right" Margin="20,0,0,0"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
                 
                     <TextBlock VerticalAlignment="Center"
                        HorizontalAlignment="Left"
@@ -130,8 +156,51 @@
                 <Line X1="0" Y1="0" 
                           X2="{Binding ActualWidth, ElementName=Header}" Y2="0" 
                           Stroke="#d9ebe9" Margin="40,0,40,0"/>
-                <StackPanel Margin="50,20,50,20">
-                    
+                <StackPanel>
+                    <StackPanel Margin="50,20,50,20">
+                        <TextBlock Foreground="#d9ebe9" 
+                                   Margin="50,50,50,20"
+                                   FontSize="20"
+                                   FontFamily="Arial Black"
+                                   Text="Language">
+                        </TextBlock>
+                        <ComboBox FontSize="20"
+                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                  Margin="50,0,50,0"
+                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
+                                  Foreground="#d9ebe9">
+                            <ComboBox.Resources>
+                                <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FF151414"/>
+                            </ComboBox.Resources>
+                            <ComboBoxItem Content="English" IsSelected="True"/>
+                            <ComboBoxItem Content="Russian"/>
+                        </ComboBox>
+                        
+                        <TextBlock Foreground="#d9ebe9" 
+                                   Margin="50,50,50,20"
+                                   FontSize="20"
+                                   FontFamily="Arial Black"
+                                   Text="Theme"
+                                   >
+                        </TextBlock>
+                        <ComboBox FontSize="20"
+                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                  Foreground="#d9ebe9"
+                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
+                                  Margin="50,0,50,0">
+                            <ComboBox.Resources>
+                                <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FF151414"/>
+                                
+                            </ComboBox.Resources>
+                            <ComboBoxItem Content="Dark" IsSelected="True"/>
+                            <ComboBoxItem Content="Light"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <Button Content="Apply" Height="50"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
+                            Margin="100,20,100,20" FontSize="20">
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

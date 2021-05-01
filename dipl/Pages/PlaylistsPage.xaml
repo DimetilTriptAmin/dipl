@@ -46,27 +46,50 @@
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
             </Border>
-			<Grid>
-				<TextBlock VerticalAlignment="Center"
+            <Grid>
+                <TextBlock VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="50"
                        FontSize="50"
                        Text="Playlists"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
-				<Button HorizontalAlignment="Right"
-							Margin="50"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                    <Border CornerRadius="15"
+                            VerticalAlignment="Center"
+                            Background="#CC151414">
+                        <TextBox
+                            Width="110"
+                            Margin="15,5,15,5"
+                             FontSize="15"
+                             VerticalContentAlignment="Center"
+                             Background="Transparent"
+                            materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
+                             materialDesign:HintAssist.Foreground="#d9ebe9"
+                             materialDesign:HintAssist.Hint="Search"
+                             FontFamily="Arial"
+                             Foreground="#d9ebe9" CaretBrush="#d9ebe9">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="13"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </Border>
+                    <Button
+							Margin="20,50,50,50"
                             Height="50" Width="50"
                             Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 							BorderBrush="#00000000" Background="{x:Null}">
-					<materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
-				</Button>
-			</Grid>
+                        <materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
 					<Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
         </Grid>
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                      Style="{StaticResource MaterialDesignScrollViewer}" Margin="40,0,40,0">
+                      Style="{StaticResource MaterialDesignScrollViewer}" Margin="50">
             <ItemsControl ItemsSource="{Binding Playlist}" Name="Playlists">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
