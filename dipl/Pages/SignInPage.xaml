@@ -59,7 +59,7 @@
                     <Button Content="Sign Up" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
-                            Margin="20,20,50,20" FontSize="20">
+                            Margin="20,20,50,20" FontSize="20" Command="{Binding NavigateSignUpCommand}">
                     </Button>
                 </WrapPanel>
             </DockPanel>

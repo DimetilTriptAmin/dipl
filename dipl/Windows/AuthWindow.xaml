@@ -6,6 +6,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dipl.Windows"
+        xmlns:viewModels="clr-namespace:dipl.ViewModels"
+        xmlns:views="clr-namespace:dipl.Pages"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -24,11 +26,11 @@
         </Grid.RowDefinitions>
 
         <TextBlock Foreground="#d9ebe9" 
-                                   Margin="5"
-                                   FontSize="14"
-                                   Text="Signing up"
+                   Margin="5"
+                   FontSize="14"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center">
+                   VerticalAlignment="Center"
+                   Text="{Binding Title}">
         </TextBlock>
         <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button Height="30" Foreground="#d9ebe9"
@@ -53,16 +55,26 @@
         </WrapPanel>
 
         <Frame Grid.Column="0" Grid.Row="1"
-               Content="{Binding CurrentPage}"
+               Content="{Binding CurrentViewModel}"
                NavigationUIVisibility="Hidden"
                Opacity="{Binding FrameOpacity}"
-              />
+              >
+            <Frame.Resources>
+                <DataTemplate DataType="{x:Type viewModels:SignInViewModel}">
+                    <views:SignInPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:SignUpViewModel}">
+                    <views:SignUpPage/>
+                </DataTemplate>
+            </Frame.Resources>
+        </Frame>
         <StackPanel Grid.Row="2" Margin="20">
             <Button Content="Enter as a guest"
                     FontSize="20"
                     Height="50"
                     Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    Foreground="#d9ebe9" Background="#00DDDDDD" BorderBrush="{x:Null}">
+                    Foreground="#d9ebe9" Background="#00DDDDDD" BorderBrush="{x:Null}"
+                    Command="{Binding GuestCommand}">
                 
             </Button>
         </StackPanel>

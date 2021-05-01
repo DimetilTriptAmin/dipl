@@ -97,6 +97,7 @@
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AuthViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="ViewModels\PlaylistsViewModel.cs" />
     <Compile Include="ViewModels\PlaylistViewModel.cs" />
     <Compile Include="ViewModels\ReservedPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\SignInViewModel.cs" />
+    <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="Pages\SignInPage.xaml">
       <SubType>Designer</SubType>
