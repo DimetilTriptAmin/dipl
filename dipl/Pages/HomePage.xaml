@@ -60,7 +60,7 @@
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
                 <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="#d9ebe9" Margin="40,0,40,0"/>
-                <ListView ItemsSource="{Binding Playlists}" Name="Playlists">
+                <ListView ItemsSource="{Binding Playlists}" AlternationCount="100" Name="Playlists">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="200" Height="270" Margin="10">
@@ -83,6 +83,7 @@
                                                 <SolidColorBrush Color="#d9ebe9" Opacity="0.6"/>
                                             </Grid.Background>
                                             <Button
+                                                DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
@@ -90,11 +91,14 @@
                                                 <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="#d9ebe9"/>
                                             </Button>
                                             <Button
+                                                DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                             Margin="5,5,5,20"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            Background="#00000000" BorderBrush="#00000000">
+                                            Background="#00000000" BorderBrush="#00000000"
+                                                Command="{Binding ShowPlaylistCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}">
                                                 <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="#d9ebe9"/>
                                             </Button>
                                         </Grid>

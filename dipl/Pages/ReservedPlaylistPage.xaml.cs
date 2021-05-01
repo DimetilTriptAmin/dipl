@@ -22,10 +22,9 @@ namespace dipl.Pages
     /// </summary>
     public partial class ReservedPlaylistPage : Page
     {
-        public ReservedPlaylistPage(Playlist pl, bool isLiked)
+        public ReservedPlaylistPage()
         {
             InitializeComponent();
-            DataContext = new ReservedPlaylistViewModel(pl, isLiked);
         }
     }
 }

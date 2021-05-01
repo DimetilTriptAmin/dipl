@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewModels="clr-namespace:dipl.ViewModels"
+        xmlns:views="clr-namespace:dipl.Pages"
         xmlns:local="clr-namespace:dipl"
         mc:Ignorable="d"
         MinHeight="450"
@@ -90,11 +92,13 @@
                 <RadioButton Height="50" GroupName="Pages"
                          Style="{StaticResource MaterialDesignTabRadioButton}" 
                          BorderBrush="#d9ebe9" Padding="0"
+                             IsChecked="true"
                          Command="{Binding HomeClickCommand}">
                     <StackPanel Orientation="Horizontal" Width="145">
                         <materialDesign:PackIcon Kind="Home" Height="40" Width="40" VerticalAlignment="Center" Foreground="#d9ebe9"/>
                         <TextBlock FontFamily="Arial Black"
                                Text="Home" Foreground="#d9ebe9" 
+                                   
                                FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </StackPanel>
                 </RadioButton>
@@ -194,10 +198,31 @@
 
         <!-- Основная панель -->
         <Frame Grid.Column="1" Grid.Row="1"
-               Content="{Binding CurrentPage}"
+               Content="{Binding CurrentViewModel}"
                NavigationUIVisibility="Hidden"
                Opacity="{Binding FrameOpacity}"
-              />
+              >
+            <Frame.Resources>
+                <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                    <views:HomePage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:PlaylistsViewModel}">
+                    <views:PlaylistsPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ProfileViewModel}">
+                    <views:ProfilePage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ReservedPlaylistViewModel}">
+                    <views:ReservedPlaylistPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:PlaylistViewModel}">
+                    <views:PlaylistPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:PlaylistEditViewModel}">
+                    <views:PlaylistEditPage/>
+                </DataTemplate>
+            </Frame.Resources>
+        </Frame>
 
         <!-- Панель управления аудио -->
 

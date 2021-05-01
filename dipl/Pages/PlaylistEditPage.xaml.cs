@@ -22,10 +22,9 @@ namespace dipl.Pages
     /// </summary>
     public partial class PlaylistEditPage : Page
     {
-        public PlaylistEditPage(ref Playlist playlistToEdit)
+        public PlaylistEditPage()
         {
             InitializeComponent();
-            DataContext = new PlaylistEditViewModel(ref playlistToEdit);
         }
     }
 }

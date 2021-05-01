@@ -90,7 +90,7 @@
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}" Margin="50">
-            <ItemsControl ItemsSource="{Binding Playlist}" Name="Playlists">
+            <ItemsControl ItemsSource="{Binding Playlists}" Name="Playlists" AlternationCount="100">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Viewbox>
@@ -121,10 +121,13 @@
                                             <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="#d9ebe9"/>
                                         </Button>
                                         <Button
+                                            DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                             Margin="5,5,5,20"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                            Command="{Binding ShowPlaylistCommand}" CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
                                             Background="#00000000" BorderBrush="#00000000">
                                             <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="#d9ebe9"/>
                                         </Button>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dipl.Stores
 {
-    class NavigationStore
+    public class NavigationStore
     {
         public event Action CurrentViewModelChanged;
 

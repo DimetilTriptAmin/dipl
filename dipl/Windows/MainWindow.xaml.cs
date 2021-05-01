@@ -1,4 +1,5 @@
-﻿using dipl.ViewModels;
+﻿using dipl.Stores;
+using dipl.ViewModels;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,11 +10,12 @@ namespace dipl.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
             this.MouseLeftButtonDown += delegate { DragMove(); };
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(new NavigationStore());
         }
 
         private void MinimizeWindow_Exec(object sender, ExecutedRoutedEventArgs e)

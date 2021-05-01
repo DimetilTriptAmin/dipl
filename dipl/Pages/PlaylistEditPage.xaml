@@ -40,32 +40,51 @@
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
             </Border>
-            <TextBox VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Margin="50"
-                       FontSize="50"
-                       Text="{Binding Playlist.Name}"
-                       FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
-            <Button Height="50" Width="50"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Margin="50,50,0,50" HorizontalAlignment="Left"  MinWidth="100">
+                    <TextBox VerticalAlignment="Center"
+                             MinWidth="100"
+                             FontSize="40"
+                             CaretBrush="#d9ebe9"
+                           materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
+                           Text="{Binding Playlist.Name}"
+                           FontFamily="Arial Black"
+                           Foreground="#d9ebe9"
+                     />
+                </Viewbox>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Button Height="50" Width="50" 
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}">
-                <materialDesign:PackIcon Kind="Add" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
-            </Button>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-					    Margin="50">
-                <Button Height="50" Width="50"
+                        <materialDesign:PackIcon Kind="Image" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                    </Button>
+                    <Button Height="50" Width="50" 
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"                               
+					    BorderBrush="#00000000" Background="{x:Null}">
+                        <materialDesign:PackIcon Kind="Add" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+					    Margin="50" Grid.Column="2">
+                    <Button Height="50" Width="50"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}"
                         Command="{Binding ConfirmCommand}">
-                    <materialDesign:PackIcon Kind="Check" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                </Button>
-                <Button Height="50" Width="50"
+                        <materialDesign:PackIcon Kind="Check" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                    </Button>
+                    <Button Height="50" Width="50"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
-					    BorderBrush="#00000000" Background="{x:Null}">
-                    <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
-                </Button>
-            </StackPanel>
+					    BorderBrush="#00000000" Background="{x:Null}"
+                            Command="{Binding CancelCommand}">
+                        <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
             <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
         </Grid>
 

@@ -25,24 +25,6 @@ namespace dipl.Pages
         public PlaylistsPage()
         {
             InitializeComponent();
-            this.DataContext = new PlaylistsViewModel();
-            List<Playlist> playlists = new List<Playlist>();
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            Playlists.ItemsSource = playlists;
         }
     }
 }

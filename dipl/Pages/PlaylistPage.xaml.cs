@@ -22,10 +22,9 @@ namespace dipl.Pages
     /// </summary>
     public partial class PlaylistPage : Page
     {
-        public PlaylistPage(Playlist pl)
+        public PlaylistPage()
         {
             InitializeComponent();
-            this.DataContext = new PlaylistViewModel(pl);
         }
     }
 }

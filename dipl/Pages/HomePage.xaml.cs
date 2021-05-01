@@ -24,7 +24,6 @@ namespace dipl.Pages
         public HomePage()
         {
             InitializeComponent();
-            DataContext = new HomeViewModel();
         }
     }
 }

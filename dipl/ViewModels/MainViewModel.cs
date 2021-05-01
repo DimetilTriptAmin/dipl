@@ -1,7 +1,9 @@
 ﻿using dipl.Models;
+using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,14 +16,23 @@ namespace dipl.ViewModels
 {
     class MainViewModel : ViewModelBase
     {
-        private readonly Page LikedPage;
-        private readonly Page ProfilePage;
-        private readonly Page HomePage;
-        private readonly Page PlaylistsPage;
-        private readonly Page QueuePage;
+
+        private readonly NavigationStore _navigationStore;
+        private readonly ViewModelBase _homeVM;
+        private readonly ViewModelBase _playlistsVM;
+        private readonly ViewModelBase _queueVM;
+        private readonly ViewModelBase _profileVM;
+        private readonly ViewModelBase _likedVM;
+
+
         private readonly Sleeper sleeper;
 
-        public MainViewModel()
+        public ViewModelBase CurrentViewModel
+        {
+            get => _navigationStore.CurrentViewModel;
+        }
+
+        public MainViewModel(NavigationStore navigationStore)
         {
 
             #region
@@ -59,18 +70,58 @@ namespace dipl.ViewModels
             pl1.Audios.Add(new Audio("Linkin Park - Numb"));
             pl1.Audios.Add(new Audio("Linkin Park - Numb"));
             pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+
+            ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
+            playlists.Add(pl);
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
+            playlists.Add(new Playlist("Linkin Park"));
             #endregion
 
-            ProfilePage = new Pages.ProfilePage();
-            LikedPage = new Pages.ReservedPlaylistPage(pl, true);
-            HomePage = new Pages.HomePage();
-            PlaylistsPage = new Pages.PlaylistsPage();
-            QueuePage = new Pages.ReservedPlaylistPage(pl1, false);
+            _navigationStore = navigationStore;
+            _homeVM = new HomeViewModel(playlists, pl, _navigationStore);
+            _navigationStore.CurrentViewModel = _homeVM;
+
+            _playlistsVM = new PlaylistsViewModel(playlists, _navigationStore);
+            _queueVM = new ReservedPlaylistViewModel(pl1,false);
+            _profileVM = new ProfileViewModel();
+            _likedVM = new ReservedPlaylistViewModel(pl,true);
+
+
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             sleeper = new Sleeper();
             sleeper.PropertyChanged += (s, arg) => RemainingTime = sleeper.RemainingTime.ToString(@"mm\:ss");
-            FrameOpacity = 1;
-            CurrentPage = HomePage;
+        }
+
+        private async void OnCurrentViewModelChanged()
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                for (double i = 1; i > 0; i -= 0.1)
+                {
+                    FrameOpacity = i;
+                    Thread.Sleep(10);
+                }
+                OnPropertyChanged(nameof(CurrentViewModel));
+                for (double i = 0; i < 1.1; i += 0.1)
+                {
+                    FrameOpacity = i;
+                    Thread.Sleep(20);
+                }
+            });
         }
 
         private bool _isPlaying = true;
@@ -89,21 +140,7 @@ namespace dipl.ViewModels
 
         }
 
-        private Page _currentPage;
-        public Page CurrentPage
-        {
-            get
-            {
-                return _currentPage;
-            }
-            set
-            {
-                _currentPage = value;
-                OnPropertyChanged("CurrentPage");
-            }
-        }
-
-        private double _frameOpacity;
+        private double _frameOpacity = 1;
         public double FrameOpacity
         {
             get
@@ -188,7 +225,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    SlowOpacity(LikedPage);
+                    _navigationStore.CurrentViewModel = _likedVM;
                 });
             }
         }
@@ -199,7 +236,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    SlowOpacity(ProfilePage);
+                    _navigationStore.CurrentViewModel = _profileVM;
                 });
             }
         }
@@ -210,7 +247,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    SlowOpacity(HomePage);
+                    _navigationStore.CurrentViewModel = _homeVM;
                 });
             }
         }
@@ -221,7 +258,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    SlowOpacity(PlaylistsPage);
+                    _navigationStore.CurrentViewModel = _playlistsVM;
                 });
             }
         }
@@ -232,27 +269,9 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    SlowOpacity(QueuePage);
+                    _navigationStore.CurrentViewModel = _queueVM;
                 });
             }
-        }
-
-        private async void SlowOpacity(Page page)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                for (double i = 1; i > 0; i -= 0.1)
-                {
-                    FrameOpacity = i;
-                    Thread.Sleep(10);
-                }
-                CurrentPage = page;
-                for (double i = 0; i < 1.1; i += 0.1)
-                {
-                    FrameOpacity = i;
-                    Thread.Sleep(20);
-                }
-            });
         }
     }
 }

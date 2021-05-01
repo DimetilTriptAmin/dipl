@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace dipl.ViewModels
 {
     class PlaylistViewModel : ViewModelBase
     {
+        private readonly NavigationStore _navigationStore;
+
         private Playlist _playlist;
         public Playlist Playlist
         {
@@ -42,14 +45,15 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-
+                    _navigationStore.CurrentViewModel = new PlaylistEditViewModel(ref _playlist, _navigationStore);
                 });
             }
         }
 
-        public PlaylistViewModel(Playlist playlist)
+        public PlaylistViewModel(Playlist playlist, NavigationStore navigationStore)
         {
             Playlist = playlist;
+            _navigationStore = navigationStore;
         }
     }
 }
