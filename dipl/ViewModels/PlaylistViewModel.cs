@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -46,6 +47,17 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = new PlaylistEditViewModel(ref _playlist, _navigationStore);
+                });
+            }
+        }
+
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    _playlist.Audios.RemoveAt((int)obj);
                 });
             }
         }

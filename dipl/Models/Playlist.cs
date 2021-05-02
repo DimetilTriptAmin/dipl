@@ -19,6 +19,7 @@ namespace dipl.Models
         {
             Name = name;
             Audios = new ObservableCollection<Audio>();
+            // TODO: Добавить картинку по умолчанию
             Image = new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
         }
 

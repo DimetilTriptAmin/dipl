@@ -24,6 +24,7 @@
                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
                                  materialDesign:HintAssist.Foreground="#d9ebe9"
                                  FontSize="20"
+                                 Text="{Binding Login, Mode=TwoWay}"
                                  materialDesign:HintAssist.Hint="Enter login" 
                                  >
                 </TextBox>

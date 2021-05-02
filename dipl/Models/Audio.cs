@@ -12,13 +12,15 @@ namespace dipl.Models
 {
     public sealed class Audio
     {
+        public bool IsLiked { get; set; }
+        public ImageSource Image { get; set; }
         public string Name { get; private set; }
         public string SourceUrl { get; private set; }
-        public ImageSource Image { get; set; }
 
-        public Audio(string sourceurl)
+        public Audio(string sourceurl, bool isLiked)
         {
             SourceUrl = sourceurl;
+            IsLiked = isLiked;
             Name = Path.GetFileNameWithoutExtension(SourceUrl);
             Image = GetImage();
         }
@@ -43,7 +45,7 @@ namespace dipl.Models
                     return new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
                 }
             }
-            ///////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////убрать когда подключу плеер
             catch { return new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative)); }
         }
     }

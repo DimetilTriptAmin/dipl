@@ -53,6 +53,17 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    _playlist.Audios.RemoveAt((int)obj);
+                });
+            }
+        }
+
         public ObservableCollection<Audio> Audios
         {
             get

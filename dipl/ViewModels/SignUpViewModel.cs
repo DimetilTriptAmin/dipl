@@ -11,6 +11,40 @@ namespace dipl.ViewModels
 {
     class SignUpViewModel:ViewModelBase
     {
+
+        private string _login;
+        public string Login
+        {
+            get => _login;
+            set
+            {
+                _login = value;
+                OnPropertyChanged(nameof(Login));
+            }
+        }
+
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+
+        private string _repeatedPassword;
+        public string RepeatedPassword
+        {
+            get => _repeatedPassword;
+            set
+            {
+                _repeatedPassword = value;
+                OnPropertyChanged(nameof(RepeatedPassword));
+            }
+        }
+
         private readonly NavigationStore _navigationStore;
 
         public ICommand NavigateSignInCommand

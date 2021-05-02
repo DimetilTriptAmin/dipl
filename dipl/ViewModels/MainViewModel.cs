@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Pages;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
@@ -24,7 +25,6 @@ namespace dipl.ViewModels
         private readonly ViewModelBase _profileVM;
         private readonly ViewModelBase _likedVM;
 
-
         private readonly Sleeper sleeper;
 
         public ViewModelBase CurrentViewModel
@@ -36,40 +36,36 @@ namespace dipl.ViewModels
         {
 
             #region
-            Playlist pl = new Playlist("Liked");
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl.Audios.Add(new Audio("Linkin Park - Numb"));
+            Playlist pl = new Playlist("Liked1");
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
 
             Playlist pl1 = new Playlist("Queue");
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
-            pl1.Audios.Add(new Audio("Linkin Park - Numb"));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", false));
+            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", false));
 
             ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
             playlists.Add(pl);
@@ -115,11 +111,11 @@ namespace dipl.ViewModels
                     FrameOpacity = i;
                     Thread.Sleep(10);
                 }
-                OnPropertyChanged(nameof(CurrentViewModel));
+                OnPropertyChanged("CurrentViewModel");
                 for (double i = 0; i < 1.1; i += 0.1)
                 {
                     FrameOpacity = i;
-                    Thread.Sleep(20);
+                    Thread.Sleep(10);
                 }
             });
         }

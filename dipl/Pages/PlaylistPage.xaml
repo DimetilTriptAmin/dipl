@@ -71,7 +71,10 @@
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}" Margin="50">
-            <ItemsControl ItemsSource="{Binding Audios}">
+            <ScrollViewer.Resources>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+            </ScrollViewer.Resources>
+            <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="100">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
 						<Grid Margin="10" Background="#26D9EBE9">
@@ -123,12 +126,16 @@
                                             >
 										<materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
 									</Button>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <StackPanel 
+                                        Orientation="Horizontal" 
+                                        HorizontalAlignment="Right"
+                                        >
                                         <ToggleButton
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
                                             Background="#4CE0E0E0"
+                                            IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
                                             <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
                                         </ToggleButton>
@@ -136,6 +143,10 @@
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
+                                            Command="{Binding RemoveCommand}"
+                                            CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                            DataContext="{Binding DataContext, ElementName=Header}"
                                             >
                                                 <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
                                             </Button>

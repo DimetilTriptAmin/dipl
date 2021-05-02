@@ -30,6 +30,30 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand DeletePlaylistCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    _playlists.RemoveAt((int)obj);
+                });
+            }
+        }
+
+        public ICommand CreatePlaylistCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    Playlist newPlaylist = new Playlist("");
+                    _playlists.Add(newPlaylist);
+                    _navigationStore.CurrentViewModel = new PlaylistViewModel(newPlaylist, _navigationStore);
+                });
+            }
+        }
+
         public PlaylistsViewModel(ObservableCollection<Playlist> playlists,NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;

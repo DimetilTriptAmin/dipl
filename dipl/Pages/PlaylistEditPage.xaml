@@ -91,6 +91,9 @@
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}" Margin="40,0,40,0">
+            <ScrollViewer.Resources>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+            </ScrollViewer.Resources>
             <ItemsControl ItemsSource="{Binding Audios}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

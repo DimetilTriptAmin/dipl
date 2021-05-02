@@ -228,26 +228,53 @@
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#FF4F575F">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="10">
-                <Ellipse Width="60" Height="60" VerticalAlignment="Center">
+            <Rectangle Width="60" Height="60" VerticalAlignment="Center" Grid.Column="0" Margin="10">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/dipl;component/Assets/lp.jpg" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
 
-                </Ellipse>
-                <TextBlock x:Name="AudioNameLabel" 
+                </Rectangle>
+
+            <TextBlock x:Name="AudioNameLabel" 
                            Foreground="#d9ebe9" 
                            FontSize="16" Text="Imagine Dragons - Thunder" 
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Right"
-                           Margin="10,0,10,0"
-                           Width="160"
-                           TextWrapping="Wrap"/>
-            </StackPanel>
+                            VerticalAlignment="Center"
+                           Grid.Column="1"
+                       TextWrapping="Wrap">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform x:Name="t1" />
+                </TextBlock.RenderTransform>
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="1">
+                                <DoubleAnimation From="0" To="-300"
+                                        Storyboard.TargetName="t1"
+                                        Storyboard.TargetProperty="X"
+                                        Duration="0:0:5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="1">
+                                <DoubleAnimation To="0"
+                                        Storyboard.TargetName="t1"
+                                        Storyboard.TargetProperty="X"
+                                        Duration="0:0:0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
 
-            <StackPanel Grid.Column="1"  Margin="10,10,10,0">
+            <StackPanel Grid.Column="2"  Margin="10,10,10,0">
                 <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button x:Name="MixPlaylistButton"
                                 Style="{StaticResource MaterialDesignFloatingActionButton}" 
@@ -301,7 +328,7 @@
                 </Grid>
             </StackPanel>
 
-            <Grid Grid.Column="2" Grid.Row="1" Margin="10,10,10,10" VerticalAlignment="Center">
+            <Grid Grid.Column="3" Grid.Row="1" Margin="10,10,10,10" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="50"/>
