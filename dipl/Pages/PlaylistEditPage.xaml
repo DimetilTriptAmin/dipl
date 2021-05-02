@@ -52,7 +52,7 @@
                              FontSize="40"
                              CaretBrush="#d9ebe9"
                            materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                           Text="{Binding Playlist.Name}"
+                           Text="{Binding Playlist.Name, Mode=TwoWay}"
                            FontFamily="Arial Black"
                            Foreground="#d9ebe9"
                      />

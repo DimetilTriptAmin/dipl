@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace dipl.ViewModels
 {
@@ -50,7 +51,7 @@ namespace dipl.ViewModels
             get
             {
                 return new RelayCommand((obj)=> {
-                    _playlistToEdit = _bufferPlaylist;
+                    _playlistToEdit.Name = _bufferPlaylist.Name;
                     _navigationStore.CurrentViewModel = new PlaylistViewModel(_playlistToEdit, _navigationStore);
                 });
             }
@@ -69,9 +70,12 @@ namespace dipl.ViewModels
         public PlaylistEditViewModel(ref Playlist playlistToEdit, NavigationStore navigationStore)
         {
             _playlistToEdit = playlistToEdit;
-            _bufferPlaylist = new Playlist(playlistToEdit.Name);
-            _bufferPlaylist.Audios = playlistToEdit.Audios;
-            _bufferPlaylist.Image = playlistToEdit.Image;
+
+            string name = string.Copy(playlistToEdit.Name);
+            ObservableCollection<Audio> audios = new ObservableCollection<Audio>(playlistToEdit.Audios);
+            ImageSource imageSource = playlistToEdit.Image.Clone();
+
+            _bufferPlaylist = new Playlist(name,audios,imageSource);
             _navigationStore = navigationStore;
         }
     }

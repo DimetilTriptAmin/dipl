@@ -21,5 +21,12 @@ namespace dipl.Models
             Audios = new ObservableCollection<Audio>();
             Image = new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
         }
+
+        public Playlist(string name, ObservableCollection<Audio> audios, ImageSource imageSource)
+        {
+            Name = name;
+            Audios = audios;
+            Image = imageSource;
+        }
     }
 }
