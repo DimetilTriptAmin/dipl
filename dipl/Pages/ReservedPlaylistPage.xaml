@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ReservedPlaylistPage">
 
-    <Grid Background="#FF000000">
+    <Grid Background="{DynamicResource MainBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
@@ -29,13 +29,7 @@
                     <BitmapCache />
                 </Border.CacheMode>
             </Border>
-            <Border Margin="0,0,0,-140">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#E5000000" Offset="0.85"/>
-                        <GradientStop Color="#4C000000"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border Margin="0,0,0,-140" Background="{DynamicResource Gradient}">
                 <Border.Effect>
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
@@ -46,18 +40,21 @@
                             Margin="50">
                     <Border CornerRadius="15"
                             VerticalAlignment="Center"
-                            Background="#CC151414">
+                            >
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.8"/>
+                        </Border.Background>
                         <TextBox
                             Width="110"
                             Margin="15,5,15,5"
                              FontSize="15"
                              VerticalContentAlignment="Center"
                              Background="Transparent"
-                            materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                             materialDesign:HintAssist.Foreground="#d9ebe9"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
+                             materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
                              materialDesign:HintAssist.Hint="{DynamicResource g_Search}"
                              FontFamily="Arial"
-                             Foreground="#d9ebe9" CaretBrush="#d9ebe9">
+                             Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}">
                             <TextBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="13"/>
@@ -72,8 +69,8 @@
                        FontSize="50"
                        Text="{Binding Playlist.Name}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
-                <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
+                <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
             </Grid>
         </Grid>
 
@@ -82,7 +79,7 @@
                       Style="{StaticResource MaterialDesignScrollViewer}" Margin="50"
                       >
             <ScrollViewer.Resources>
-                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
             <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="100">
                 <ItemsControl.ItemTemplate>
@@ -96,7 +93,7 @@
                                 </Border>
 
                                 <TextBlock Text="{Binding Name}" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
                                        TextWrapping="WrapWithOverflow"
@@ -105,7 +102,7 @@
                             </StackPanel>
 
                             <TextBlock Text="04:12" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
 									   HorizontalAlignment="Right"
@@ -134,7 +131,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
-                                        <materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                        <materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                     </Button>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                         <ToggleButton
@@ -144,7 +141,7 @@
                                             Background="#4CE0E0E0"
                                             IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
-                                            <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                            <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </ToggleButton>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DataContext="{Binding DataContext, ElementName=Header}">
                                             <Button Visibility="{Binding IsLiked}"
@@ -156,14 +153,14 @@
                                             CommandParameter="{Binding Path=(ListView.AlternationIndex), 
                                             RelativeSource={RelativeSource TemplatedParent}}"
                                             >
-                                                <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                             <Button Visibility="{Binding IsQueue}"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
-                                                <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                         </StackPanel>
                                     </StackPanel>

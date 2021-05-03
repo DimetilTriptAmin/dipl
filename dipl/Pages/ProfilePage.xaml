@@ -9,7 +9,7 @@
       d:DesignHeight="1950" d:DesignWidth="800"
       Title="ProfilePage">
 
-    <Grid Background="#FF000000">
+    <Grid Background="{DynamicResource MainBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
@@ -29,13 +29,7 @@
                     <BitmapCache />
                 </Border.CacheMode>
             </Border>
-            <Border Margin="0,0,0,-140">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#E5000000" Offset="0.85"/>
-                        <GradientStop Color="#4C000000"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border Margin="0,0,0,-140" Background="{DynamicResource Gradient}">
                 <Border.Effect>
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
@@ -46,15 +40,15 @@
                        FontSize="50"
                        Text="{DynamicResource g_Profile}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
-            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
+            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" Margin="50"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}">
             <ScrollViewer.Resources>
-                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
             <StackPanel>
                 
@@ -64,10 +58,10 @@
                        FontSize="30"
                        Text="{DynamicResource p_Info}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
                 <Line X1="0" Y1="0" 
                           X2="{Binding ActualWidth, ElementName=Header}" Y2="0" 
-                          Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                          Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
                 <Grid Margin="50,70,50,20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -81,17 +75,18 @@
                         </Viewbox>
                         <Button Content="{DynamicResource p_Change}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
-                            Margin="0,20,0,20" FontSize="20">
+                            Foreground="{DynamicResource MainTextColor}" BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
+                            Margin="0,20,0,20" FontSize="20"
+                                MaxWidth="400">
                         </Button>
                     </StackPanel>
                     <Grid Grid.Column="1" Margin="20,0,20,0">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                             <DockPanel>
-                                <TextBlock Text="{DynamicResource p_Login}" Foreground="#d9ebe9"
+                                <TextBlock Text="{DynamicResource p_Login}" Foreground="{DynamicResource MainTextColor}"
                                    FontSize="20" FontFamily="Arial Black"
                                            DockPanel.Dock="Left"/>
-                                <TextBlock Text="username1" Foreground="#d9ebe9"
+                                <TextBlock Text="username1" Foreground="{DynamicResource MainTextColor}"
                                    FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap"
                                    DockPanel.Dock="Right" Margin="20,0,0,0"/>
                             </DockPanel>
@@ -105,28 +100,28 @@
                        FontSize="25"
                        Text="{DynamicResource p_Password}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
                 <Line X1="0" Y1="0" 
                           X2="{Binding ActualWidth, ElementName=Header}" Y2="0" 
-                          Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                          Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
                 <StackPanel>
                     <StackPanel Margin="50,20,50,20">
-                        <TextBlock Foreground="#d9ebe9" 
+                        <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,50,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
                                    Text="{DynamicResource p_OPassword}">
                         </TextBlock>
-                        <PasswordBox Foreground="#d9ebe9" CaretBrush="#d9ebe9"
+                        <PasswordBox Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                  Margin="50,0,50,50"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                                 materialDesign:HintAssist.Foreground="#d9ebe9"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
+                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
                                  FontSize="20"
                                  materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}" 
                                  >
                         </PasswordBox>
-                        <TextBlock Foreground="#d9ebe9" 
+                        <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,20,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
@@ -134,17 +129,18 @@
                                    >
                         </TextBlock>
                         <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Foreground="#d9ebe9" CaretBrush="#d9ebe9"
+                                 Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
                                  Margin="50,0,50,0"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                                 materialDesign:HintAssist.Foreground="#d9ebe9"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
+                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
                                  FontSize="20"
                                  materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}">
                         </TextBox>
                     </StackPanel>
                     <Button Content="{DynamicResource p_Change}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
+                            Foreground="{DynamicResource MainTextColor}"
+                            BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
                             Margin="100,20,100,20" FontSize="20">
                     </Button>
                 </StackPanel>
@@ -155,59 +151,43 @@
                        FontSize="25"
                        Text="{DynamicResource p_Settings}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
                 <Line X1="0" Y1="0" 
                           X2="{Binding ActualWidth, ElementName=Header}" Y2="0" 
-                          Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                          Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
                 <StackPanel>
-                    <StackPanel Margin="50,20,50,20">
-                        <TextBlock Foreground="#d9ebe9" 
-                                   Margin="50,50,50,20"
-                                   FontSize="20"
-                                   FontFamily="Arial Black"
-                                   Text="{DynamicResource p_Language}">
-                        </TextBlock>
-                        <ComboBox FontSize="20"
-                                  SelectedIndex="{Binding Language, Mode=OneWayToSource}"
-                                  Name="langComboBox"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  Margin="50,0,50,0"
-                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                                  Foreground="#d9ebe9">
-                            <ComboBox.Resources>
-                                <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FF151414"/>
-                            </ComboBox.Resources>
-                            <ComboBoxItem Content="{DynamicResource p_English}" IsSelected="True" Tag="en-US"/>
-                            <ComboBoxItem Content="{DynamicResource p_Russian}" Tag="ru-RU"/>
-                        </ComboBox>
-                        
-                        <TextBlock Foreground="#d9ebe9" 
-                                   Margin="50,50,50,20"
-                                   FontSize="20"
-                                   FontFamily="Arial Black"
-                                   Text="{DynamicResource p_Theme}"
-                                   >
-                        </TextBlock>
-                        <ComboBox FontSize="20"
-                                  SelectedIndex="{Binding Theme, Mode=OneWayToSource}"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  Foreground="#d9ebe9"
-                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                                  Margin="50,0,50,0">
-                            <ComboBox.Resources>
-                                <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FF151414"/>
-                                
-                            </ComboBox.Resources>
-                            <ComboBoxItem Content="{DynamicResource p_Dark}" IsSelected="True"/>
-                            <ComboBoxItem Content="{DynamicResource p_Light}"/>
-                        </ComboBox>
+                    <StackPanel Margin="100,20,100,20" Name="Menu">
+                        <Menu Background="{DynamicResource MenuBackgroundColor}" 
+                              Foreground="{DynamicResource MainTextColor}"
+                              Margin="0,50,0,50"
+                              FontSize="20">
+                            <MenuItem HorizontalAlignment="Center"
+                                      Width="{Binding ActualWidth, ElementName=Menu}"
+                                      Header="{DynamicResource p_Language}">
+                                <MenuItem Width="{Binding ActualWidth, ElementName=Menu}" 
+                                          Header="{DynamicResource p_English}" Command="{Binding EnglishCommand}"
+                                          Margin="0,10,0,10"/>
+                                <MenuItem Width="{Binding ActualWidth, ElementName=Menu}" 
+                                          Header="{DynamicResource p_Russian}" Command="{Binding RussianCommand}"
+                                          Margin="0,10,0,10"/>
+                            </MenuItem>
+                        </Menu>
+                        <Menu Background="{DynamicResource MenuBackgroundColor}" 
+                              Foreground="{DynamicResource MainTextColor}"
+                              Margin="0,50,0,50"
+                              FontSize="20">
+                            <MenuItem Width="{Binding ActualWidth, ElementName=Menu}" 
+                                      HorizontalAlignment="Center"
+                                      Header="{DynamicResource p_Theme}">
+                                <MenuItem Width="{Binding ActualWidth, ElementName=Menu}" 
+                                          Header="{DynamicResource p_Dark}" Command="{Binding DarkCommand}"
+                                          Margin="0,10,0,10"/>
+                                <MenuItem Width="{Binding ActualWidth, ElementName=Menu}" 
+                                          Header="{DynamicResource p_Light}" Command="{Binding LightCommand}"
+                                          Margin="0,10,0,10"/>
+                            </MenuItem>
+                        </Menu>
                     </StackPanel>
-                    <Button Content="{DynamicResource p_Apply}" Height="50"
-                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
-                            Margin="100,20,100,20" FontSize="20"
-                            Command="{Binding ApplyCommand}">
-                    </Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

@@ -36,4 +36,16 @@
     <v:String x:Key="p_Light">Светлая</v:String>
     <v:String x:Key="p_Apply">Применить</v:String>
 
+    <!-- login&register -->
+
+    <v:String x:Key="l_ELogin">Введите логин</v:String>
+    <v:String x:Key="l_RPassword">Повторите пароль</v:String>
+    <v:String x:Key="l_Account">Есть аккаунт?</v:String>
+    <v:String x:Key="l_NoAccount">Нет аккаунта?</v:String>
+    <v:String x:Key="l_SignIn">Войти</v:String>
+    <v:String x:Key="l_SignUp">Регистрация</v:String>
+    <v:String x:Key="l_SigningUp">Регистрация</v:String>
+    <v:String x:Key="l_SigningIn">Вход</v:String>
+    <v:String x:Key="l_Guest">Войти как гость</v:String>
+
 </ResourceDictionary>

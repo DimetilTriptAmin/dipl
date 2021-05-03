@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
 
-    <Grid Background="#FF000000">
+    <Grid Background="{DynamicResource MainBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
@@ -28,13 +28,7 @@
                     <BitmapCache />
                 </Border.CacheMode>
             </Border>
-            <Border Margin="0,0,0,-140">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#E5000000" Offset="0.85"/>
-                        <GradientStop Color="#4C000000"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border Margin="0,0,0,-140" Background="{DynamicResource Gradient}">
                 <Border.Effect>
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
@@ -46,13 +40,13 @@
                        FontSize="50"
                        Text="{DynamicResource g_Home}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
             </Grid>
-            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
         <ScrollViewer Grid.Row="1" materialDesign:ScrollViewerAssist.IgnorePadding="True" materialDesign:ScrollViewerAssist.ShowSeparators="False">
             <ScrollViewer.Resources>
-                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
             <StackPanel Margin="50">
                 <TextBlock VerticalAlignment="Center"
@@ -61,8 +55,8 @@
                        FontSize="25"
                        Text="{DynamicResource g_Playlists}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
-                <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
+                <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
                 <ListView ItemsSource="{Binding Playlists}" AlternationCount="100" Name="Playlists">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -71,7 +65,9 @@
                                         <Border.Background>
                                             <ImageBrush ImageSource="{Binding Image}"/>
                                         </Border.Background>
-                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Width="200" Height="200"
+                                               >
                                             <Grid.Style>
                                                 <Style TargetType="{x:Type Grid}">
                                                     <Setter Property="Opacity" Value="0"/>
@@ -83,15 +79,15 @@
                                                 </Style>
                                             </Grid.Style>
                                             <Grid.Background>
-                                            <SolidColorBrush Color="#FF000000" Opacity="0.75"/>
-                                        </Grid.Background>
+                                                <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
+                                            </Grid.Background>
                                             <Button
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000">
-                                                <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                             <Button
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
@@ -102,19 +98,19 @@
                                             Background="#00000000" BorderBrush="#00000000"
                                                 Command="{Binding ShowPlaylistCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
                                                     RelativeSource={RelativeSource TemplatedParent}}">
-                                                <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                         <Button 
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000">
-                                            <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="#d9ebe9"/>
+                                            <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                         </Button>
                                     </Grid>
                                     </Border>
                                     <TextBlock Text="{Binding Name}" 
-                                           FontSize="18" Foreground="#d9ebe9" 
+                                           FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                            TextAlignment="Center" 
                                            TextWrapping="WrapWithOverflow"
                                            FontFamily="Arial Black"
@@ -135,8 +131,8 @@
                        FontSize="25"
                        Text="{DynamicResource h_Recent}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
-                <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
+                <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
 
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding Recent}">
@@ -151,7 +147,7 @@
                                         </Border>
 
                                         <TextBlock Text="{Binding Name}" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
                                        TextWrapping="WrapWithOverflow"
@@ -160,7 +156,7 @@
                                     </StackPanel>
 
                                     <TextBlock Text="04:12" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
 									   HorizontalAlignment="Right"
@@ -189,7 +185,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
-                                                <materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                             <ToggleButton
 											HorizontalAlignment="Right"
@@ -198,7 +194,7 @@
                                             Background="#4CE0E0E0"
                                                 IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
-                                                <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </ToggleButton>
                                         </Grid>
                                     </Border>

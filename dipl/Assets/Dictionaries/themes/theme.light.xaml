@@ -1,5 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:dipl.Assets.Dictionaries.themes">
+                    >
+
+    <SolidColorBrush x:Key="MainTextColor" Color="#080808"/>
+    <Color x:Key="MainColor" R="8" B="8" G="8" A="255"/>
+
+    <SolidColorBrush x:Key="ButtonBgColor" Color="#B214210D"/>
+
+    <SolidColorBrush x:Key="ControlBg" Color="#e3e8ff"/>
+
+    <SolidColorBrush x:Key="MainBackgroundColor" Color="#f1f2f2"/>
+    <Color x:Key="MainBgColor" R="241" B="242" G="242" A="255"/>
+
+    <SolidColorBrush x:Key="MenuBackgroundColor" Color="#dcdbe1"/>
+    <Color x:Key="MenuBgColor" R="220" B="219" G="225" A="255"/>
+
+    <LinearGradientBrush x:Key="Gradient" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#f1f2f2" Offset="0.85"/>
+        <GradientStop Color="#4CFFFFFF"/>
+    </LinearGradientBrush>
     
 </ResourceDictionary>

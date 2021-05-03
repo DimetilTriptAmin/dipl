@@ -20,7 +20,7 @@ namespace dipl
 
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
 		private static List<string> m_Themes = new List<string>();
-		public static int themeid;
+		public static int themeid=0;
 
 		public static List<CultureInfo> Languages
         {

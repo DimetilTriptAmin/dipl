@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PlaylistEditPage">
 
-    <Grid Background="#FF000000">
+    <Grid Background="{DynamicResource MainBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
@@ -29,13 +29,7 @@
                     <BitmapCache />
                 </Border.CacheMode>
             </Border>
-            <Border Margin="0,0,0,-140">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#E5000000" Offset="0.85"/>
-                        <GradientStop Color="#4C000000"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border Margin="0,0,0,-140" Background="{DynamicResource Gradient}">
                 <Border.Effect>
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
@@ -50,23 +44,23 @@
                     <TextBox VerticalAlignment="Center"
                              MinWidth="100"
                              FontSize="40"
-                             CaretBrush="#d9ebe9"
-                           materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
+                             CaretBrush="{DynamicResource MainTextColor}"
+                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
                            Text="{Binding Playlist.Name, Mode=TwoWay}"
                            FontFamily="Arial Black"
-                           Foreground="#d9ebe9"
+                           Foreground="{DynamicResource MainTextColor}"
                      />
                 </Viewbox>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <Button Height="50" Width="50" 
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}">
-                        <materialDesign:PackIcon Kind="Image" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <materialDesign:PackIcon Kind="Image" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button Height="50" Width="50" 
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}">
-                        <materialDesign:PackIcon Kind="Add" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <materialDesign:PackIcon Kind="Add" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
@@ -75,24 +69,24 @@
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}"
                         Command="{Binding ConfirmCommand}">
-                        <materialDesign:PackIcon Kind="Check" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <materialDesign:PackIcon Kind="Check" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button Height="50" Width="50"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}"
                             Command="{Binding CancelCommand}">
-                        <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                        <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                 </StackPanel>
             </Grid>
-            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}" Margin="40,0,40,0">
             <ScrollViewer.Resources>
-                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
             <ItemsControl ItemsSource="{Binding Audios}">
                 <ItemsControl.ItemTemplate>
@@ -106,7 +100,7 @@
                                 </Border>
 
                                 <TextBlock Text="{Binding Name}" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
                                        TextWrapping="WrapWithOverflow"
@@ -115,7 +109,7 @@
                             </StackPanel>
 
                             <TextBlock Text="04:12" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
 									   HorizontalAlignment="Right"
@@ -144,7 +138,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
-                                        <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                        <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                     </Button>
                                 </Grid>
                             </Border>

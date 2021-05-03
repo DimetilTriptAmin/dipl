@@ -11,37 +11,63 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Title="AuthWindow" Height="600" Width="500">
+        Title="AuthWindow" Height="600" Width="600">
 
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" 
                     Executed="MinimizeWindow_Exec"/>
     </Window.CommandBindings>
 
-    <Grid Background="#FF151414">
+    <Grid Background="{DynamicResource MenuBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Foreground="#d9ebe9" 
+        <TextBlock Foreground="{DynamicResource MainTextColor}"
+                   Visibility="{Binding IsSigningIn}"
                    Margin="5"
                    FontSize="14"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   Text="{Binding Title}">
+                   Text="{DynamicResource l_SigningIn}">
+        </TextBlock>
+        <TextBlock Foreground="{DynamicResource MainTextColor}"
+                   Visibility="{Binding IsSigningUp}"
+                   Margin="5"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{DynamicResource l_SigningUp}">
         </TextBlock>
         <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button Height="30" Foreground="#d9ebe9"
+            <Menu Height="30" HorizontalContentAlignment="Center" Padding="-2"
+                  Background="{DynamicResource MenuBackgroundColor}" Foreground="{DynamicResource MainTextColor}">
+                <MenuItem Padding="0" Height="30" Width="45" HorizontalAlignment="Center">
+                    <MenuItem.Header>
+                        <materialDesign:PackIcon Kind="Menu" Height="15" Width="45" Padding="0" HorizontalAlignment="Center" Margin="-2,0,-23,0"/>
+                    </MenuItem.Header>
+                    <MenuItem Header="{DynamicResource p_Language}" Name="menuLanguage" >
+                        <MenuItem Header="{DynamicResource p_English}" Command="{Binding EnglishCommand}"/>
+                        <MenuItem Header="{DynamicResource p_Russian}" Command="{Binding RussianCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource p_Theme}" Name="menuSettings">
+                        <MenuItem Header="{DynamicResource p_Dark}" Command="{Binding DarkCommand}"/>
+                        <MenuItem Header="{DynamicResource p_Light}" Command="{Binding LightCommand}"/>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <Button Height="30" Foreground="{DynamicResource MainTextColor}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Command="{x:Static SystemCommands.MinimizeWindowCommand}">
-                <materialDesign:PackIcon Kind="Minus" Height="15" Width="15" VerticalAlignment="Center" Foreground="#d9ebe9" HorizontalAlignment="Left"/>
+                <materialDesign:PackIcon Kind="Minus" Height="15" Width="15" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
             </Button>
             <Button Height="30" 
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Foreground="Red" BorderBrush="Red" Background="{x:Null}">
-                <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" Foreground="#d9ebe9" HorizontalAlignment="Left"/>
+                <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:CallMethodAction MethodName="Close"
@@ -69,13 +95,13 @@
             </Frame.Resources>
         </Frame>
         <StackPanel Grid.Row="2" Margin="20">
-            <Button Content="Enter as a guest"
+            <Button Content="{DynamicResource l_Guest}"
                     FontSize="20"
                     Height="50"
                     Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    Foreground="#d9ebe9" Background="#00DDDDDD" BorderBrush="{x:Null}"
+                    Foreground="{DynamicResource MainTextColor}" Background="#00DDDDDD" BorderBrush="{x:Null}"
                     Command="{Binding GuestCommand}">
-                
+
             </Button>
         </StackPanel>
     </Grid>

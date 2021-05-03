@@ -9,56 +9,56 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="SignInPage">
 
-    <Grid Background="#FF000000">
+    <Grid Background="{DynamicResource MainBackgroundColor}">
         <StackPanel>
             <StackPanel>
-                <TextBlock Foreground="#d9ebe9" 
+                <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,50,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
-                                   Text="Login">
+                                   Text="{DynamicResource p_Login}">
                 </TextBlock>
-                <TextBox Foreground="#d9ebe9" CaretBrush="#d9ebe9"
+                <TextBox Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  Margin="50,0,50,50"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                                 materialDesign:HintAssist.Foreground="#d9ebe9"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
+                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
                                  FontSize="20"
-                                 materialDesign:HintAssist.Hint="Enter login" 
+                                 materialDesign:HintAssist.Hint="{DynamicResource l_ELogin}" 
                                  >
                 </TextBox>
-                <TextBlock Foreground="#d9ebe9" 
+                <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,20,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
-                                   Text="Password"
+                                   Text="{DynamicResource p_Password}"
                                    >
                 </TextBlock>
                 <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                 Foreground="#d9ebe9" CaretBrush="#d9ebe9"
+                                 Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
                                  Margin="50,0,50,0"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
-                                 materialDesign:HintAssist.Foreground="#d9ebe9"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
+                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
                                  FontSize="20"
-                                 materialDesign:HintAssist.Hint="Enter password">
+                                 materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}">
                 </PasswordBox>
             </StackPanel>
             <DockPanel Margin="0,20,0,20">
-                <Button Content="Sign In" Height="50" DockPanel.Dock="Left"
+                <Button Content="{DynamicResource l_SignIn}" Height="50" DockPanel.Dock="Left"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
+                            Foreground="{DynamicResource MainTextColor}" BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
                             Margin="50,20,50,20" FontSize="20">
                 </Button>
                 <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <TextBlock Foreground="#d9ebe9" 
+                    <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                     VerticalAlignment="Center"
                                    FontSize="20"
-                                   Text="No account?"
+                                   Text="{DynamicResource l_NoAccount}"
                                    >
                     </TextBlock>
-                    <Button Content="Sign Up" Height="50"
+                    <Button Content="{DynamicResource l_SignUp}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                            Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
+                            Foreground="{DynamicResource MainTextColor}" BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
                             Margin="20,20,50,20" FontSize="20" Command="{Binding NavigateSignUpCommand}">
                     </Button>
                 </WrapPanel>

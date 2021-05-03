@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PlaylistPage">
 
-    <Grid Background="#FF000000">
+    <Grid Background="{DynamicResource MainBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
@@ -29,13 +29,7 @@
                     <BitmapCache />
                 </Border.CacheMode>
             </Border>
-            <Border Margin="0,0,0,-140">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#E5000000" Offset="0.85"/>
-                        <GradientStop Color="#4C000000"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border Margin="0,0,0,-140" Background="{DynamicResource Gradient}">
                 <Border.Effect>
                     <BlurEffect KernelType="Gaussian" Radius="6" />
                 </Border.Effect>
@@ -52,7 +46,7 @@
                        FontSize="50"
                        Text="{Binding Playlist.Name}"
                        FontFamily="Arial Black"
-                       Foreground="#d9ebe9"/>
+                       Foreground="{DynamicResource MainTextColor}"/>
                 </Viewbox>
                 
                 <Button HorizontalAlignment="Right"
@@ -62,17 +56,17 @@
                             Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 							BorderBrush="#00000000" Background="{x:Null}"
                             Command="{Binding EditCommand}">
-                    <materialDesign:PackIcon Kind="Edit" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                    <materialDesign:PackIcon Kind="Edit" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                 </Button>
             </Grid>
-            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
+            <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}" Margin="50">
             <ScrollViewer.Resources>
-                <SolidColorBrush x:Key="MaterialDesignBody" Color="#d9ebe9"/>
+                <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
             <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="100">
                 <ItemsControl.ItemTemplate>
@@ -86,7 +80,7 @@
 								</Border>
 
 								<TextBlock Text="{Binding Name}" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
                                        TextWrapping="WrapWithOverflow"
@@ -95,7 +89,7 @@
 							</StackPanel>
 
 							<TextBlock Text="04:12" 
-                                       FontSize="18" Foreground="#d9ebe9" 
+                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
 									   HorizontalAlignment="Right"
@@ -124,7 +118,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
-										<materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+										<materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
 									</Button>
                                     <StackPanel 
                                         Orientation="Horizontal" 
@@ -137,7 +131,7 @@
                                             Background="#4CE0E0E0"
                                             IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
-                                            <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                            <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </ToggleButton>
                                         <Button
                                             Height="50" Width="50"
@@ -148,14 +142,14 @@
                                                     RelativeSource={RelativeSource TemplatedParent}}"
                                             DataContext="{Binding DataContext, ElementName=Header}"
                                             >
-                                                <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                                <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                         <Button
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
-                                            <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="#d9ebe9"/>
+                                            <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </Button>
                                     </StackPanel>
                                 </Grid>

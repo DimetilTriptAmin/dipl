@@ -35,6 +35,16 @@
     <v:String x:Key="p_Light">Light</v:String>
     <v:String x:Key="p_Apply">Apply</v:String>
 
+    <!-- login&register -->
 
+    <v:String x:Key="l_ELogin">Enter login</v:String>
+    <v:String x:Key="l_RPassword">Repeat password</v:String>
+    <v:String x:Key="l_Account">Have account?</v:String>
+    <v:String x:Key="l_NoAccount">No account?</v:String>
+    <v:String x:Key="l_SignIn">Sign In</v:String>
+    <v:String x:Key="l_SignUp">Sign Up</v:String>
+    <v:String x:Key="l_SigningUp">Signing Up</v:String>
+    <v:String x:Key="l_SigningIn">Signing In</v:String>
+    <v:String x:Key="l_Guest">Enter as a guest</v:String>
 
 </ResourceDictionary>

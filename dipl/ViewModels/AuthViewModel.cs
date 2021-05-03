@@ -4,6 +4,7 @@ using dipl.View.ViewModel;
 using dipl.Windows;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -43,19 +44,6 @@ namespace dipl.ViewModels
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
-        public ICommand GuestCommand
-        {
-            get
-            {
-                return new RelayCommand((obj) =>
-                {
-                    MainWindow mw = new MainWindow();
-                    Application.Current.MainWindow.Close();
-                    mw.Show();
-                });
-            }
-        }
-
         private async void OnCurrentViewModelChanged()
         {
             await Task.Factory.StartNew(() =>
@@ -65,6 +53,9 @@ namespace dipl.ViewModels
                     FrameOpacity = i;
                     Thread.Sleep(10);
                 }
+                _isSigningIn = !_isSigningIn;
+                OnPropertyChanged(nameof(IsSigningIn));
+                OnPropertyChanged(nameof(IsSigningUp));
                 OnPropertyChanged(nameof(CurrentViewModel));
                 OnPropertyChanged(nameof(Title));
                 for (double i = 0; i < 1.1; i += 0.1)
@@ -88,5 +79,81 @@ namespace dipl.ViewModels
                 OnPropertyChanged("FrameOpacity");
             }
         }
+
+        private bool _isSigningIn = true;
+        public Visibility IsSigningUp
+        {
+            get
+            {
+                return _isSigningIn ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility IsSigningIn
+        {
+            get
+            {
+                return _isSigningIn ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+
+        public ICommand GuestCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    MainWindow mw = new MainWindow();
+                    Application.Current.MainWindow.Close();
+                    mw.ShowDialog();
+                });
+            }
+        }
+
+        public ICommand EnglishCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.Language = new CultureInfo("en-US");
+                });
+            }
+        }
+
+        public ICommand RussianCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.Language = new CultureInfo("ru-RU");
+                });
+            }
+        }
+
+        public ICommand DarkCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.Theme = "dark";
+                });
+            }
+        }
+
+        public ICommand LightCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.Theme = "light";
+                });
+            }
+        }
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using dipl.View.ViewModel;
+﻿using dipl.Stores;
+using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,56 +12,46 @@ namespace dipl.ViewModels
 {
     class ProfileViewModel : ViewModelBase
     {
-
-        private int _language;
-        public int Language
+        public ICommand EnglishCommand
         {
             get
             {
-                if (App.Language.ToString() == "en-US") return 0;
-                if (App.Language.ToString() == "ru-RU") return 1;
-                else return 0;
-            }
-            set
-            {
-                _language = value;
-                OnPropertyChanged(nameof(Language));
+                return new RelayCommand((obj) =>
+                {
+                    App.Language = new CultureInfo("en-US");
+                });
             }
         }
 
-        private int _theme;
-        public int Theme
+        public ICommand RussianCommand
         {
             get
             {
-                return App.themeid;
-            }
-            set
-            {
-                _theme = value;
-                OnPropertyChanged(nameof(Theme));
+                return new RelayCommand((obj) =>
+                {
+                    App.Language = new CultureInfo("ru-RU");
+                });
             }
         }
-        
 
-        public ICommand ApplyCommand
+        public ICommand DarkCommand
         {
             get
             {
-                return new RelayCommand((obj)=> {
-                    CultureInfo lang;
-                    switch (_language)
-                    {
-                        case 1: lang = new CultureInfo("ru-RU"); break;
-                        default: lang = new CultureInfo("en-US"); break;
-                    }
-                    App.Language = lang;
+                return new RelayCommand((obj) =>
+                {
+                    App.Theme = "dark";
+                });
+            }
+        }
 
-                    switch (_theme)
-                    {
-                        case 1: App.Theme="light"; break;
-                        default: App.Theme="dark"; break;
-                    }
+        public ICommand LightCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.Theme = "light";
                 });
             }
         }
