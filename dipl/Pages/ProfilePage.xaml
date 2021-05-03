@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:dipl.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1950" d:DesignWidth="800"
       Title="ProfilePage">
 
     <Grid Background="#FF000000">
@@ -44,7 +44,7 @@
                        HorizontalAlignment="Left"
                        Margin="50"
                        FontSize="50"
-                       Text="Profile"
+                       Text="{DynamicResource g_Profile}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
             <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="#d9ebe9" Margin="40,0,40,0"/>
@@ -62,7 +62,7 @@
                        HorizontalAlignment="Left"
                        Margin="50,50,50,20"
                        FontSize="30"
-                       Text="Information"
+                       Text="{DynamicResource p_Info}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
                 <Line X1="0" Y1="0" 
@@ -75,11 +75,11 @@
                     </Grid.ColumnDefinitions>
                     
                     <StackPanel Margin="20,0,20,0">
-                        <Viewbox MaxHeight="450" MaxWidth="450">
+                        <Viewbox MaxHeight="400" MaxWidth="400">
                             <Image Source="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" 
                                    Width="200" Height="200"/>
                         </Viewbox>
-                        <Button Content="Change" Height="50"
+                        <Button Content="{DynamicResource p_Change}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
                             Margin="0,20,0,20" FontSize="20">
@@ -88,7 +88,7 @@
                     <Grid Grid.Column="1" Margin="20,0,20,0">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                             <DockPanel>
-                                <TextBlock Text="Login" Foreground="#d9ebe9"
+                                <TextBlock Text="{DynamicResource p_Login}" Foreground="#d9ebe9"
                                    FontSize="20" FontFamily="Arial Black"
                                            DockPanel.Dock="Left"/>
                                 <TextBlock Text="username1" Foreground="#d9ebe9"
@@ -103,7 +103,7 @@
                        HorizontalAlignment="Left"
                        Margin="50,50,50,20"
                        FontSize="25"
-                       Text="Password"
+                       Text="{DynamicResource p_Password}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
                 <Line X1="0" Y1="0" 
@@ -115,7 +115,7 @@
                                    Margin="50,50,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
-                                   Text="Old password">
+                                   Text="{DynamicResource p_OPassword}">
                         </TextBlock>
                         <PasswordBox Foreground="#d9ebe9" CaretBrush="#d9ebe9"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
@@ -123,14 +123,14 @@
                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
                                  materialDesign:HintAssist.Foreground="#d9ebe9"
                                  FontSize="20"
-                                 materialDesign:HintAssist.Hint="Enter password" 
+                                 materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}" 
                                  >
                         </PasswordBox>
                         <TextBlock Foreground="#d9ebe9" 
                                    Margin="50,20,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
-                                   Text="New password"
+                                   Text="{DynamicResource p_NPassword}"
                                    >
                         </TextBlock>
                         <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -139,10 +139,10 @@
                                  materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
                                  materialDesign:HintAssist.Foreground="#d9ebe9"
                                  FontSize="20"
-                                 materialDesign:HintAssist.Hint="Enter password">
+                                 materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}">
                         </TextBox>
                     </StackPanel>
-                    <Button Content="Change password" Height="50"
+                    <Button Content="{DynamicResource p_Change}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
                             Margin="100,20,100,20" FontSize="20">
@@ -153,7 +153,7 @@
                        HorizontalAlignment="Left"
                        Margin="50,50,50,20"
                        FontSize="25"
-                       Text="Settings"
+                       Text="{DynamicResource p_Settings}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
                 <Line X1="0" Y1="0" 
@@ -165,9 +165,11 @@
                                    Margin="50,50,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
-                                   Text="Language">
+                                   Text="{DynamicResource p_Language}">
                         </TextBlock>
                         <ComboBox FontSize="20"
+                                  SelectedIndex="{Binding Language, Mode=OneWayToSource}"
+                                  Name="langComboBox"
                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                   Margin="50,0,50,0"
                                   materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
@@ -175,18 +177,19 @@
                             <ComboBox.Resources>
                                 <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FF151414"/>
                             </ComboBox.Resources>
-                            <ComboBoxItem Content="English" IsSelected="True"/>
-                            <ComboBoxItem Content="Russian"/>
+                            <ComboBoxItem Content="{DynamicResource p_English}" IsSelected="True" Tag="en-US"/>
+                            <ComboBoxItem Content="{DynamicResource p_Russian}" Tag="ru-RU"/>
                         </ComboBox>
                         
                         <TextBlock Foreground="#d9ebe9" 
                                    Margin="50,50,50,20"
                                    FontSize="20"
                                    FontFamily="Arial Black"
-                                   Text="Theme"
+                                   Text="{DynamicResource p_Theme}"
                                    >
                         </TextBlock>
                         <ComboBox FontSize="20"
+                                  SelectedIndex="{Binding Theme, Mode=OneWayToSource}"
                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                   Foreground="#d9ebe9"
                                   materialDesign:TextFieldAssist.UnderlineBrush="#d9ebe9"
@@ -195,14 +198,15 @@
                                 <SolidColorBrush x:Key="MaterialDesignPaper" Color="#FF151414"/>
                                 
                             </ComboBox.Resources>
-                            <ComboBoxItem Content="Dark" IsSelected="True"/>
-                            <ComboBoxItem Content="Light"/>
+                            <ComboBoxItem Content="{DynamicResource p_Dark}" IsSelected="True"/>
+                            <ComboBoxItem Content="{DynamicResource p_Light}"/>
                         </ComboBox>
                     </StackPanel>
-                    <Button Content="Apply" Height="50"
+                    <Button Content="{DynamicResource p_Apply}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="#d9ebe9" BorderBrush="{x:Null}" Background="#B214210D"
-                            Margin="100,20,100,20" FontSize="20">
+                            Margin="100,20,100,20" FontSize="20"
+                            Command="{Binding ApplyCommand}">
                     </Button>
                 </StackPanel>
             </StackPanel>

@@ -44,7 +44,7 @@
                        HorizontalAlignment="Left"
                        Margin="50"
                        FontSize="50"
-                       Text="Home"
+                       Text="{DynamicResource g_Home}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
             </Grid>
@@ -59,7 +59,7 @@
                        HorizontalAlignment="Left"
                        Margin="50,50,50,20"
                        FontSize="25"
-                       Text="Playlists"
+                       Text="{DynamicResource g_Playlists}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
                 <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="#d9ebe9" Margin="40,0,40,0"/>
@@ -133,7 +133,7 @@
                        HorizontalAlignment="Left"
                        Margin="50,50,50,20"
                        FontSize="25"
-                       Text="Recently played"
+                       Text="{DynamicResource h_Recent}"
                        FontFamily="Arial Black"
                        Foreground="#d9ebe9"/>
                 <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="#d9ebe9" Margin="40,0,40,0"/>

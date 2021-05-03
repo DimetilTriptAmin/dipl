@@ -144,7 +144,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             Command="{Binding RemoveCommand}"
-                                            CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                                            CommandParameter="{Binding Path=(ListView.AlternationIndex), 
                                                     RelativeSource={RelativeSource TemplatedParent}}"
                                             DataContext="{Binding DataContext, ElementName=Header}"
                                             >
