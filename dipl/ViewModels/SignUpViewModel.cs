@@ -1,4 +1,5 @@
-﻿using dipl.Stores;
+﻿using dipl.Models;
+using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,14 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) => {
                     _navigationStore.CurrentViewModel = new SignInViewModel(_navigationStore);
                 });
+            }
+        }
+
+        public ICommand SignUpCommand
+        {
+            get
+            {
+                return null;
             }
         }
 

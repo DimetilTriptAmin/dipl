@@ -64,7 +64,8 @@
                 <Button Content="{DynamicResource l_SignUp}" Height="50" DockPanel.Dock="Left"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="{DynamicResource MainTextColor}" BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
-                            Margin="50,20,50,20" FontSize="20">
+                            Margin="50,20,50,20" FontSize="20"
+                        Command="{Binding SignUpCommand}">
                 </Button>
                 <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
                     <TextBlock Foreground="{DynamicResource MainTextColor}" 

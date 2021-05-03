@@ -1,21 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace dipl.Models
+﻿namespace dipl.Models
 {
-    class User : AbstractUser
+    public enum UserType
     {
-        ObservableCollection<Audio> PlayingQueue;
-        List<Playlist> Playlists;
+        Guest,
+        Regular,
+        Admin
+    }
 
-        private void LoadPlaylists()
-        {
-
-        }
-
-        User()
-        {
-            LoadPlaylists();
-        }
+    public class User
+    {
+        public string Username { get; set; }
+        public string PasswordHash { get; set; }
     }
 }

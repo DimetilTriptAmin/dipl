@@ -1,4 +1,5 @@
-﻿using dipl.Stores;
+﻿using dipl.Models;
+using dipl.Stores;
 using dipl.ViewModels;
 using dipl.Windows;
 using System;
@@ -17,12 +18,12 @@ namespace dipl
     /// </summary>
     public partial class App : Application
     {
-
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
 		private static List<string> m_Themes = new List<string>();
-		public static int themeid=0;
 
-		public static List<CultureInfo> Languages
+        public static Account CurrentAccount { get; set; }
+
+        public static List<CultureInfo> Languages
         {
             get
             {
@@ -120,11 +121,9 @@ namespace dipl
 				{
 					case "light":
 						dict.Source = new Uri("Assets/Dictionaries/themes/theme.light.xaml", UriKind.Relative);
-						themeid = 1;
 						break;
 					default:
 						dict.Source = new Uri("Assets/Dictionaries/themes/theme.dark.xaml", UriKind.Relative);
-						themeid = 0;
 						break;
 				}
 

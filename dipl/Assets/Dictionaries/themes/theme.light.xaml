@@ -12,6 +12,9 @@
     <SolidColorBrush x:Key="MainBackgroundColor" Color="#f1f2f2"/>
     <Color x:Key="MainBgColor" R="241" B="242" G="242" A="255"/>
 
+    <SolidColorBrush x:Key="SongBackgroundColor" Color="#260A0C0B"/>
+    <SolidColorBrush x:Key="HeartgBackgroundColor" Color="#72000000"/>
+
     <SolidColorBrush x:Key="MenuBackgroundColor" Color="#dcdbe1"/>
     <Color x:Key="MenuBgColor" R="220" B="219" G="225" A="255"/>
 

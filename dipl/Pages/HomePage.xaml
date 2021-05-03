@@ -138,7 +138,7 @@
                     <ItemsControl ItemsSource="{Binding Recent}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="10" Background="#26D9EBE9">
+                                <Grid Margin="10" Background="{DynamicResource SongBackgroundColor}">
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                         <Border Width="50" Height="50">
                                             <Border.Background>
@@ -177,7 +177,7 @@
                                                 </Style>
                                             </Grid.Style>
                                             <Grid.Background>
-                                                <SolidColorBrush Color="Black" Opacity="0.6"/>
+                                                <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
                                             </Grid.Background>
                                             <Button x:Name="PlayButton"
 											HorizontalAlignment="Left"
@@ -191,10 +191,11 @@
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            Background="#4CE0E0E0"
+                                            Background="{DynamicResource HeartgBackgroundColor}"
                                                 IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
-                                                <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                                                <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" 
+                                                                         Foreground="{DynamicResource MainTextColor}"/>
                                             </ToggleButton>
                                         </Grid>
                                     </Border>

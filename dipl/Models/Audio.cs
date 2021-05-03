@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,16 @@ namespace dipl.Models
 {
     public sealed class Audio
     {
+        public int Id { get; set; }
         public bool IsLiked { get; set; }
         public ImageSource Image { get; set; }
         public string Name { get; private set; }
         public string SourceUrl { get; private set; }
 
-        public Audio(string sourceurl, bool isLiked)
+        public Audio(string SourceUrl, bool IsLiked)
         {
-            SourceUrl = sourceurl;
-            IsLiked = isLiked;
+            this.SourceUrl = SourceUrl;
+            this.IsLiked = IsLiked;
             Name = Path.GetFileNameWithoutExtension(SourceUrl);
             Image = GetImage();
         }

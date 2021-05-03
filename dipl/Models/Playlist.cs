@@ -13,7 +13,7 @@ namespace dipl.Models
     {
         public string Name { get; set; }
         public ImageSource Image { get; set; }
-        public ObservableCollection<Audio> Audios;
+        public ObservableCollection<Audio> Audios { get; set; }
 
         public Playlist(string name)
         {

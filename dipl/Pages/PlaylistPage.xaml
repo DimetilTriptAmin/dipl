@@ -110,8 +110,8 @@
 										</Style>
 									</Grid.Style>
 									<Grid.Background>
-										<SolidColorBrush Color="Black" Opacity="0.6"/>
-									</Grid.Background>
+                                        <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
+                                    </Grid.Background>
 									<Button x:Name="PlayButton"
 											HorizontalAlignment="Left"
                                             Height="50" Width="50"
@@ -128,7 +128,7 @@
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            Background="#4CE0E0E0"
+                                            Background="{DynamicResource MainBackgroundColor}"
                                             IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
                                             <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
