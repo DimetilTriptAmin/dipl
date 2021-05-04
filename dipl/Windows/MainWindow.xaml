@@ -192,6 +192,7 @@
         </Grid>
 
         <!-- Основная панель -->
+        
         <Frame Grid.Column="1" Grid.Row="1"
                Content="{Binding CurrentViewModel}"
                NavigationUIVisibility="Hidden"

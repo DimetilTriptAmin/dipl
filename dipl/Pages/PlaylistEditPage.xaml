@@ -19,7 +19,7 @@
             <Border>
                 <Rectangle x:Name="BlurringShape" Margin="3,3,3,-130">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="{Binding Playlist.Image}" Stretch="UniformToFill" />
+                        <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
                     </Rectangle.Fill>
                     <Rectangle.Effect>
                         <BlurEffect KernelType="Gaussian" Radius="3" />
@@ -54,12 +54,12 @@
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <Button Height="50" Width="50" 
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
-					    BorderBrush="#00000000" Background="{x:Null}">
+					    BorderBrush="#00000000" Background="{x:Null}" Click="ChoosePic_Click">
                         <materialDesign:PackIcon Kind="Image" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button Height="50" Width="50" 
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
-					    BorderBrush="#00000000" Background="{x:Null}">
+					    BorderBrush="#00000000" Background="{x:Null}" Click="Add_Click">
                         <materialDesign:PackIcon Kind="Add" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                 </StackPanel>
@@ -130,7 +130,7 @@
                                         </Style>
                                     </Grid.Style>
                                     <Grid.Background>
-                                        <SolidColorBrush Color="Black" Opacity="0.6"/>
+                                        <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.8"/>
                                     </Grid.Background>
                                     <Button
 											HorizontalAlignment="Right"

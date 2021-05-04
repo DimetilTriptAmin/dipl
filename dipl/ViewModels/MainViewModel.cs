@@ -35,65 +35,14 @@ namespace dipl.ViewModels
         public MainViewModel(NavigationStore navigationStore)
         {
 
-            #region
-            Playlist pl = new Playlist("Liked1");
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-
-            Playlist pl1 = new Playlist("Queue");
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", true));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-            pl1.Audios.Add(new Audio("Linkin Park1 - Numb", false));
-
-            ObservableCollection<Playlist> playlists = new ObservableCollection<Playlist>();
-            playlists.Add(pl);
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            playlists.Add(new Playlist("Linkin Park"));
-            #endregion
-
             _navigationStore = navigationStore;
-            _homeVM = new HomeViewModel(playlists, pl, _navigationStore);
+            _homeVM = new HomeViewModel(App.CurrentAccount.Playlists, App.CurrentAccount.Recent, _navigationStore);
             _navigationStore.CurrentViewModel = _homeVM;
 
-            _playlistsVM = new PlaylistsViewModel(playlists, _navigationStore);
-            _queueVM = new ReservedPlaylistViewModel(pl1,false);
+            _playlistsVM = new PlaylistsViewModel(App.CurrentAccount.Playlists, _navigationStore);
+            _queueVM = new ReservedPlaylistViewModel(App.CurrentAccount.Queue, false);
             _profileVM = new ProfileViewModel();
-            _likedVM = new ReservedPlaylistViewModel(pl,true);
+            _likedVM = new ReservedPlaylistViewModel(App.CurrentAccount.Liked,true);
 
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;

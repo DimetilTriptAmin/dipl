@@ -70,7 +70,7 @@
                     
                     <StackPanel Margin="20,0,20,0">
                         <Viewbox MaxHeight="400" MaxWidth="400">
-                            <Image Source="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" 
+                            <Image Source="{Binding Image}" Stretch="UniformToFill" 
                                    Width="200" Height="200"/>
                         </Viewbox>
                         <Button Content="{DynamicResource p_Change}" Height="50"
@@ -86,7 +86,7 @@
                                 <TextBlock Text="{DynamicResource p_Login}" Foreground="{DynamicResource MainTextColor}"
                                    FontSize="20" FontFamily="Arial Black"
                                            DockPanel.Dock="Left"/>
-                                <TextBlock Text="username1" Foreground="{DynamicResource MainTextColor}"
+                                <TextBlock Text="{Binding Username}" Foreground="{DynamicResource MainTextColor}"
                                    FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap"
                                    DockPanel.Dock="Right" Margin="20,0,0,0"/>
                             </DockPanel>

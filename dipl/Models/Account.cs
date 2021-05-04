@@ -14,7 +14,9 @@ namespace dipl.Models
         public UserType UserType { get; set; }
         public ImageSource Image { get; set; }
         public Playlist Liked { get; set; }
+        public Playlist Recent { get; set; }
         public Playlist Queue { get; set; }
         public ObservableCollection<Playlist> Playlists { get; set; }
+
     }
 }

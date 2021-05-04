@@ -44,7 +44,7 @@ namespace dipl.Models
                 }
                 else
                 {
-                    return new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
+                    return new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative));
                 }
             }
             ///////////////////////////////////////////////////////////////////////////////////убрать когда подключу плеер

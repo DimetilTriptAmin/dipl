@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace dipl.ViewModels
 {
     class ProfileViewModel : ViewModelBase
     {
+
+        public string Username => App.CurrentAccount.User;
+        public ImageSource Image => App.CurrentAccount.Image;
+
         public ICommand EnglishCommand
         {
             get
