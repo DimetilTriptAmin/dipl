@@ -35,9 +35,21 @@
                 </Border.Effect>
             </Border>
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Height="50" Width="50" Grid.Column="1"
+                        Visibility="{Binding IsQueue}"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"                               
+					    BorderBrush="#00000000" Background="{x:Null}" Click="Add_Click">
+                    <materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                </Button>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right"
-                            Margin="50">
+                            Margin="0,50,50,50"
+                            Grid.Column="2">
                     <Border CornerRadius="15"
                             VerticalAlignment="Center"
                             >
@@ -63,15 +75,24 @@
                         </TextBox>
                     </Border>
                 </StackPanel>
-                <TextBlock VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Margin="50"
+                <Viewbox Margin="50,50,0,50" HorizontalAlignment="Left"  MinWidth="100">
+                    <TextBlock VerticalAlignment="Center"
                        FontSize="50"
-                       Text="{Binding Playlist.Name}"
+                               Visibility="{Binding IsLiked}"
+                       Text="{DynamicResource g_Liked}"
                        FontFamily="Arial Black"
                        Foreground="{DynamicResource MainTextColor}"/>
-                <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
+                </Viewbox>
+                <Viewbox Margin="50,50,0,50" HorizontalAlignment="Left"  MinWidth="100">
+                    <TextBlock VerticalAlignment="Center"
+                               Visibility="{Binding IsQueue}"
+                       FontSize="50"
+                       Text="{DynamicResource g_Queue}"
+                       FontFamily="Arial Black"
+                       Foreground="{DynamicResource MainTextColor}"/>
+                </Viewbox>
             </Grid>
+                <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1"
@@ -81,7 +102,7 @@
             <ScrollViewer.Resources>
                 <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
-            <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="100">
+            <ItemsControl ItemsSource="{Binding Playlist}" AlternationCount="100">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10" Background="#26D9EBE9">
@@ -144,7 +165,7 @@
                                             <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </ToggleButton>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DataContext="{Binding DataContext, ElementName=Header}">
-                                            <Button Visibility="{Binding IsLiked}"
+                                            <Button Visibility="{Binding IsQueu}"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
@@ -155,10 +176,13 @@
                                             >
                                                 <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
-                                            <Button Visibility="{Binding IsQueue}"
+                                            <Button Visibility="{Binding IsLiked}"
                                             Height="50" Width="50"
+                                            DataContext="{Binding DataContext, ElementName=Header}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
+                                            Command="{Binding QueueAddCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
+                                            RelativeSource={RelativeSource TemplatedParent}}"
                                             >
                                                 <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>

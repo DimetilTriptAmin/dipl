@@ -36,13 +36,13 @@ namespace dipl.ViewModels
         {
 
             _navigationStore = navigationStore;
-            _homeVM = new HomeViewModel(App.CurrentAccount.Playlists, App.CurrentAccount.Recent, _navigationStore);
+            _homeVM = new HomeViewModel(_navigationStore);
             _navigationStore.CurrentViewModel = _homeVM;
 
-            _playlistsVM = new PlaylistsViewModel(App.CurrentAccount.Playlists, _navigationStore);
-            _queueVM = new ReservedPlaylistViewModel(App.CurrentAccount.Queue, false);
+            _playlistsVM = new PlaylistsViewModel(_navigationStore);
+            _queueVM = new ReservedPlaylistViewModel(false);
             _profileVM = new ProfileViewModel();
-            _likedVM = new ReservedPlaylistViewModel(App.CurrentAccount.Liked,true);
+            _likedVM = new ReservedPlaylistViewModel(true);
 
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;

@@ -32,7 +32,8 @@ namespace dipl.Pages
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
-            if(openFileDialog.ShowDialog() == true)
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.png) | *.jpg; *.jpeg; *.jpe; *.png";
+            if (openFileDialog.ShowDialog() == true)
             {
                 ((PlaylistEditViewModel)(this.DataContext)).ChoosePicCommand.Execute(openFileDialog.FileName);
             }

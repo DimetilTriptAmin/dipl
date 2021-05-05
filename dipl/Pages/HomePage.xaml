@@ -60,7 +60,7 @@
                 <ListView ItemsSource="{Binding Playlists}" AlternationCount="100" Name="Playlists">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Width="200" Height="270" Margin="10">
+                            <StackPanel Width="200" Height="270" Margin="10">
                                     <Border Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Border.Background>
                                             <ImageBrush ImageSource="{Binding Image}"/>
@@ -82,7 +82,7 @@
                                                 <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
                                             </Grid.Background>
                                             <Button
-                                                DataContext="{Binding DataContext, ElementName=Playlists}"
+                                            DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
@@ -90,7 +90,7 @@
                                                 <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                             <Button
-                                                DataContext="{Binding DataContext, ElementName=Playlists}"
+                                            DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                             Margin="5"
                                             Height="50" Width="50"
@@ -100,9 +100,12 @@
                                                     RelativeSource={RelativeSource TemplatedParent}}">
                                                 <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
-                                        <Button 
+                                        <Button
+                                            DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
-                                            Height="50" Width="50" Margin="5" 
+                                            Height="50" Width="50" Margin="5"
+                                            Command="{Binding QueueAddCommand}"  CommandParameter="{Binding Path=(ListView.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000">
                                             <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
@@ -187,16 +190,31 @@
                                             >
                                                 <materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
-                                            <ToggleButton
+                                            <StackPanel
+                                        
+                                        Orientation="Horizontal" 
+                                        HorizontalAlignment="Right"
+                                        >
+                                                <ToggleButton
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            Background="{DynamicResource HeartgBackgroundColor}"
-                                                IsChecked="{Binding IsLiked, Mode=TwoWay}"
+                                            Background="{DynamicResource MainBackgroundColor}"
+                                            IsChecked="{Binding IsLiked, Mode=OneWayToSource}"
                                             >
-                                                <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" 
-                                                                         Foreground="{DynamicResource MainTextColor}"/>
-                                            </ToggleButton>
+                                                    <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                                                </ToggleButton>
+                                                <Button
+                                            DataContext="{Binding DataContext, ElementName=Header}"
+                                            Height="50" Width="50"
+                                            Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                                            BorderBrush="#00000000" Background="{x:Null}"
+                                            Command="{Binding QueueAddCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                            >
+                                                    <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                                                </Button>
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                 </Grid>

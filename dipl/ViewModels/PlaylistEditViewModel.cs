@@ -106,6 +106,17 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    _bufferPlaylist.Audios.RemoveAt((int)obj);
+                });
+            }
+        }
+
         public PlaylistEditViewModel(ref Playlist playlistToEdit, NavigationStore navigationStore)
         {
             _playlistToEdit = playlistToEdit;

@@ -62,7 +62,8 @@ namespace dipl.ViewModels
         {
             get
             {
-                return null;
+                return new RelayCommand((obj) => { 
+                });
             }
         }
 

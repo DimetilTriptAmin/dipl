@@ -13,8 +13,8 @@ namespace dipl.ViewModels
 {
     class ReservedPlaylistViewModel : ViewModelBase
     {
-        private Playlist _playlist;
-        public Playlist Playlist
+        private ObservableCollection<Audio> _playlist;
+        public ObservableCollection<Audio> Playlist
         {
             get
             {
@@ -27,29 +27,29 @@ namespace dipl.ViewModels
             }
         }
 
-        bool _isQueue;
+        readonly bool _isQueue;
         public Visibility IsQueue
         {
             get
             {
                 if (_isQueue)
                 {
-                    return Visibility.Collapsed;
+                    return Visibility.Visible;
                 }
-                else return Visibility.Visible;
+                else return Visibility.Collapsed;
             }
         }
 
-        bool _isLiked;
+        readonly bool _isLiked;
         public Visibility IsLiked
         {
             get
             {
                 if (_isLiked)
                 {
-                    return Visibility.Collapsed;
+                    return Visibility.Visible;
                 }
-                else return Visibility.Visible;
+                else return Visibility.Collapsed;
             }
         }
 
@@ -59,22 +59,45 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _playlist.Audios.RemoveAt((int)obj);
+                    Playlist.RemoveAt((int)obj);
                 });
             }
         }
 
-        public ObservableCollection<Audio> Audios
+        public ICommand QueueAddCommand
         {
             get
             {
-                return _playlist.Audios;
+                return new RelayCommand((obj) =>
+                {
+                    App.CurrentAccount.Queue.Add(Playlist[(int)obj]);
+                });
             }
         }
 
-        public ReservedPlaylistViewModel(Playlist playlist, bool isLiked)
+        public ICommand AddCommand
         {
-            Playlist = playlist;
+            get
+            {
+                return new RelayCommand((obj) => {
+                    foreach (string filename in (string[])obj)
+                    {
+                        Playlist.Add(new Audio(filename, false));
+                    }
+                });
+            }
+        }
+
+        public ReservedPlaylistViewModel(bool isLiked)
+        {
+            if (isLiked)
+            {
+                Playlist = App.CurrentAccount.Liked;
+            }
+            else
+            {
+                Playlist = App.CurrentAccount.Queue;
+            }
             _isLiked = isLiked;
             _isQueue = !isLiked;
         }

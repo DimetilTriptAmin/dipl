@@ -9,6 +9,7 @@
     <v:String x:Key="g_Playlists">Плейлисты</v:String>
     <v:String x:Key="g_Search">Поиск</v:String>
     <v:String x:Key="g_Profile">Профиль</v:String>
+    <v:String x:Key="g_Queue">Очередь</v:String>
 
     <!--main-->
 
@@ -47,5 +48,7 @@
     <v:String x:Key="l_SigningUp">Регистрация</v:String>
     <v:String x:Key="l_SigningIn">Вход</v:String>
     <v:String x:Key="l_Guest">Войти как гость</v:String>
+
+    
 
 </ResourceDictionary>

@@ -41,14 +41,19 @@
                 </Border.Effect>
             </Border>
             <Grid>
-                <TextBlock VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Margin="50"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Margin="50,50,0,50" HorizontalAlignment="Left"  MinWidth="100">
+                    <TextBlock VerticalAlignment="Center"
                        FontSize="50"
                        Text="{DynamicResource g_Playlists}"
                        FontFamily="Arial Black"
                        Foreground="{DynamicResource MainTextColor}"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                </Viewbox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" 
+                            Margin="20,50,25,50">
                     <Border CornerRadius="15"
                             VerticalAlignment="Center"
                             >
@@ -74,7 +79,7 @@
                         </TextBox>
                     </Border>
                     <Button
-							Margin="20,50,50,50"
+							Margin="25,0,25,0"
                             Height="50" Width="50"
                             Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 							BorderBrush="#00000000" Background="{x:Null}"
@@ -135,11 +140,14 @@
                                             </Button>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <Button 
+                                            <Button
+                                                DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            Background="#00000000" BorderBrush="#00000000">
+                                            Background="#00000000" BorderBrush="#00000000"
+                                                 Command="{Binding QueueAddCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}">
                                                 <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
 

@@ -62,6 +62,17 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand QueueAddCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                        App.CurrentAccount.Queue.Add(Playlist.Audios[(int)obj]);
+                });
+            }
+        }
+
         public PlaylistViewModel(Playlist playlist, NavigationStore navigationStore)
         {
             Playlist = playlist;

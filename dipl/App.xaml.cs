@@ -40,9 +40,9 @@ namespace dipl
 			CurrentAccount.Image = new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
 			CurrentAccount.User = "Username111";
 			CurrentAccount.Playlists = new System.Collections.ObjectModel.ObservableCollection<Playlist>();
-			CurrentAccount.Liked = new Playlist("Liked");
-			CurrentAccount.Recent = new Playlist("Recent");
-			CurrentAccount.Queue = new Playlist("Queue");
+			CurrentAccount.Liked = new System.Collections.ObjectModel.ObservableCollection<Audio>();
+			CurrentAccount.Recent = new System.Collections.ObjectModel.ObservableCollection<Audio>();
+			CurrentAccount.Queue = new System.Collections.ObjectModel.ObservableCollection<Audio>();
 			CurrentAccount.UserType = UserType.Regular;
 
 

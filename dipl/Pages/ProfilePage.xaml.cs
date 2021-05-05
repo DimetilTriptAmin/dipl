@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dipl.ViewModels;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -38,6 +40,17 @@ namespace dipl.Pages
                 }
             }
 
+        }
+
+        private void ChoosePic_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.png) | *.jpg; *.jpeg; *.jpe; *.png";
+            openFileDialog.Multiselect = false;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ((ProfileViewModel)(this.DataContext)).ChangePicCommand.Execute(openFileDialog.FileName);
+            }
         }
     }
 }

@@ -116,11 +116,12 @@
 											HorizontalAlignment="Left"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                                            BorderBrush="#00000000" Background="{x:Null}"
+                                            BorderBrush="{DynamicResource MainTextColor}" Background="{x:Null}"
                                             >
 										<materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
 									</Button>
-                                    <StackPanel 
+                                    <StackPanel
+                                        
                                         Orientation="Horizontal" 
                                         HorizontalAlignment="Right"
                                         >
@@ -128,9 +129,11 @@
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            Background="{DynamicResource MainBackgroundColor}"
-                                            IsChecked="{Binding IsLiked, Mode=TwoWay}"
+                                            IsChecked="{Binding IsLiked, Mode=OneWayToSource}"
                                             >
+                                            <ToggleButton.Background>
+                                                <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                                            </ToggleButton.Background>
                                             <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </ToggleButton>
                                         <Button
@@ -145,9 +148,12 @@
                                                 <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                         <Button
+                                            DataContext="{Binding DataContext, ElementName=Header}"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
+                                            Command="{Binding QueueAddCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
                                             >
                                             <materialDesign:PackIcon Kind="PlaylistAdd" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </Button>

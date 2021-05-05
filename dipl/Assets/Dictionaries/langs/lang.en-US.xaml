@@ -8,6 +8,8 @@
     <v:String x:Key="g_Playlists">Playlists</v:String>
     <v:String x:Key="g_Search">Search</v:String>
     <v:String x:Key="g_Profile">Profile</v:String>
+    <v:String x:Key="g_Queue">Queue</v:String>
+
 
     <!--main-->
 

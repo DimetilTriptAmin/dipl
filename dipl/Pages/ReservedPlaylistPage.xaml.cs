@@ -1,5 +1,6 @@
 ﻿using dipl.Models;
 using dipl.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,17 @@ namespace dipl.Pages
         public ReservedPlaylistPage()
         {
             InitializeComponent();
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "Audio files |*.mp3";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ((ReservedPlaylistViewModel)(this.DataContext)).AddCommand.Execute(openFileDialog.FileNames);
+            }
         }
     }
 }

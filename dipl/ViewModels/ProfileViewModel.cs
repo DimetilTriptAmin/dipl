@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace dipl.ViewModels
 {
@@ -15,7 +16,29 @@ namespace dipl.ViewModels
     {
 
         public string Username => App.CurrentAccount.User;
-        public ImageSource Image => App.CurrentAccount.Image;
+
+        public ImageSource Image
+        {
+            get
+            {
+                return App.CurrentAccount.Image;
+            }
+            set
+            {
+                App.CurrentAccount.Image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
+
+        public ICommand ChangePicCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) => {
+                    Image = new BitmapImage(new Uri((string)obj, UriKind.Absolute));
+                });
+            }
+        }
 
         public ICommand EnglishCommand
         {

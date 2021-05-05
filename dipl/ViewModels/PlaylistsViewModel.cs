@@ -54,10 +54,24 @@ namespace dipl.ViewModels
             }
         }
 
-        public PlaylistsViewModel(ObservableCollection<Playlist> playlists,NavigationStore navigationStore)
+        public ICommand QueueAddCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    foreach (Audio audio in Playlists[(int)obj].Audios)
+                    {
+                        App.CurrentAccount.Queue.Add(audio);
+                    }
+                });
+            }
+        }
+
+        public PlaylistsViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            _playlists = playlists;
+            _playlists = App.CurrentAccount.Playlists;
         }
     }
 }

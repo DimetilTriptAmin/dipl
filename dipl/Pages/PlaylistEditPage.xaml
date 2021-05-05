@@ -43,7 +43,7 @@
                 <Viewbox Margin="50,50,0,50" HorizontalAlignment="Left"  MinWidth="100">
                     <TextBox VerticalAlignment="Center"
                              MinWidth="100"
-                             FontSize="40"
+                             FontSize="50"
                              CaretBrush="{DynamicResource MainTextColor}"
                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
                            Text="{Binding Playlist.Name, Mode=TwoWay}"
@@ -60,7 +60,7 @@
                     <Button Height="50" Width="50" 
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}" Click="Add_Click">
-                        <materialDesign:PackIcon Kind="Add" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                        <materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
@@ -88,7 +88,7 @@
             <ScrollViewer.Resources>
                 <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
-            <ItemsControl ItemsSource="{Binding Audios}">
+            <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="100">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10" Background="#26D9EBE9">
@@ -132,11 +132,14 @@
                                     <Grid.Background>
                                         <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.8"/>
                                     </Grid.Background>
-                                    <Button
-											HorizontalAlignment="Right"
+                                    <Button HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
+                                            DataContext="{Binding DataContext, ElementName=Header}"
+                                            Command="{Binding RemoveCommand}"
+                                            CommandParameter="{Binding Path=(ListView.AlternationIndex), 
+                                            RelativeSource={RelativeSource TemplatedParent}}"
                                             >
                                         <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                     </Button>
