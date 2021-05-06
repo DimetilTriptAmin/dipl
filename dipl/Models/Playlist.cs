@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace dipl.Models
 {
     public class Playlist
     {
+        [Key]
+        public string PlaylistId { get; set; }
         public string Name { get; set; }
         public ImageSource Image { get; set; }
         public ObservableCollection<Audio> Audios { get; set; }

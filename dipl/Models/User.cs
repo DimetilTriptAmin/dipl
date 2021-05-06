@@ -1,4 +1,6 @@
-﻿namespace dipl.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace dipl.Models
 {
     public enum UserType
     {
@@ -9,6 +11,7 @@
 
     public class User
     {
+        [Key]
         public string Username { get; set; }
         public string PasswordHash { get; set; }
     }

@@ -15,7 +15,7 @@ namespace dipl.ViewModels
 
         public bool HasErrors => _errorsByPropertyName.Any();
 
-        public bool _canValidate = true;
+        private bool _canValidate = true;
         public bool CanValidate
         {
             get => _canValidate;

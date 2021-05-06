@@ -238,10 +238,10 @@
 
             <TextBlock x:Name="AudioNameLabel" 
                            Foreground="{DynamicResource MainTextColor}" 
-                           FontSize="16" Text="Imagine Dragons - Thunder" 
+                           FontSize="16" Text="Imagihcfffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhne Dragons - Thunder" 
                             VerticalAlignment="Center"
                            Grid.Column="1"
-                       TextWrapping="Wrap">
+                       >
                 <TextBlock.RenderTransform>
                     <TranslateTransform x:Name="t1" />
                 </TextBlock.RenderTransform>

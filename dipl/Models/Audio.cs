@@ -13,7 +13,10 @@ namespace dipl.Models
 {
     public sealed class Audio
     {
+        [Key]
         public int Id { get; set; }
+        public int PlaylistId { get; set; }
+        public int UserId { get; set; }
         public bool IsLiked { get; set; }
         public ImageSource Image { get; set; }
         public string Name { get; private set; }

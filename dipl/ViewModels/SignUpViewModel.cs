@@ -93,14 +93,14 @@ namespace dipl.ViewModels
 
             if (!Regex.IsMatch(Login, pattern, RegexOptions.IgnoreCase))
             {
-                AddError(nameof(Login), "Username invalid.");
+                AddError(nameof(Login), "The username must begin with a letter.");
             }
             if (string.IsNullOrWhiteSpace(Login))
-                AddError(nameof(Login), "Username cannot be empty.");
+                AddError(nameof(Login), "The username cannot be empty.");
             if (string.Equals(Login, "Admin", StringComparison.OrdinalIgnoreCase))
                 AddError(nameof(Login), "Admin is not valid username.");
             if (Login == null || Login?.Length <= 4)
-                AddError(nameof(Login), "Username must be at least 5 characters long.");
+                AddError(nameof(Login), "The username must be at least 5 characters long.");
         }
 
         private void ValidatePassword()
