@@ -2,17 +2,22 @@
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace dipl.ViewModels
 {
-    class SignUpViewModel:ViewModelBase
-    {
-
+    class SignUpViewModel : ErrorViewModelBase
+    { 
         private string _login;
         public string Login
         {
@@ -21,32 +26,37 @@ namespace dipl.ViewModels
             {
                 _login = value;
                 OnPropertyChanged(nameof(Login));
+                ValidateUserName();
             }
         }
 
-        private string _password;
-        public string Password
+        private SecureString _password;
+        public SecureString Password
         {
             get => _password;
             set
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
+                ValidatePassword();
+                ValidateRepeatedPassword();
             }
         }
 
-        private string _repeatedPassword;
-        public string RepeatedPassword
+        private SecureString _repeatedPassword;
+        public SecureString RepeatedPassword
         {
             get => _repeatedPassword;
             set
             {
                 _repeatedPassword = value;
                 OnPropertyChanged(nameof(RepeatedPassword));
+                ValidateRepeatedPassword();
             }
         }
 
         private readonly NavigationStore _navigationStore;
+
 
         public ICommand NavigateSignInCommand
         {
@@ -62,14 +72,49 @@ namespace dipl.ViewModels
         {
             get
             {
-                return new RelayCommand((obj) => { 
+                return new RelayCommand((obj) => {
+                    ValidatePassword();
+                    ValidateRepeatedPassword();
+                    ValidateUserName();
                 });
             }
         }
 
+
         public SignUpViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
+        }
+
+        private void ValidateUserName()
+        {
+            ClearErrors(nameof(Login));
+            string pattern = @"^[a-z][0-9a-z]*";
+
+            if (!Regex.IsMatch(Login, pattern, RegexOptions.IgnoreCase))
+            {
+                AddError(nameof(Login), "Username invalid.");
+            }
+            if (string.IsNullOrWhiteSpace(Login))
+                AddError(nameof(Login), "Username cannot be empty.");
+            if (string.Equals(Login, "Admin", StringComparison.OrdinalIgnoreCase))
+                AddError(nameof(Login), "Admin is not valid username.");
+            if (Login == null || Login?.Length <= 4)
+                AddError(nameof(Login), "Username must be at least 5 characters long.");
+        }
+
+        private void ValidatePassword()
+        {
+            ClearErrors(nameof(Password));
+            if (Password == null || Password.Length <=4)
+                AddError(nameof(Password), "Password must be at least 5 characters long.");
+        }
+
+        private void ValidateRepeatedPassword()
+        {
+            ClearErrors(nameof(RepeatedPassword));
+            if (!RepeatedPassword.IsEqualTo(Password))
+                AddError(nameof(RepeatedPassword), "Passwords must be equal.");
         }
     }
 }

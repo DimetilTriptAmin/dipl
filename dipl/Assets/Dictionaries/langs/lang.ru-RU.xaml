@@ -40,6 +40,7 @@
     <!-- login&register -->
 
     <v:String x:Key="l_ELogin">Введите логин</v:String>
+    <v:String x:Key="l_EPassword">Введите пароль</v:String>
     <v:String x:Key="l_RPassword">Повторите пароль</v:String>
     <v:String x:Key="l_Account">Есть аккаунт?</v:String>
     <v:String x:Key="l_NoAccount">Нет аккаунта?</v:String>

@@ -40,6 +40,7 @@
     <!-- login&register -->
 
     <v:String x:Key="l_ELogin">Enter login</v:String>
+    <v:String x:Key="l_EPassword">Enter password</v:String>
     <v:String x:Key="l_RPassword">Repeat password</v:String>
     <v:String x:Key="l_Account">Have account?</v:String>
     <v:String x:Key="l_NoAccount">No account?</v:String>

@@ -106,6 +106,10 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10" Background="#26D9EBE9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Width="50" Height="50">
                                     <Border.Background>
@@ -122,7 +126,7 @@
                                        Margin="10"/>
                             </StackPanel>
 
-                            <TextBlock Text="04:12" 
+                            <TextBlock Text="04:12" Grid.Column="1" 
                                        FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
@@ -131,7 +135,7 @@
                                        FontFamily="Arial Black"
                                        Margin="10"/>
 
-                            <Border>
+                            <Border Grid.ColumnSpan="2">
                                 <Grid>
                                     <Grid.Style>
                                         <Style TargetType="{x:Type Grid}">
@@ -149,6 +153,7 @@
                                     <Button x:Name="PlayButton"
 											HorizontalAlignment="Left"
                                             Height="50" Width="50"
+                                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             >
@@ -159,14 +164,18 @@
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            Background="{DynamicResource MainBackgroundColor}"
+                                            
                                             IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
+                                            <ToggleButton.Background>
+                                                <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                                            </ToggleButton.Background>
                                             <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </ToggleButton>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DataContext="{Binding DataContext, ElementName=Header}">
                                             <Button Visibility="{Binding IsQueu}"
                                             Height="50" Width="50"
+                                                    materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             DataContext="{Binding DataContext, ElementName=Header}"
@@ -178,6 +187,7 @@
                                             </Button>
                                             <Button Visibility="{Binding IsLiked}"
                                             Height="50" Width="50"
+                                                    materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             DataContext="{Binding DataContext, ElementName=Header}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"

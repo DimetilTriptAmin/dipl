@@ -78,7 +78,7 @@
                             </TextBox.Resources>
                         </TextBox>
                     </Border>
-                    <Button
+                    <Button materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
 							Margin="25,0,25,0"
                             Height="50" Width="50"
                             Style="{StaticResource MaterialDesignFloatingActionButton}"                               
@@ -121,7 +121,7 @@
                                     </Grid.Background>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <StackPanel Orientation="Horizontal">
-                                            <Button
+                                            <Button materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
@@ -133,7 +133,8 @@
                                             </Button>
                                             <Button Margin="5"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
-                                            Height="50" Width="50" 
+                                            Height="50" Width="50"
+                                                    materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000">
                                                 <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
@@ -141,6 +142,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Button
+                                                materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
@@ -152,6 +154,7 @@
                                             </Button>
 
                                             <Button
+                                                materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                             Margin="5"

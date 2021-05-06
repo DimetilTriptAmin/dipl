@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:dipl.Pages"
+            xmlns:uc="clr-namespace:dipl.Assets.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="SignInPage">
@@ -34,14 +35,11 @@
                                    Text="{DynamicResource p_Password}"
                                    >
                 </TextBlock>
-                <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                 Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
-                                 Margin="50,0,50,0"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
-                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
-                                 FontSize="20"
-                                 materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}">
-                </PasswordBox>
+                <uc:BindingPasswordBox Margin="50,0,50,20"
+                    Password="{Binding Password, Mode=TwoWay,
+                    UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}">
+
+                </uc:BindingPasswordBox>
             </StackPanel>
             <DockPanel Margin="0,20,0,20">
                 <Button Content="{DynamicResource l_SignIn}" Height="50" DockPanel.Dock="Left"

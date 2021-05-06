@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:dipl.Pages"
+      xmlns:uc="clr-namespace:dipl.Assets.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1950" d:DesignWidth="800"
       Title="ProfilePage">
@@ -113,15 +114,12 @@
                                    FontFamily="Arial Black"
                                    Text="{DynamicResource p_OPassword}">
                         </TextBlock>
-                        <PasswordBox Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
-                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                 Margin="50,0,50,50"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
-                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
-                                 FontSize="20"
-                                 materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}" 
-                                 >
-                        </PasswordBox>
+                        <uc:BindingPasswordBox Margin="50,0,50,50"
+                                               Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                                        Password="{Binding Password, Mode=TwoWay,
+                                        UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}">
+
+                        </uc:BindingPasswordBox>
                         <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,20,50,20"
                                    FontSize="20"
@@ -129,18 +127,17 @@
                                    Text="{DynamicResource p_NPassword}"
                                    >
                         </TextBlock>
-                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
-                                 Margin="50,0,50,0"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
-                                 materialDesign:HintAssist.Foreground="{DynamicResource MainTextColor}"
-                                 FontSize="20"
-                                 materialDesign:HintAssist.Hint="{DynamicResource p_EPassword}">
-                        </TextBox>
+                        <uc:BindingPasswordBox Margin="50,0,50,50"
+                                               Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                                        Password="{Binding RepeatedPassword, Mode=TwoWay,
+                                        UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}">
+
+                        </uc:BindingPasswordBox>
                     </StackPanel>
                     <Button Content="{DynamicResource p_Change}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="{DynamicResource MainTextColor}"
+                            IsEnabled="{Binding CanValidate}"
                             BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
                             Margin="100,20,100,20" FontSize="20">
                     </Button>

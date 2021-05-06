@@ -52,12 +52,14 @@
                      />
                 </Viewbox>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Button Height="50" Width="50" 
+                    <Button Height="50" Width="50"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}" Click="ChoosePic_Click">
                         <materialDesign:PackIcon Kind="Image" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button Height="50" Width="50" 
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}" Click="Add_Click">
                         <materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
@@ -66,15 +68,19 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
 					    Margin="50" Grid.Column="2">
                     <Button Height="50" Width="50"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}"
                         Command="{Binding ConfirmCommand}">
                         <materialDesign:PackIcon Kind="Check" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button Height="50" Width="50"
-                        Style="{StaticResource MaterialDesignFloatingActionButton}"                               
-					    BorderBrush="#00000000" Background="{x:Null}"
-                            Command="{Binding CancelCommand}">
+                       Style="{StaticResource MaterialDesignFloatingActionAccentButton}"                               
+					    BorderBrush="{x:Null}"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
+                            Background="{x:Null}"    
+                            Command="{Binding CancelCommand}" VerticalAlignment="Top">
+             
                         <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                 </StackPanel>
@@ -92,6 +98,10 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10" Background="#26D9EBE9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Width="50" Height="50">
                                     <Border.Background>
@@ -108,7 +118,7 @@
                                        Margin="10"/>
                             </StackPanel>
 
-                            <TextBlock Text="04:12" 
+                            <TextBlock Text="04:12" Grid.Column="1"
                                        FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
@@ -117,7 +127,7 @@
                                        FontFamily="Arial Black"
                                        Margin="10"/>
 
-                            <Border>
+                            <Border Grid.ColumnSpan="2">
                                 <Grid>
                                     <Grid.Style>
                                         <Style TargetType="{x:Type Grid}">
@@ -134,6 +144,7 @@
                                     </Grid.Background>
                                     <Button HorizontalAlignment="Right"
                                             Height="50" Width="50"
+                                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             DataContext="{Binding DataContext, ElementName=Header}"

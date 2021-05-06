@@ -142,6 +142,10 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="10" Background="{DynamicResource SongBackgroundColor}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                         <Border Width="50" Height="50">
                                             <Border.Background>
@@ -158,7 +162,7 @@
                                        Margin="10"/>
                                     </StackPanel>
 
-                                    <TextBlock Text="04:12" 
+                                    <TextBlock Text="04:12" Grid.Column="1"
                                        FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
@@ -167,7 +171,7 @@
                                        FontFamily="Arial Black"
                                        Margin="10"/>
 
-                                    <Border>
+                                    <Border Grid.ColumnSpan="2">
                                         <Grid>
                                             <Grid.Style>
                                                 <Style TargetType="{x:Type Grid}">
@@ -183,10 +187,12 @@
                                                 <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
                                             </Grid.Background>
                                             <Button x:Name="PlayButton"
+                                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
 											HorizontalAlignment="Left"
+                                            BorderBrush="{DynamicResource MainTextColor}"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                                            BorderBrush="#00000000" Background="{x:Null}"
+                                            Background="{x:Null}"
                                             >
                                                 <materialDesign:PackIcon Kind="Play" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
@@ -199,14 +205,18 @@
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            Background="{DynamicResource MainBackgroundColor}"
+                                           
                                             IsChecked="{Binding IsLiked, Mode=OneWayToSource}"
                                             >
+                                                    <ToggleButton.Background>
+                                                        <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                                                    </ToggleButton.Background>
                                                     <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                                 </ToggleButton>
                                                 <Button
                                             DataContext="{Binding DataContext, ElementName=Header}"
                                             Height="50" Width="50"
+                                                    materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                             BorderBrush="#00000000" Background="{x:Null}"
                                             Command="{Binding QueueAddCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
