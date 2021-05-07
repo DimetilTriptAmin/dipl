@@ -60,7 +60,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.8"/>
                         </Border.Background>
-                        <TextBox
+                        <TextBox Text="{Binding Filter, UpdateSourceTrigger=LostFocus, Mode=OneWayToSource}"
                             Width="110"
                             Margin="15,5,15,5"
                              FontSize="15"
@@ -90,7 +90,7 @@
             </Grid>
             <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
-        <ListView ItemsSource="{Binding Playlists}" Name="Playlists" AlternationCount="100"
+        <ListView ItemsSource="{Binding PlaylistsView}" Name="Playlists" AlternationCount="100"
                       Grid.Row="1"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
                       Margin="50">
@@ -172,7 +172,7 @@
                             <TextBlock Text="{Binding Name}" 
                                            FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                            TextAlignment="Center" 
-                                           TextWrapping="WrapWithOverflow"
+                                           TextWrapping="Wrap"
                                            FontFamily="Arial Black"
                                            Margin="10"/>
                         </StackPanel>

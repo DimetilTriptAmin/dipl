@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Pages;
 using dipl.Stores;
 using dipl.View.ViewModel;
@@ -19,11 +20,6 @@ namespace dipl.ViewModels
     {
 
         private readonly NavigationStore _navigationStore;
-        private readonly ViewModelBase _homeVM;
-        private readonly ViewModelBase _playlistsVM;
-        private readonly ViewModelBase _queueVM;
-        private readonly ViewModelBase _profileVM;
-        private readonly ViewModelBase _likedVM;
 
         private readonly Sleeper sleeper;
 
@@ -34,18 +30,9 @@ namespace dipl.ViewModels
 
         public MainViewModel(NavigationStore navigationStore)
         {
-
             _navigationStore = navigationStore;
-            _homeVM = new HomeViewModel(_navigationStore);
-            _navigationStore.CurrentViewModel = _homeVM;
-
-            _playlistsVM = new PlaylistsViewModel(_navigationStore);
-            _queueVM = new ReservedPlaylistViewModel(false);
-            _profileVM = new ProfileViewModel();
-            _likedVM = new ReservedPlaylistViewModel(true);
-
-
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
 
             sleeper = new Sleeper();
             sleeper.PropertyChanged += (s, arg) => RemainingTime = sleeper.RemainingTime.ToString(@"mm\:ss");
@@ -170,7 +157,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = _likedVM;
+                    _navigationStore.CurrentViewModel = new ReservedPlaylistViewModel(true);
                 });
             }
         }
@@ -181,7 +168,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = _profileVM;
+                    _navigationStore.CurrentViewModel = new ProfileViewModel();
                 });
             }
         }
@@ -192,7 +179,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = _homeVM;
+                    _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
                 });
             }
         }
@@ -203,7 +190,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = _playlistsVM;
+                    _navigationStore.CurrentViewModel = new PlaylistsViewModel(_navigationStore);
                 });
             }
         }
@@ -214,7 +201,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = _queueVM;
+                    _navigationStore.CurrentViewModel = new ReservedPlaylistViewModel(false);
                 });
             }
         }

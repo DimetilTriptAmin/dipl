@@ -76,9 +76,9 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                        App.CurrentAccount.Playlists[1].Audios.Add(Playlist.Audios[(int)obj]);
+                        App.CurrentAccount.Playlists[0].Audios.Add(Playlist.Audios[(int)obj]);
                 });
-                if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
                 {
                     //TODO ошибка
                 }

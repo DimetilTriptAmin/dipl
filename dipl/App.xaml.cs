@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Stores;
 using dipl.ViewModels;
 using dipl.Windows;
@@ -61,6 +62,10 @@ namespace dipl
 
         protected override void OnStartup(StartupEventArgs e)
         {
+			using (PlayerContext pc = new PlayerContext())
+			{
+				pc.Database.CreateIfNotExists();	
+			}
 
 			System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 

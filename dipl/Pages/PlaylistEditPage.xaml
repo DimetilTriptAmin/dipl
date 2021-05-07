@@ -44,6 +44,7 @@
                     <TextBox VerticalAlignment="Center"
                              MinWidth="100"
                              FontSize="50"
+                             MaxLength="30"
                              CaretBrush="{DynamicResource MainTextColor}"
                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MainTextColor}"
                            Text="{Binding Playlist.Name, Mode=TwoWay}"

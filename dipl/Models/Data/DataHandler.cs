@@ -66,9 +66,8 @@ namespace dipl.Models.Data
                 Image = System.Text.Encoding.UTF8.GetBytes("../../Assets/anime.jpg"),
                 Playlists = new ObservableCollection<Playlist>()
             };
-            account.Playlists.Add(new Playlist("Liked") { PlaylistId = 0});
-            account.Playlists.Add(new Playlist("Queue") { PlaylistId = 1 });
-            account.Playlists.Add(new Playlist("Recent") { PlaylistId = 2 });
+            account.Playlists.Add(new Playlist("Queue") { PlaylistId = 0 });
+            account.Playlists.Add(new Playlist("Recent") { PlaylistId = 1 });
 
 
             using (PlayerContext pc = new PlayerContext())
@@ -126,7 +125,9 @@ namespace dipl.Models.Data
                 {
                     try
                     {
-                        Playlist playlist = pc.Playlists.Find(playlistToRemove.AccountId, playlistToRemove.PlaylistId);
+                        Playlist playlist = pc.Playlists
+                            .Include(p=>p.Audios)
+                            .Where(p=> p.AccountId == playlistToRemove.AccountId && p.PlaylistId==playlistToRemove.PlaylistId).FirstOrDefault();
                         pc.Playlists.Remove(playlist);
                         pc.SaveChanges();
                         transaction.Commit();
@@ -149,10 +150,35 @@ namespace dipl.Models.Data
                 {
                     try
                     {
-                        Playlist playlistToUpdate = pc.Playlists.Find(oldplaylist.AccountId, oldplaylist.PlaylistId);
+                        Playlist playlistToUpdate = pc.Playlists
+                            .Include(p=>p.Audios)
+                            .Where(p => p.AccountId == oldplaylist.AccountId && p.PlaylistId == oldplaylist.PlaylistId).FirstOrDefault();
                         playlistToUpdate.Name = newplaylist.Name;
                         playlistToUpdate.Audios = newplaylist.Audios;
                         playlistToUpdate.Image = newplaylist.Image;
+                        pc.SaveChanges();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public static bool UpdateAudio(Audio audioToUpdate)
+        {
+            using (PlayerContext pc = new PlayerContext())
+            {
+                using (var transaction = pc.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Audio audio = pc.Audios.Find(audioToUpdate.Id);
+                        audio.IsLiked = audioToUpdate.IsLiked;
                         pc.SaveChanges();
                         transaction.Commit();
                         return true;
@@ -235,28 +261,20 @@ namespace dipl.Models.Data
             }
         }
 
-        //public static ObservableCollection<Audio> GetLiked(Account account)
-        //{
-        //    using (PlayerContext pc = new PlayerContext())
-        //    {
-        //        using (var transaction = pc.Database.BeginTransaction())
-        //        {
-        //            try
-        //            {
-        //                ObservableCollection<Audio> Liked = new ObservableCollection<Audio>();
-        //                var result = pc.Accounts
-        //                     .Include(x => x.Playlists.Select(y => y.Audios))
-        //                     .Where(x => x.AccountId == account.AccountId);
-        //                transaction.Commit();
-        //                return true;
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                transaction.Rollback();
-        //                return new ObservableCollection<Audio>();
-        //            }
-        //        }
-        //    }
-        //}
+        public static ObservableCollection<Audio> LoadLiked()
+        {
+            ObservableCollection<Audio> Liked = new ObservableCollection<Audio>();
+            foreach (Playlist playlist in App.CurrentAccount.Playlists)
+            {
+                foreach(Audio audio in playlist.Audios)
+                {
+                    if (audio.IsLiked)
+                    {
+                        Liked.Add(audio);
+                    }
+                }
+            }
+            return Liked;
+        }
     }
 }

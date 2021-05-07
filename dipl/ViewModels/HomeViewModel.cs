@@ -65,9 +65,9 @@ namespace dipl.ViewModels
                 {
                     foreach(Audio audio in Playlists[(int)obj].Audios)
                     {
-                        App.CurrentAccount.Playlists[1].Audios.Add(audio);
+                        App.CurrentAccount.Playlists[0].Audios.Add(audio);
                     }
-                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
                     {
                         //TODO ошибка
                     }
@@ -77,8 +77,8 @@ namespace dipl.ViewModels
 
         public HomeViewModel(NavigationStore navigationStore)
         {
-            Playlists = new ObservableCollection<Playlist>(App.CurrentAccount.Playlists.Skip(3));
-            Recent = App.CurrentAccount.Playlists[2].Audios;
+            Playlists = new ObservableCollection<Playlist>(App.CurrentAccount.Playlists.Skip(2));
+            Recent = App.CurrentAccount.Playlists[1].Audios;
             _navigationStore = navigationStore;
         }
     }
