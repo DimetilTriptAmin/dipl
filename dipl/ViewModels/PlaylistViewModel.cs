@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
@@ -57,7 +58,14 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _playlist.Audios.RemoveAt((int)obj);
+                    if (DataHandler.DeleteAudio(Audios[(int)obj]))
+                    {
+                        _playlist.Audios.RemoveAt((int)obj);
+                    }
+                    else
+                    {
+                        //TODO: error
+                    }
                 });
             }
         }
@@ -68,8 +76,12 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                        App.CurrentAccount.Queue.Add(Playlist.Audios[(int)obj]);
+                        App.CurrentAccount.Playlists[1].Audios.Add(Playlist.Audios[(int)obj]);
                 });
+                if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                {
+                    //TODO ошибка
+                }
             }
         }
 

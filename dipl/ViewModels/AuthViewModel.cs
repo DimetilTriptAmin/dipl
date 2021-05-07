@@ -18,18 +18,6 @@ namespace dipl.ViewModels
     class AuthViewModel : ViewModelBase
     {
 
-        public string Title
-        {
-            get
-            {
-                if (CurrentViewModel is SignInViewModel)
-                {
-                    return "Signing In";
-                }
-                else return "Signing Up";
-            }
-        }
-
         private readonly NavigationStore _navigationStore;
 
         public ViewModelBase CurrentViewModel
@@ -40,7 +28,7 @@ namespace dipl.ViewModels
         public AuthViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-
+            _navigationStore.CurrentViewModel = new SignInViewModel(navigationStore);
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
@@ -57,7 +45,6 @@ namespace dipl.ViewModels
                 OnPropertyChanged(nameof(IsSigningIn));
                 OnPropertyChanged(nameof(IsSigningUp));
                 OnPropertyChanged(nameof(CurrentViewModel));
-                OnPropertyChanged(nameof(Title));
                 for (double i = 0; i < 1.1; i += 0.1)
                 {
                     FrameOpacity = i;

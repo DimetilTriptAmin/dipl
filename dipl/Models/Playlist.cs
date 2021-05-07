@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dipl.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,21 +13,23 @@ namespace dipl.Models
 {
     public class Playlist
     {
-        [Key]
-        public string PlaylistId { get; set; }
+        public int PlaylistId { get; set; }
+        public int AccountId { get; set; }
         public string Name { get; set; }
-        public ImageSource Image { get; set; }
+        public byte[] Image { get; set; }
         public ObservableCollection<Audio> Audios { get; set; }
+
+        public Playlist() { }
 
         public Playlist(string name)
         {
             Name = name;
             Audios = new ObservableCollection<Audio>();
             // TODO: Добавить картинку по умолчанию
-            Image = new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
+            Image = ((ImageSource)(new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative)))).ToBytes();
         }
 
-        public Playlist(string name, ObservableCollection<Audio> audios, ImageSource imageSource)
+        public Playlist(string name, ObservableCollection<Audio> audios, byte[] imageSource)
         {
             Name = name;
             Audios = audios;

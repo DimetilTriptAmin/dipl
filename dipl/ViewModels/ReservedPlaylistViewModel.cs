@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,14 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    Playlist.RemoveAt((int)obj);
+                    if (DataHandler.DeleteAudio(Playlist[(int)obj]))
+                    {
+                        Playlist.RemoveAt((int)obj);
+                    }
+                    else
+                    {
+                        //TODO: error
+                    }
                 });
             }
         }
@@ -70,7 +78,44 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.CurrentAccount.Queue.Add(Playlist[(int)obj]);
+                    App.CurrentAccount.Playlists[1].Audios.Add(Playlist[(int)obj]);
+                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                    {
+                        //TODO ошибка
+                    }
+                });
+            }
+        }
+
+        public ICommand ClearCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.CurrentAccount.Playlists[1].Audios.Clear();
+                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                    {
+                        //TODO ошибка
+                    }
+                });
+            }
+        }
+
+        public ICommand LikeCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    if (Playlist[(int)obj].IsLiked)
+                    {
+                        App.CurrentAccount.Playlists[0].Audios.Remove(Playlist[(int)obj]);
+                    }
+                    else
+                    {
+                        App.CurrentAccount.Playlists[0].Audios.Add(Playlist[(int)obj]);
+                    }
                 });
             }
         }
@@ -80,9 +125,19 @@ namespace dipl.ViewModels
             get
             {
                 return new RelayCommand((obj) => {
+                    Playlist Queue = new Playlist("Queue");
+                    Queue.Audios = Playlist;
                     foreach (string filename in (string[])obj)
                     {
-                        Playlist.Add(new Audio(filename, false));
+                        Queue.Audios.Add(new Audio(filename, false));
+                    }
+                    if (DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], Queue))
+                    {
+                        Playlist = Queue.Audios;
+                    }
+                    else
+                    {
+                        //TODO ошибка
                     }
                 });
             }
@@ -92,11 +147,12 @@ namespace dipl.ViewModels
         {
             if (isLiked)
             {
-                Playlist = App.CurrentAccount.Liked;
+                Playlist = App.CurrentAccount.Playlists[0].Audios;
+                //TODO
             }
             else
             {
-                Playlist = App.CurrentAccount.Queue;
+                Playlist = App.CurrentAccount.Playlists[1].Audios;
             }
             _isLiked = isLiked;
             _isQueue = !isLiked;

@@ -13,5 +13,11 @@ namespace dipl.Models.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<Audio> Audios { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Playlist>().HasKey(p => new { p.AccountId, p.PlaylistId });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

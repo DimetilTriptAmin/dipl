@@ -13,12 +13,21 @@
     <Grid Background="{DynamicResource MainBackgroundColor}">
         <StackPanel x:Name="Playlists">
             <StackPanel>
-                <TextBlock Foreground="{DynamicResource MainTextColor}" 
+                <Grid>
+                    <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,20,50,00"
                                    FontSize="20"
                                    FontFamily="Arial Black"
                                    Text="{DynamicResource p_Login}">
-                </TextBlock>
+                    </TextBlock>
+                    <TextBlock Foreground="#FF2B5117" 
+                                   Margin="50,20,50,00"
+                                   FontSize="20"
+                                   FontFamily="Arial Black"
+                                    HorizontalAlignment="Center"
+                                   Text="{DynamicResource l_SuccessReg}">
+                    </TextBlock>
+                </Grid>
                 <TextBox Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  MaxLength="20"
@@ -31,7 +40,6 @@
                                     UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                                  materialDesign:HintAssist.Hint="{DynamicResource l_ELogin}" 
                                  >
-                   
                 </TextBox>
                 <TextBlock Foreground="{DynamicResource MainTextColor}" 
                                    Margin="50,20,50,0"

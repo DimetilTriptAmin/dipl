@@ -127,8 +127,8 @@
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
-                                                Command="{Binding DeletePlaylistCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
-                                                    RelativeSource={RelativeSource TemplatedParent}}">
+                                                Command="{Binding DeletePlaylistCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                       RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
                                                 <materialDesign:PackIcon Kind="Delete" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                             <Button Margin="5"
@@ -148,8 +148,8 @@
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
-                                                 Command="{Binding QueueAddCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
-                                                    RelativeSource={RelativeSource TemplatedParent}}">
+                                                 Command="{Binding QueueAddCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                       RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
                                                 <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
 
@@ -160,8 +160,8 @@
                                             Margin="5"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            Command="{Binding ShowPlaylistCommand}" CommandParameter="{Binding Path=(ListView.AlternationIndex), 
-                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                            Command="{Binding ShowPlaylistCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                       RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                             Background="#00000000" BorderBrush="#00000000">
                                                 <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>

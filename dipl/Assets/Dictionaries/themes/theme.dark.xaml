@@ -6,7 +6,7 @@
 
     <SolidColorBrush x:Key="ControlBg" Color="#FF4F575F"/>
 
-    <SolidColorBrush x:Key="ButtonBgColor" Color="#B214210D"/>
+    <SolidColorBrush x:Key="ButtonBgColor" Color="#FF151414"/>
 
     <SolidColorBrush x:Key="MainBackgroundColor" Color="#FF000000"/>
     <Color x:Key="MainBgColor" R="0" B="0" G="0" A="255"/>

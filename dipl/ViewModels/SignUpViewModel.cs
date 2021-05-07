@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
@@ -72,10 +73,26 @@ namespace dipl.ViewModels
         {
             get
             {
-                return new RelayCommand((obj) => {
+                return new RelayCommand(async (obj) => {
+                    ValidateUserName();
                     ValidatePassword();
                     ValidateRepeatedPassword();
-                    ValidateUserName();
+                    if (!CanValidate) return;
+
+                    User user = new User()
+                    {
+                        Username = Login,
+                        PasswordHash = HashGenerator.GetHash(Password)
+                    };
+
+                    if (DataHandler.Register(user))
+                    {
+                        //TODO оповещение об удачной регистрации
+                    }
+                    else
+                    {
+                        AddError(nameof(Login), "The username is taken.");
+                    }
                 });
             }
         }

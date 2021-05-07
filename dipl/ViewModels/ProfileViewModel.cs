@@ -1,4 +1,5 @@
-﻿using dipl.Stores;
+﻿using dipl.Models.Data;
+using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace dipl.ViewModels
     class ProfileViewModel : ErrorViewModelBase
     {
 
-        public string Username => App.CurrentAccount.User;
+        public string Username => App.CurrentAccount.User.Username;
 
         private SecureString _password;
         public SecureString Password
@@ -26,20 +27,18 @@ namespace dipl.ViewModels
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
-                ValidatePassword();
-                ValidateRepeatedPassword();
             }
         }
 
-        private SecureString _repeatedPassword;
-        public SecureString RepeatedPassword
+        private SecureString _newPassword;
+        public SecureString NewPassword
         {
-            get => _repeatedPassword;
+            get => _newPassword;
             set
             {
-                _repeatedPassword = value;
-                OnPropertyChanged(nameof(RepeatedPassword));
-                ValidateRepeatedPassword();
+                _newPassword = value;
+                OnPropertyChanged(nameof(NewPassword));
+                ValidateNewPassword();
             }
         }
 
@@ -47,11 +46,11 @@ namespace dipl.ViewModels
         {
             get
             {
-                return App.CurrentAccount.Image;
+                return App.CurrentAccount.Image.ToImage();
             }
             set
             {
-                App.CurrentAccount.Image = value;
+                App.CurrentAccount.Image = value.ToBytes();
                 OnPropertyChanged(nameof(Image));
             }
         }
@@ -60,8 +59,17 @@ namespace dipl.ViewModels
         {
             get
             {
-                return new RelayCommand((obj) => {
-                    Image = new BitmapImage(new Uri((string)obj, UriKind.Absolute));
+                return new RelayCommand((obj) =>
+                {
+                    ImageSource imagesource = new BitmapImage(new Uri((string)obj, UriKind.Absolute));
+                    if (DataHandler.UpdateProfilePic(App.CurrentAccount, imagesource.ToBytes()))
+                    {
+                        Image = imagesource;
+                    }
+                    else
+                    {
+                        //todo ошибка
+                    }
                 });
             }
         }
@@ -110,6 +118,17 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.CurrentAccount = null;
+                });
+            }
+        }
+
         public ICommand ChangePassword
         {
             get
@@ -117,7 +136,12 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     ValidatePassword();
-                    ValidateRepeatedPassword();
+                    ValidateNewPassword();
+                    if (!CanValidate) return;
+                    if (DataHandler.UpdateProfilePassword(App.CurrentAccount.User, NewPassword))
+                    {
+                        App.CurrentAccount.User.PasswordHash = HashGenerator.GetHash(NewPassword);
+                    }
                 });
             }
         }
@@ -125,15 +149,15 @@ namespace dipl.ViewModels
         private void ValidatePassword()
         {
             ClearErrors(nameof(Password));
-            if (Password == null || Password.Length <= 4)
-                AddError(nameof(Password), "Password must be at least 5 characters long.");
+            if (Password == null || !HashGenerator.GetHash(Password).Equals(App.CurrentAccount.User.PasswordHash))
+                AddError(nameof(Password), "Incorrect password.");
         }
 
-        private void ValidateRepeatedPassword()
+        private void ValidateNewPassword()
         {
-            ClearErrors(nameof(RepeatedPassword));
-            if (!RepeatedPassword.IsEqualTo(Password))
-                AddError(nameof(RepeatedPassword), "Passwords must be equal.");
+            ClearErrors(nameof(NewPassword));
+            if (NewPassword == null || NewPassword.Length <= 4)
+                AddError(nameof(NewPassword), "Password must be at least 5 characters long.");
         }
     }
 }

@@ -40,12 +40,21 @@
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Height="50" Width="50" Grid.Column="1"
-                        Visibility="{Binding IsQueue}"
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Visibility="{Binding IsQueue}">
+                    <Button Height="50" Width="50"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"                               
+					    BorderBrush="#00000000" Background="{x:Null}"
+                            Command="{Binding ClearCommand}">
+                        <materialDesign:PackIcon Kind="Delete" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                    </Button>
+                    <Button Height="50" Width="50" 
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}"                               
 					    BorderBrush="#00000000" Background="{x:Null}" Click="Add_Click">
-                    <materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
-                </Button>
+                        <materialDesign:PackIcon Kind="AddCircle" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
+                    </Button>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             Margin="0,50,50,50"
@@ -164,7 +173,6 @@
 											HorizontalAlignment="Right"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                            
                                             IsChecked="{Binding IsLiked, Mode=TwoWay}"
                                             >
                                             <ToggleButton.Background>
@@ -173,7 +181,7 @@
                                             <materialDesign:PackIcon Kind="Heart" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                                         </ToggleButton>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DataContext="{Binding DataContext, ElementName=Header}">
-                                            <Button Visibility="{Binding IsQueu}"
+                                            <Button Visibility="{Binding IsQueue}"
                                             Height="50" Width="50"
                                                     materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}" 

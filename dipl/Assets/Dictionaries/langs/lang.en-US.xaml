@@ -36,6 +36,9 @@
     <v:String x:Key="p_Dark">Dark</v:String>
     <v:String x:Key="p_Light">Light</v:String>
     <v:String x:Key="p_Apply">Apply</v:String>
+    <v:String x:Key="p_Management">Account management</v:String>
+    <v:String x:Key="p_Logout">Log out</v:String>
+    <v:String x:Key="p_Delete">Delete account</v:String>
 
     <!-- login&register -->
 
@@ -49,5 +52,6 @@
     <v:String x:Key="l_SigningUp">Signing Up</v:String>
     <v:String x:Key="l_SigningIn">Signing In</v:String>
     <v:String x:Key="l_Guest">Enter as a guest</v:String>
+    <v:String x:Key="l_SuccessReg">Successful registration</v:String>
 
 </ResourceDictionary>

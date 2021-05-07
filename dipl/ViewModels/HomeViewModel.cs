@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
@@ -51,7 +52,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = new PlaylistViewModel(Playlists[(int)obj], _navigationStore);
+                    _navigationStore.CurrentViewModel = new PlaylistViewModel(Playlists[Convert.ToInt32(obj)], _navigationStore);
                 });
             }
         }
@@ -64,7 +65,11 @@ namespace dipl.ViewModels
                 {
                     foreach(Audio audio in Playlists[(int)obj].Audios)
                     {
-                        App.CurrentAccount.Queue.Add(audio);
+                        App.CurrentAccount.Playlists[1].Audios.Add(audio);
+                    }
+                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                    {
+                        //TODO ошибка
                     }
                 });
             }
@@ -72,8 +77,8 @@ namespace dipl.ViewModels
 
         public HomeViewModel(NavigationStore navigationStore)
         {
-            Playlists = App.CurrentAccount.Playlists;
-            Recent = App.CurrentAccount.Recent;
+            Playlists = new ObservableCollection<Playlist>(App.CurrentAccount.Playlists.Skip(3));
+            Recent = App.CurrentAccount.Playlists[2].Audios;
             _navigationStore = navigationStore;
         }
     }

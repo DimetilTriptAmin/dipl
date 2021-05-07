@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace dipl
@@ -24,7 +26,30 @@ namespace dipl
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
 		private static List<string> m_Themes = new List<string>();
 
-        public static Account CurrentAccount { get; set; }
+		public static Account _currentAccount;
+        public static Account CurrentAccount
+        {
+			get => _currentAccount;
+            set
+            {
+				if(value == null)
+                {
+					_currentAccount = null;
+					AuthWindow aw = new AuthWindow();
+					Application.Current.MainWindow.Close();
+					Application.Current.MainWindow = aw;
+					aw.Show();
+				}
+                else
+                {
+					_currentAccount = value;
+					MainWindow mw = new MainWindow();
+					Application.Current.MainWindow.Close();
+					Application.Current.MainWindow = mw;
+					mw.Show();
+				}
+            }
+        }
 
         public static List<CultureInfo> Languages
         {
@@ -36,18 +61,6 @@ namespace dipl
 
         protected override void OnStartup(StartupEventArgs e)
         {
-
-
-			CurrentAccount = new Account();
-			CurrentAccount.Image = new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative));
-			CurrentAccount.User = "Username111";
-			CurrentAccount.Playlists = new System.Collections.ObjectModel.ObservableCollection<Playlist>();
-			CurrentAccount.Liked = new System.Collections.ObjectModel.ObservableCollection<Audio>();
-			CurrentAccount.Recent = new System.Collections.ObjectModel.ObservableCollection<Audio>();
-			CurrentAccount.Queue = new System.Collections.ObjectModel.ObservableCollection<Audio>();
-			CurrentAccount.UserType = UserType.Regular;
-
-
 
 			System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
@@ -67,8 +80,6 @@ namespace dipl
 
             base.OnStartup(e);
         }
-
-		public static event EventHandler LanguageChanged;
 
 		public static CultureInfo Language
 		{

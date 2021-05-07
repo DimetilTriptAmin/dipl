@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dipl.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -15,12 +16,15 @@ namespace dipl.Models
     {
         [Key]
         public int Id { get; set; }
-        public int PlaylistId { get; set; }
-        public int UserId { get; set; }
         public bool IsLiked { get; set; }
-        public ImageSource Image { get; set; }
+        public byte[] Image { get; set; }
         public string Name { get; private set; }
         public string SourceUrl { get; private set; }
+
+        public Audio()
+        {
+
+        }
 
         public Audio(string SourceUrl, bool IsLiked)
         {
@@ -30,7 +34,7 @@ namespace dipl.Models
             Image = GetImage();
         }
 
-        public ImageSource GetImage()
+        public byte[] GetImage()
         {
             TagLib.File file_TAG;
             try
@@ -38,20 +42,15 @@ namespace dipl.Models
                 file_TAG = TagLib.File.Create(SourceUrl);
                 if (file_TAG.Tag.Pictures.Length >= 1)
                 {
-                    var bin = file_TAG.Tag.Pictures[0].Data.Data;
-                    var imageSource = new BitmapImage();
-                    imageSource.BeginInit();
-                    imageSource.StreamSource = new MemoryStream(bin);
-                    imageSource.EndInit();
-                    return imageSource;
+                    return file_TAG.Tag.Pictures[0].Data.Data;
                 }
                 else
                 {
-                    return new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative));
+                    return ((ImageSource)(new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative)))).ToBytes();
                 }
             }
             ///////////////////////////////////////////////////////////////////////////////////убрать когда подключу плеер
-            catch { return new BitmapImage(new Uri("../../Assets/lp.jpg", UriKind.Relative)); }
+            catch { return ((ImageSource)(new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative)))).ToBytes(); }
         }
     }
 }

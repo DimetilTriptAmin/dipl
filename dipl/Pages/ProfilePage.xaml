@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:dipl.Pages"
       xmlns:uc="clr-namespace:dipl.Assets.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="1950" d:DesignWidth="800"
+      d:DesignHeight="2200" d:DesignWidth="800"
       Title="ProfilePage">
 
     <Grid Background="{DynamicResource MainBackgroundColor}">
@@ -92,6 +92,7 @@
                                    FontSize="20" FontFamily="Arial Black" TextWrapping="Wrap"
                                    DockPanel.Dock="Right" Margin="20,0,0,0"/>
                             </DockPanel>
+
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -129,7 +130,7 @@
                         </TextBlock>
                         <uc:BindingPasswordBox Margin="50,0,50,50"
                                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
-                                        Password="{Binding RepeatedPassword, Mode=TwoWay,
+                                        Password="{Binding NewPassword, Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}">
 
                         </uc:BindingPasswordBox>
@@ -138,6 +139,7 @@
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="{DynamicResource MainTextColor}"
                             IsEnabled="{Binding CanValidate}"
+                            Command="{Binding ChangePassword}"
                             BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
                             Margin="100,20,100,20" FontSize="20">
                     </Button>
@@ -157,7 +159,7 @@
                     <StackPanel Margin="100,20,100,20" Name="Menu">
                         <Menu Background="{DynamicResource MenuBackgroundColor}" 
                               Foreground="{DynamicResource MainTextColor}"
-                              Margin="0,50,0,50"
+                              Margin="0,50,0,0"
                               FontSize="20">
                             <MenuItem HorizontalAlignment="Center"
                                       Width="{Binding ActualWidth, ElementName=Menu}"
@@ -186,6 +188,34 @@
                             </MenuItem>
                         </Menu>
                     </StackPanel>
+                </StackPanel>
+                <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="50,50,50,20"
+                       FontSize="25"
+                       Text="{DynamicResource p_Management}"
+                       FontFamily="Arial Black"
+                       Foreground="{DynamicResource MainTextColor}"/>
+                <Line X1="0" Y1="0" 
+                          X2="{Binding ActualWidth, ElementName=Header}" Y2="0" 
+                          Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
+                <StackPanel Margin="0,50,50,0">
+                    <Button Content="{DynamicResource p_Logout}" Height="50"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                            Foreground="{DynamicResource MainTextColor}"
+                            IsEnabled="{Binding CanValidate}"
+                            Command="{Binding LogoutCommand}"
+                            BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
+                            Margin="100,20,100,20" FontSize="20">
+                    </Button>
+                    <Button Content="{DynamicResource p_Delete}" Height="50"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                            Foreground="{DynamicResource MainTextColor}"
+                            IsEnabled="{Binding CanValidate}"
+                            Command="{Binding ChangePassword}"
+                            BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
+                            Margin="100,20,100,20" FontSize="20">
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

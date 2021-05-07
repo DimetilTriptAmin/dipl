@@ -1,8 +1,10 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -36,7 +38,14 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _playlists.RemoveAt((int)obj);
+                    if (DataHandler.DeletePlaylist(_playlists[(int)obj]))
+                    {
+                        _playlists.RemoveAt((int)obj);
+                    }
+                    else
+                    {
+                        //TODO: error
+                    }
                 });
             }
         }
@@ -47,9 +56,17 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    Playlist newPlaylist = new Playlist("");
-                    _playlists.Add(newPlaylist);
-                    _navigationStore.CurrentViewModel = new PlaylistViewModel(newPlaylist, _navigationStore);
+                    Playlist newPlaylist = new Playlist("") { PlaylistId = App.CurrentAccount.Playlists.Count };
+                    newPlaylist.AccountId = App.CurrentAccount.AccountId;
+                    if (DataHandler.AddPlaylist(newPlaylist))
+                    {
+                        _playlists.Add(newPlaylist);
+                        _navigationStore.CurrentViewModel = new PlaylistViewModel(newPlaylist, _navigationStore);
+                    }
+                    else
+                    {
+                        //TODO: ошибка
+                    }
                 });
             }
         }
@@ -62,7 +79,11 @@ namespace dipl.ViewModels
                 {
                     foreach (Audio audio in Playlists[(int)obj].Audios)
                     {
-                        App.CurrentAccount.Queue.Add(audio);
+                        App.CurrentAccount.Playlists[1].Audios.Add(audio);
+                    }
+                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[1], App.CurrentAccount.Playlists[1]))
+                    {
+                        //TODO ошибка
                     }
                 });
             }
@@ -71,7 +92,7 @@ namespace dipl.ViewModels
         public PlaylistsViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            _playlists = App.CurrentAccount.Playlists;
+            _playlists = new ObservableCollection<Playlist>(App.CurrentAccount.Playlists.Skip(3));
         }
     }
 }

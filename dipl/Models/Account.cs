@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dipl.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -13,13 +14,13 @@ namespace dipl.Models
     {
         [Key]
         public int AccountId { get; set; }
-        public string User { get; set; }
+        public User User { get; set; }
         public UserType UserType { get; set; }
-        public ImageSource Image { get; set; }
-        public ObservableCollection<Audio> Liked { get; set; }
-        public ObservableCollection<Audio> Recent { get; set; }
-        public ObservableCollection<Audio> Queue { get; set; }
+        public byte[] Image { get; set; }
         public ObservableCollection<Playlist> Playlists { get; set; }
 
+        public Account()
+        {
+        }
     }
 }

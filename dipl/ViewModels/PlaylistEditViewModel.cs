@@ -1,4 +1,5 @@
 ﻿using dipl.Models;
+using dipl.Models.Data;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
@@ -16,8 +17,8 @@ namespace dipl.ViewModels
     class PlaylistEditViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
-        private Playlist _bufferPlaylist;
-        private Playlist _playlistToEdit;
+        private readonly Playlist _bufferPlaylist;
+        private readonly Playlist _playlistToEdit;
 
         public Playlist Playlist => _bufferPlaylist;
 
@@ -51,11 +52,11 @@ namespace dipl.ViewModels
         {
             get
             {
-                return _bufferPlaylist.Image;
+                return _bufferPlaylist.Image.ToImage();
             }
             set
             {
-                _bufferPlaylist.Image = value;
+                _bufferPlaylist.Image = value.ToBytes();
                 OnPropertyChanged(nameof(Image));
             }
         }
@@ -65,10 +66,17 @@ namespace dipl.ViewModels
             get
             {
                 return new RelayCommand((obj)=> {
-                    _playlistToEdit.Name = _bufferPlaylist.Name;
-                    _playlistToEdit.Image = _bufferPlaylist.Image;
-                    _playlistToEdit.Audios = _bufferPlaylist.Audios;
-                    _navigationStore.CurrentViewModel = new PlaylistViewModel(_playlistToEdit, _navigationStore);
+                    if (DataHandler.UpdatePlaylist(_playlistToEdit, _bufferPlaylist))
+                    {
+                        _playlistToEdit.Name = _bufferPlaylist.Name;
+                        _playlistToEdit.Image = _bufferPlaylist.Image;
+                        _playlistToEdit.Audios = _bufferPlaylist.Audios;
+                        _navigationStore.CurrentViewModel = new PlaylistViewModel(_playlistToEdit, _navigationStore);
+                    }
+                    else
+                    {
+                        //TODO: ошибка
+                    }
                 });
             }
         }
@@ -78,9 +86,10 @@ namespace dipl.ViewModels
             get
             {
                 return new RelayCommand((obj) => {
-                    foreach(string filename in (string[])obj)
+                    foreach (string filename in (string[])obj)
                     {
-                        Audios.Add(new Audio(filename, false));
+                        Audio audio = new Audio(filename, false);
+                        Audios.Add(audio);
                     }
                 });
             }
@@ -123,7 +132,7 @@ namespace dipl.ViewModels
 
             string name = string.Copy(playlistToEdit.Name);
             ObservableCollection<Audio> audios = new ObservableCollection<Audio>(playlistToEdit.Audios);
-            ImageSource imageSource = playlistToEdit.Image.Clone();
+            byte[] imageSource = (byte[])playlistToEdit.Image.Clone();
 
             _bufferPlaylist = new Playlist(name,audios,imageSource);
             _navigationStore = navigationStore;

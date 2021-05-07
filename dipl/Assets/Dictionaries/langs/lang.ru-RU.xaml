@@ -36,6 +36,9 @@
     <v:String x:Key="p_Dark">Темная</v:String>
     <v:String x:Key="p_Light">Светлая</v:String>
     <v:String x:Key="p_Apply">Применить</v:String>
+    <v:String x:Key="p_Management">Управление аккаунтом</v:String>
+    <v:String x:Key="p_Logout">Выйти</v:String>
+    <v:String x:Key="p_Delete">Удалить аккаунт</v:String>
 
     <!-- login&register -->
 
@@ -49,7 +52,8 @@
     <v:String x:Key="l_SigningUp">Регистрация</v:String>
     <v:String x:Key="l_SigningIn">Вход</v:String>
     <v:String x:Key="l_Guest">Войти как гость</v:String>
+    <v:String x:Key="l_SuccessReg">Регистрация успешна</v:String>
 
-    
+
 
 </ResourceDictionary>

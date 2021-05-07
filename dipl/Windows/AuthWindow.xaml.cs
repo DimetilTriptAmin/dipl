@@ -24,6 +24,7 @@ namespace dipl.Windows
         {
             InitializeComponent();
             this.MouseLeftButtonDown += delegate { DragMove(); };
+            this.DataContext = new AuthViewModel(new Stores.NavigationStore());
         }
 
         private void MinimizeWindow_Exec(object sender, ExecutedRoutedEventArgs e)
