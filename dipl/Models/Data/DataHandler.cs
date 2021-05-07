@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
@@ -264,12 +265,14 @@ namespace dipl.Models.Data
         public static ObservableCollection<Audio> LoadLiked()
         {
             ObservableCollection<Audio> Liked = new ObservableCollection<Audio>();
+            List<string> urls = new List<string>();
             foreach (Playlist playlist in App.CurrentAccount.Playlists)
             {
                 foreach(Audio audio in playlist.Audios)
                 {
-                    if (audio.IsLiked)
+                    if (audio.IsLiked && !urls.Contains(audio.SourceUrl))
                     {
+                        urls.Add(audio.SourceUrl);
                         Liked.Add(audio);
                     }
                 }
