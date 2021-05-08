@@ -150,14 +150,14 @@ namespace dipl.ViewModels
         {
             ClearErrors(nameof(Password));
             if (Password == null || !HashGenerator.GetHash(Password).Equals(App.CurrentAccount.User.PasswordHash))
-                AddError(nameof(Password), "Incorrect password.");
+                AddError(nameof(Password), mergedDict["p_Wrong"].ToString());
         }
 
         private void ValidateNewPassword()
         {
             ClearErrors(nameof(NewPassword));
             if (NewPassword == null || NewPassword.Length <= 4)
-                AddError(nameof(NewPassword), "Password must be at least 5 characters long.");
+                AddError(nameof(NewPassword), mergedDict["l_ShortPass"].ToString());
         }
     }
 }

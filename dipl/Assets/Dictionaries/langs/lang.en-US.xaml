@@ -39,6 +39,7 @@
     <v:String x:Key="p_Management">Account management</v:String>
     <v:String x:Key="p_Logout">Log out</v:String>
     <v:String x:Key="p_Delete">Delete account</v:String>
+    <v:String x:Key="p_Wrong">Incorrect password.</v:String>
 
     <!-- login&register -->
 
@@ -54,4 +55,12 @@
     <v:String x:Key="l_Guest">Enter as a guest</v:String>
     <v:String x:Key="l_SuccessReg">Successful registration</v:String>
 
+    <!--Errors section-->
+    <v:String x:Key="l_TakenLogin">The username is taken.</v:String>
+    <v:String x:Key="l_EmptyLogin">The username cannot be empty.</v:String>
+    <v:String x:Key="l_ShortLogin">The username must be at least 5 characters long.</v:String>
+    <v:String x:Key="l_IncorrectLogin">The username must begin with a letter.</v:String>
+    <v:String x:Key="l_ShortPass">The password must be at least 5 characters long.</v:String>
+    <v:String x:Key="l_EqualPass">Passwords must be equal.</v:String>
+    <v:String x:Key="l_Wrong">Wrong username or password.</v:String>
 </ResourceDictionary>

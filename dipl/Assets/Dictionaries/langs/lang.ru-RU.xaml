@@ -39,6 +39,7 @@
     <v:String x:Key="p_Management">Управление аккаунтом</v:String>
     <v:String x:Key="p_Logout">Выйти</v:String>
     <v:String x:Key="p_Delete">Удалить аккаунт</v:String>
+    <v:String x:Key="p_Wrong">Неверный пароль.</v:String>
 
     <!-- login&register -->
 
@@ -54,6 +55,13 @@
     <v:String x:Key="l_Guest">Войти как гость</v:String>
     <v:String x:Key="l_SuccessReg">Регистрация успешна</v:String>
 
-
+    <!--Errors section-->
+    <v:String x:Key="l_TakenLogin">Такое имя пользователя занято.</v:String>
+    <v:String x:Key="l_EmptyLogin">Имя пользователя не может быть пустым.</v:String>
+    <v:String x:Key="l_ShortLogin">Имя пользователя не может быть короче 5 символов.</v:String>
+    <v:String x:Key="l_IncorrectLogin">Имя пользователя должно начинаться с буквы.</v:String>
+    <v:String x:Key="l_ShortPass">Пароль не может ыбть короче 5 символов.</v:String>
+    <v:String x:Key="l_EqualPass">Пароли должны совпадать.</v:String>
+    <v:String x:Key="l_Wrong">Неверное имя пользователя или пароль.</v:String>
 
 </ResourceDictionary>

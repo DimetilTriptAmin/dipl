@@ -2,6 +2,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:dipl.Pages"
@@ -19,13 +20,6 @@
                                    FontSize="20"
                                    FontFamily="Arial Black"
                                    Text="{DynamicResource p_Login}">
-                    </TextBlock>
-                    <TextBlock Foreground="#FF2B5117" 
-                                   Margin="50,20,50,00"
-                                   FontSize="20"
-                                   FontFamily="Arial Black"
-                                    HorizontalAlignment="Center"
-                                   Text="{DynamicResource l_SuccessReg}">
                     </TextBlock>
                 </Grid>
                 <TextBox Foreground="{DynamicResource MainTextColor}" CaretBrush="{DynamicResource MainTextColor}"
@@ -95,5 +89,56 @@
                 </WrapPanel>
             </DockPanel>
         </StackPanel>
+        <Grid x:Name="grid" VerticalAlignment="Top" Height="130">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="t1" />
+            </Grid.RenderTransform>
+          
+            <TextBox
+                 Foreground="{DynamicResource MainTextColor}"
+                Text="{DynamicResource l_SuccessReg}" IsReadOnly="True" 
+                 FontSize="20">
+                <TextBox.Background>
+                    <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                </TextBox.Background>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBoxBase.TextChanged">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="Margin">
+                                    <DoubleAnimation
+                                        From="-170" To="0"
+                                        Storyboard.TargetName="t1"
+                                        Storyboard.TargetProperty="Y"
+                                        Duration="0:0:0.75" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+            <Button Height="30"
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="Red" BorderBrush="Red" Background="{x:Null}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="FocusManager.GotFocus">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="Margin">
+                                    <DoubleAnimation
+                                        From="0" To="-170"
+                                        Storyboard.TargetName="t1"
+                                        Storyboard.TargetProperty="Y"
+                                        Duration="0:0:0.75" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Button.Triggers>
+                <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" 
+                                         Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
+            </Button>
+        </Grid>
     </Grid>
 </Page>

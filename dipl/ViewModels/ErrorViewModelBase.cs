@@ -5,12 +5,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace dipl.ViewModels
 {
     public class ErrorViewModelBase : ViewModelBase, INotifyDataErrorInfo
     {
-
+        internal ResourceDictionary mergedDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.Contains("lang")).FirstOrDefault();
         private readonly Dictionary<string, List<string>> _errorsByPropertyName = new Dictionary<string, List<string>>();
 
         public bool HasErrors => _errorsByPropertyName.Any();
@@ -59,6 +60,24 @@ namespace dipl.ViewModels
         {
             CanValidate = !_errorsByPropertyName.Any();
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        public ErrorViewModelBase()
+        {
+            App.LanguageChanged += (s, e) =>
+            {
+                List<string> props = new List<string>();
+                foreach (string propertyName in _errorsByPropertyName.Keys)
+                {
+                    props.Add(propertyName);
+                }
+                _errorsByPropertyName.Clear();
+                foreach (string propertyName in props)
+                {
+                    OnErrorsChanged(propertyName);
+                }
+                mergedDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.Contains("lang")).FirstOrDefault();
+            };
         }
     }
 }

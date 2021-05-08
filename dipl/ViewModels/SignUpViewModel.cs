@@ -19,6 +19,9 @@ namespace dipl.ViewModels
 {
     class SignUpViewModel : ErrorViewModelBase
     { 
+        private readonly NavigationStore _navigationStore;
+
+
         private string _login;
         public string Login
         {
@@ -56,8 +59,17 @@ namespace dipl.ViewModels
             }
         }
 
-        private readonly NavigationStore _navigationStore;
 
+        private string _notification ="d";
+        public string Notification
+        {
+            get => _notification;
+            set
+            {
+                _notification = value;
+                OnPropertyChanged(nameof(Notification));
+            }
+        }
 
         public ICommand NavigateSignInCommand
         {
@@ -73,7 +85,7 @@ namespace dipl.ViewModels
         {
             get
             {
-                return new RelayCommand(async (obj) => {
+                return new RelayCommand((obj) => {
                     ValidateUserName();
                     ValidatePassword();
                     ValidateRepeatedPassword();
@@ -91,7 +103,7 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        AddError(nameof(Login), "The username is taken.");
+                        AddError(nameof(Login), mergedDict["l_TakenLogin"].ToString());
                     }
                 });
             }
@@ -106,32 +118,32 @@ namespace dipl.ViewModels
         private void ValidateUserName()
         {
             ClearErrors(nameof(Login));
+            if (string.IsNullOrWhiteSpace(Login))
+            {
+                AddError(nameof(Login), mergedDict["l_EmptyLogin"].ToString());
+                return;
+            }
             string pattern = @"^[a-z][0-9a-z]*";
-
             if (!Regex.IsMatch(Login, pattern, RegexOptions.IgnoreCase))
             {
-                AddError(nameof(Login), "The username must begin with a letter.");
+                AddError(nameof(Login), mergedDict["l_IncorrectLogin"].ToString());
             }
-            if (string.IsNullOrWhiteSpace(Login))
-                AddError(nameof(Login), "The username cannot be empty.");
-            if (string.Equals(Login, "Admin", StringComparison.OrdinalIgnoreCase))
-                AddError(nameof(Login), "Admin is not valid username.");
             if (Login == null || Login?.Length <= 4)
-                AddError(nameof(Login), "The username must be at least 5 characters long.");
+                AddError(nameof(Login), mergedDict["l_ShortLogin"].ToString());
         }
 
         private void ValidatePassword()
         {
             ClearErrors(nameof(Password));
             if (Password == null || Password.Length <=4)
-                AddError(nameof(Password), "Password must be at least 5 characters long.");
+                AddError(nameof(Password), mergedDict["l_ShortPass"].ToString());
         }
 
         private void ValidateRepeatedPassword()
         {
             ClearErrors(nameof(RepeatedPassword));
             if (!RepeatedPassword.IsEqualTo(Password))
-                AddError(nameof(RepeatedPassword), "Passwords must be equal.");
+                AddError(nameof(RepeatedPassword), mergedDict["l_EqualPass"].ToString());
         }
     }
 }

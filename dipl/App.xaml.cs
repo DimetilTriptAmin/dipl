@@ -52,7 +52,9 @@ namespace dipl
             }
         }
 
-        public static List<CultureInfo> Languages
+		public static event EventHandler LanguageChanged;
+
+		public static List<CultureInfo> Languages
         {
             get
             {
@@ -129,6 +131,8 @@ namespace dipl
 				{
 					Application.Current.Resources.MergedDictionaries.Add(dict);
 				}
+
+				LanguageChanged(null, new EventArgs());
 			}
 		}
 

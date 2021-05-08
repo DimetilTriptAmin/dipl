@@ -64,8 +64,10 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        AddError(nameof(Login), "Wrong username or password");
-                        AddError(nameof(Password), "Wrong username or password");
+                        ClearErrors(nameof(Login));
+                        ClearErrors(nameof(Password));
+                        AddError(nameof(Login), mergedDict["l_Wrong"].ToString());
+                        AddError(nameof(Password), mergedDict["l_Wrong"].ToString());
                     }
                 });
             }
