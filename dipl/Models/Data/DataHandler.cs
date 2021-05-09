@@ -78,7 +78,6 @@ namespace dipl.Models.Data
                     try
                     {
                         pc.Playlists.AddRange(account.Playlists);
-                        pc.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Playlists ON");
                         pc.Users.Add(user);
                         pc.Accounts.Add(account);
                         pc.SaveChanges();
@@ -103,7 +102,13 @@ namespace dipl.Models.Data
                 {
                     try
                     {
-                        pc.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Playlists ON");
+                        var result = pc.Playlists.Where(p => p.AccountId == App.CurrentAccount.AccountId);
+                        int i = 2;
+                        foreach (Playlist pl in result)
+                        {
+                            if (i == pl.PlaylistId) i++;
+                        }
+                        playlist.PlaylistId = i;
                         pc.Playlists.Add(playlist);
                         pc.SaveChanges();
                         transaction.Commit();
@@ -118,7 +123,7 @@ namespace dipl.Models.Data
             }
         }
 
-        public static bool DeletePlaylist(Playlist playlistToRemove)
+        public static bool DeletePlaylist(Playlist playlistToRemove, bool IsDelete)
         {
             using (PlayerContext pc = new PlayerContext())
             {
@@ -129,7 +134,9 @@ namespace dipl.Models.Data
                         Playlist playlist = pc.Playlists
                             .Include(p=>p.Audios)
                             .Where(p=> p.AccountId == playlistToRemove.AccountId && p.PlaylistId==playlistToRemove.PlaylistId).FirstOrDefault();
-                        pc.Playlists.Remove(playlist);
+                        pc.Audios.RemoveRange(playlist.Audios);
+                        if (IsDelete)
+                            pc.Playlists.Remove(playlist);
                         pc.SaveChanges();
                         transaction.Commit();
                         return true;

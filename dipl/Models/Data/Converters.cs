@@ -8,15 +8,22 @@ namespace dipl.Models.Data
 	{
 		public static ImageSource ToImage(this byte[] imageData)
 		{
-			BitmapImage biImg = new BitmapImage();
-			MemoryStream ms = new MemoryStream(imageData);
-			biImg.BeginInit();
-			biImg.StreamSource = ms;
-			biImg.EndInit();
+			ImageSource imgSrc = null;
+			try
+			{
+				BitmapImage biImg = new BitmapImage();
+				MemoryStream ms = new MemoryStream(imageData);
+				biImg.BeginInit();
+				biImg.StreamSource = ms;
+				biImg.EndInit();
 
-			ImageSource imgSrc = biImg as ImageSource;
-
-			return imgSrc;
+				imgSrc = biImg;
+				return imgSrc;
+			}
+            catch
+            {
+				return null;
+            }
 		}
 	}
 

@@ -57,7 +57,7 @@
                        FontFamily="Arial Black"
                        Foreground="{DynamicResource MainTextColor}"/>
                 <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=Header}" Y2="0" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
-                <ListView ItemsSource="{Binding Playlists}" AlternationCount="100" Name="Playlists">
+                <ListView ItemsSource="{Binding Playlists}" AlternationCount="500" Name="Playlists">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                             <StackPanel Width="200" Height="270" Margin="10">
@@ -84,9 +84,12 @@
                                             <Button
                                             DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
-                                            Height="50" Width="50" Margin="5" 
+                                            Height="50" Width="50" Padding="0"
+                                            Command="{Binding PlaylistPlayCommand}"
+                                            CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                                            RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            Background="#00000000" BorderBrush="#00000000">
+                                            Background="#00000000" BorderBrush="{DynamicResource MainTextColor}">
                                                 <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                             </Button>
                                             <Button
@@ -105,8 +108,8 @@
                                             DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5"
-                                            Command="{Binding QueueAddCommand}"  CommandParameter="{Binding Path=(ListView.AlternationIndex), 
-                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                            Command="{Binding QueueAddCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
+                                            RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000">
                                             <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>

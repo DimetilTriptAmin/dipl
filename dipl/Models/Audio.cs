@@ -3,10 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using WMPLib;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -20,6 +17,7 @@ namespace dipl.Models
         public byte[] Image { get; set; }
         public string Name { get; private set; }
         public string SourceUrl { get; private set; }
+        public string DurationTime { get; private set; }
 
         public Audio()
         {
@@ -32,6 +30,7 @@ namespace dipl.Models
             this.IsLiked = IsLiked;
             Name = Path.GetFileNameWithoutExtension(SourceUrl);
             Image = GetImage();
+            DurationTime = TimeSpan.FromSeconds(App.AudioPlayer.wmp.newMedia(SourceUrl).duration).ToString(@"mm\:ss");
         }
 
         public byte[] GetImage()

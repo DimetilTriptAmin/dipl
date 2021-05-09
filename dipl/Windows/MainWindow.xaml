@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         MinHeight="450"
         MinWidth="710"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="650" Width="1000">
 
     <WindowChrome.WindowChrome>
         <WindowChrome     
@@ -238,8 +238,9 @@
 
             <TextBlock x:Name="AudioNameLabel" 
                            Foreground="{DynamicResource MainTextColor}" 
-                           FontSize="16" Text="Imagihcfffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhne Dragons - Thunder" 
-                            VerticalAlignment="Center"
+                           FontSize="16" 
+                           Text="Imagihcfffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhne Dragons - Thunder" 
+                           VerticalAlignment="Center"
                            Grid.Column="1"
                        >
                 <TextBlock.RenderTransform>
@@ -274,18 +275,23 @@
                     <Button x:Name="MixPlaylistButton"
                                 Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                 Background="#00000000" BorderBrush="#00000000"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                 Margin="10,0,10,0"
-                                Height="30" Width="30">
+                                Height="30" Width="30"
+                             Command="{Binding MixClickCommand}">
                         <materialDesign:PackIcon Kind="Shuffle" Height="25" Width="25" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button x:Name="BackButton" 
                                 Height="30" Width="30"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                 Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                                Background="#00000000" BorderBrush="#00000000">
+                                Background="#00000000" BorderBrush="#00000000"
+                             Command="{Binding BackClickCommand}">
                         <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <Button x:Name="PlayButton"
                                 Height="40" Width="40"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                 Style="{StaticResource MaterialDesignFloatingActionButton}" 
                                 Background="#00000000" BorderBrush="#00000000"
                                 Margin="10,0,10,0"
@@ -294,32 +300,49 @@
                     </Button>
                     <Button x:Name="ForwardButton"
                                 Height="30" Width="30"
+                            materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                 Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                Background="#00000000" BorderBrush="#00000000">
+                                Background="#00000000" BorderBrush="#00000000"
+                             Command="{Binding ForwardClickCommand}">
                         <materialDesign:PackIcon Kind="ArrowRight" Height="25" Width="25"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </Button>
                     <ToggleButton Height="30" Width="30"
                                       Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                      Background="#4CE0E0E0"
-                                      Margin="10,0,10,0">
+                                      Margin="10,0,10,0"
+                                  Command="{Binding RepeatClickCommand}">
+                        <ToggleButton.Background>
+                            <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                        </ToggleButton.Background>
                         <materialDesign:PackIcon Kind="Repeat" Height="25" Width="25"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                     </ToggleButton>
                 </WrapPanel>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="40"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="1:32" HorizontalAlignment="Left" DockPanel.Dock="Bottom"/>
+                    <TextBlock Text="{Binding PositionTime}"
+                               FontSize="16" 
+                               HorizontalAlignment="Left"
+                               Margin="5,0,0,5"
+                               VerticalAlignment="Top"
+                               Foreground="{DynamicResource MainTextColor}" />
                     <Slider
                         Grid.Column="1"
                         IsMoveToPointEnabled="True"
                         Foreground="{DynamicResource MainTextColor}"
-                        Maximum="100"
+                        Maximum="{Binding Duration}"
+                        Value="{Binding Position}"
                         />
-                    <TextBlock Text="4:02" HorizontalAlignment="Right" Grid.Column="2"/>
+                    <TextBlock Text="{Binding DurationTime}" 
+                               FontSize="16" 
+                               HorizontalAlignment="Left"
+                               Margin="5,0,0,5"
+                               VerticalAlignment="Top"
+                               Grid.Column="2"
+                               Foreground="{DynamicResource MainTextColor}" />
                 </Grid>
             </StackPanel>
 
@@ -332,23 +355,29 @@
                 <RadioButton Height="40" Width="40"
                              GroupName="Pages"
                              Style="{StaticResource MaterialDesignFlatToggleButton}" 
-                             Background="#4CE0E0E0"
                              Command="{Binding QueueClickCommand}">
+                    <RadioButton.Background>
+                        <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                    </RadioButton.Background>
                     <materialDesign:PackIcon Kind="PlaylistPlay" Height="30" Width="30" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                 </RadioButton>
                 <Button Style="{StaticResource MaterialDesignFloatingActionButton}" 
                         Background="#00000000"
                         BorderBrush="#00000000"
+                        materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                         Height="45" Width="45"
+                        Command="{Binding MuteCommand}"
                         Grid.Column="1">
                     <materialDesign:PackIcon Kind="VolumeOff" Height="30" Width="30"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                 </Button>
                 <Slider Maximum="100"
-                        Value="100" SmallChange="1" LargeChange="5" TickFrequency="10"
+                        Value="{Binding Volume}"
+                        SmallChange="1" LargeChange="5" TickFrequency="10"
                         IsMoveToPointEnabled="True"
                         VerticalAlignment="Center"
                         Foreground="{DynamicResource MainTextColor}"
-                        Grid.Column="2"/>
+                        Grid.Column="2"
+                        />
             </Grid>
 
         </Grid>

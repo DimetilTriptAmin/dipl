@@ -27,7 +27,9 @@ namespace dipl
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
 		private static List<string> m_Themes = new List<string>();
 
-		public static Account _currentAccount;
+		public static AudioPlayer AudioPlayer { get; set; }
+
+		private static Account _currentAccount;
         public static Account CurrentAccount
         {
 			get => _currentAccount;
@@ -44,6 +46,7 @@ namespace dipl
                 else
                 {
 					_currentAccount = value;
+					AudioPlayer = new AudioPlayer(_currentAccount.Playlists[0].Audios);
 					MainWindow mw = new MainWindow();
 					Application.Current.MainWindow.Close();
 					Application.Current.MainWindow = mw;
@@ -64,6 +67,7 @@ namespace dipl
 
         protected override void OnStartup(StartupEventArgs e)
         {
+
 			using (PlayerContext pc = new PlayerContext())
 			{
 				pc.Database.CreateIfNotExists();	

@@ -38,11 +38,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WMPLib.1.0.0\lib\AxInterop.WMPLib.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WMPLib.1.0.0\lib\Interop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
@@ -83,13 +90,14 @@
     <Compile Include="Assets\UserControls\BindingPasswordBox.xaml.cs">
       <DependentUpon>BindingPasswordBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105070757377_Player.cs" />
-    <Compile Include="Migrations\202105070757377_Player.designer.cs">
-      <DependentUpon>202105070757377_Player.cs</DependentUpon>
+    <Compile Include="Migrations\202105090824436_Player.cs" />
+    <Compile Include="Migrations\202105090824436_Player.designer.cs">
+      <DependentUpon>202105090824436_Player.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Audio.cs" />
+    <Compile Include="Models\AudioPlayer.cs" />
     <Compile Include="Models\Data\Converters.cs" />
     <Compile Include="Models\Data\DataHandler.cs" />
     <Compile Include="Models\Data\HashGenerator.cs" />
@@ -226,8 +234,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202105070757377_Player.resx">
-      <DependentUpon>202105070757377_Player.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105090824436_Player.resx">
+      <DependentUpon>202105090824436_Player.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

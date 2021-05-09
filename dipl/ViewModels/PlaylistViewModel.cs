@@ -70,18 +70,30 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand LikeCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    Playlist.Audios[(int)obj].IsLiked = !Playlist.Audios[(int)obj].IsLiked;
+                    DataHandler.UpdateAudio(Playlist.Audios[(int)obj]);
+                });
+            }
+        }
+
         public ICommand QueueAddCommand
         {
             get
             {
                 return new RelayCommand((obj) =>
                 {
-                        App.CurrentAccount.Playlists[0].Audios.Add(Playlist.Audios[(int)obj]);
+                    App.CurrentAccount.Playlists[0].Audios.Add(Playlist.Audios[(int)obj]);
+                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
+                    {
+                        //TODO ошибка
+                    }
                 });
-                if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
-                {
-                    //TODO ошибка
-                }
             }
         }
 

@@ -90,115 +90,116 @@
             </Grid>
             <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
-        <ListView ItemsSource="{Binding PlaylistsView}" Name="Playlists" AlternationCount="100"
-                      Grid.Row="1"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      Margin="50">
-            <ListView.Resources>
+        <ScrollViewer Grid.Row="1"  Margin="50"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Resources>
                 <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
-            </ListView.Resources>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Viewbox>
-                        <StackPanel Width="200" Height="270" Margin="10">
-                            <Border Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="{Binding Image}"/>
-                                </Border.Background>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
-                                    <Grid.Style>
-                                        <Style TargetType="{x:Type Grid}">
-                                            <Setter Property="Opacity" Value="0"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Opacity" Value="1"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Grid.Style>
-                                    <Grid.Background>
-                                        <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
-                                    </Grid.Background>
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
+            </ScrollViewer.Resources>
+            <ItemsControl ItemsSource="{Binding PlaylistsView}" Name="Playlists" AlternationCount="500">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Viewbox>
+                            <StackPanel Width="200" Height="270" Margin="10">
+                                <Border Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Image}"/>
+                                    </Border.Background>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+                                        <Grid.Style>
+                                            <Style TargetType="{x:Type Grid}">
+                                                <Setter Property="Opacity" Value="0"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <Grid.Background>
+                                            <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
+                                        </Grid.Background>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
-                                                Command="{Binding DeletePlaylistCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
-                       RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
-                                                <materialDesign:PackIcon Kind="Delete" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
-                                            </Button>
-                                            <Button Margin="5"
+                                                Command="{Binding DeletePlaylistCommand}"  
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}">
+                                                    <materialDesign:PackIcon Kind="Delete" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
+                                                </Button>
+                                                <Button Margin="5"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Height="50" Width="50"
                                                     materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000">
-                                                <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
-                                            </Button>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button
+                                                    <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
+                                                </Button>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button
                                                 materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
-                                                 Command="{Binding QueueAddCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
-                       RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
-                                                <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
-                                            </Button>
+                                                 Command="{Binding QueueAddCommand}"  
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}">
+                                                    <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
+                                                </Button>
 
-                                            <Button
+                                                <Button
                                                 materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                             Margin="5"
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            Command="{Binding ShowPlaylistCommand}"  CommandParameter="{Binding Path=(ItemsControl.AlternationIndex), 
-                       RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                            Command="{Binding ShowPlaylistCommand}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}"
                                             Background="#00000000" BorderBrush="#00000000">
-                                                <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
-                                            </Button>
+                                                    <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
+                                                </Button>
+                                            </StackPanel>
                                         </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Text="{Binding Name}" 
+                                    </Grid>
+                                </Border>
+                                <TextBlock Text="{Binding Name}" 
                                            FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                            TextAlignment="Center" 
                                            TextWrapping="Wrap"
                                            FontFamily="Arial Black"
                                            Margin="10"/>
-                        </StackPanel>
-                    </Viewbox>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Name="MediaPanel">
-                        <UniformGrid.Style>
-                            <Style TargetType="{x:Type UniformGrid}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
+                            </StackPanel>
+                        </Viewbox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Name="MediaPanel">
+                            <UniformGrid.Style>
+                                <Style TargetType="{x:Type UniformGrid}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
                                  Value="true">
-                                        <Setter Property="Columns" Value="3"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
+                                            <Setter Property="Columns" Value="3"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
                                  Value="false">
-                                        <Setter Property="Columns" Value="5"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </UniformGrid.Style>
-                    </UniformGrid>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+                                            <Setter Property="Columns" Value="5"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </UniformGrid.Style>
+                        </UniformGrid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

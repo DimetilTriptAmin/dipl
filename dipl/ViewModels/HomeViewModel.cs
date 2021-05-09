@@ -57,6 +57,18 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand PlaylistPlayCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.Queue = Playlists[Convert.ToInt32(obj)].Audios;
+                    App.AudioPlayer.SelectAudio(0);
+                });
+            }
+        }
+
         public ICommand QueueAddCommand
         {
             get

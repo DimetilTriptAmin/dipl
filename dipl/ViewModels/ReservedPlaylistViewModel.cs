@@ -113,7 +113,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.CurrentAccount.Playlists[0].Audios.Clear();
-                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
+                    if (!DataHandler.DeletePlaylist(App.CurrentAccount.Playlists[0], false))
                     {
                         //TODO ошибка
                     }
