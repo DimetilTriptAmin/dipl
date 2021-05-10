@@ -221,7 +221,7 @@
 
         <!-- Панель управления аудио -->
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource ControlBg}">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource ControlBg}" Margin="0,0.2,-0.4,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="120"/>
@@ -231,7 +231,7 @@
 
             <Rectangle Width="60" Height="60" VerticalAlignment="Center" Grid.Column="0" Margin="10">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/dipl;component/Assets/lp.jpg" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
                     </Rectangle.Fill>
 
                 </Rectangle>
@@ -239,35 +239,12 @@
             <TextBlock x:Name="AudioNameLabel" 
                            Foreground="{DynamicResource MainTextColor}" 
                            FontSize="16" 
-                           Text="Imagihcfffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhne Dragons - Thunder" 
+                           Text="{Binding CurrentAudioName}" 
                            VerticalAlignment="Center"
                            Grid.Column="1"
+                       TextWrapping="Wrap"
                        >
-                <TextBlock.RenderTransform>
-                    <TranslateTransform x:Name="t1" />
-                </TextBlock.RenderTransform>
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="MouseEnter">
-                        <BeginStoryboard>
-                            <Storyboard RepeatBehavior="1">
-                                <DoubleAnimation From="0" To="-300"
-                                        Storyboard.TargetName="t1"
-                                        Storyboard.TargetProperty="X"
-                                        Duration="0:0:5" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard RepeatBehavior="1">
-                                <DoubleAnimation To="0"
-                                        Storyboard.TargetName="t1"
-                                        Storyboard.TargetProperty="X"
-                                        Duration="0:0:0" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBlock.Triggers>
+                
             </TextBlock>
 
             <StackPanel Grid.Column="2"  Margin="10,10,10,0">
@@ -319,30 +296,34 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="60"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding PositionTime}"
                                FontSize="16" 
-                               HorizontalAlignment="Left"
-                               Margin="5,0,0,5"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Top"
                                Foreground="{DynamicResource MainTextColor}" />
                     <Slider
+                        Thumb.DragStarted="ProgressBar_DragStarted"
+                        Thumb.DragCompleted="ProgressBar_DragCompleted"
+                        Thumb.DragDelta="ProgressBar_DragDelta"
                         Grid.Column="1"
                         IsMoveToPointEnabled="True"
                         Foreground="{DynamicResource MainTextColor}"
                         Maximum="{Binding Duration}"
-                        Value="{Binding Position}"
-                        />
+                        Value="{Binding Position, Mode=TwoWay}">
+                        
+                    </Slider>
                     <TextBlock Text="{Binding DurationTime}" 
                                FontSize="16" 
-                               HorizontalAlignment="Left"
+                               HorizontalAlignment="Center"
                                Margin="5,0,0,5"
                                VerticalAlignment="Top"
                                Grid.Column="2"
                                Foreground="{DynamicResource MainTextColor}" />
+                    
                 </Grid>
             </StackPanel>
 
@@ -361,15 +342,15 @@
                     </RadioButton.Background>
                     <materialDesign:PackIcon Kind="PlaylistPlay" Height="30" Width="30" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
                 </RadioButton>
-                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                        Background="#00000000"
-                        BorderBrush="#00000000"
-                        materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
+                <ToggleButton Style="{StaticResource MaterialDesignFlatToggleButton}" 
                         Height="45" Width="45"
                         Command="{Binding MuteCommand}"
                         Grid.Column="1">
+                    <ToggleButton.Background>
+                        <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
+                    </ToggleButton.Background>
                     <materialDesign:PackIcon Kind="VolumeOff" Height="30" Width="30"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
-                </Button>
+                </ToggleButton>
                 <Slider Maximum="100"
                         Value="{Binding Volume}"
                         SmallChange="1" LargeChange="5" TickFrequency="10"

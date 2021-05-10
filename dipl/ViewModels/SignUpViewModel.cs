@@ -59,18 +59,6 @@ namespace dipl.ViewModels
             }
         }
 
-
-        private string _notification ="d";
-        public string Notification
-        {
-            get => _notification;
-            set
-            {
-                _notification = value;
-                OnPropertyChanged(nameof(Notification));
-            }
-        }
-
         public ICommand NavigateSignInCommand
         {
             get
@@ -99,7 +87,8 @@ namespace dipl.ViewModels
 
                     if (DataHandler.Register(user))
                     {
-                        //TODO оповещение об удачной регистрации
+                        Notification = "";
+                        Notification = mergedDict["l_SuccessReg"].ToString();
                     }
                     else
                     {

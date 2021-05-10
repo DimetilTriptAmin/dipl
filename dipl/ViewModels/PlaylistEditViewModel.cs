@@ -73,10 +73,6 @@ namespace dipl.ViewModels
                         _playlistToEdit.Audios = _bufferPlaylist.Audios;
                         _navigationStore.CurrentViewModel = new PlaylistViewModel(_playlistToEdit, _navigationStore);
                     }
-                    else
-                    {
-                        //TODO: ошибка
-                    }
                 });
             }
         }

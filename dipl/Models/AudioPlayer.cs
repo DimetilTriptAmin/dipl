@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dipl.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -27,7 +28,7 @@ namespace dipl.Models
 
         #region Props
         public ObservableCollection<Audio> Queue { get; set; }
-        public Audio CurrentAudio => Queue == null? Queue[CurrentIndex]:new Audio();
+        public Audio CurrentAudio => Queue.Count == 0? new Audio() : Queue[CurrentIndex];
         public int CurrentIndex { get; set; }
         public int SavedVolume { get; set; }
 
@@ -62,7 +63,7 @@ namespace dipl.Models
             set { wmp.controls.currentPosition = value; }
         }
 
-        public TimeSpan PositionTime => TimeSpan.FromSeconds((int)wmp.controls.currentPosition);
+        public TimeSpan PositionTime => TimeSpan.FromMinutes((int)wmp.controls.currentPosition);
 
         public int Volume
         {
@@ -83,12 +84,12 @@ namespace dipl.Models
             {
                 if (PlayingStatus == Status.Undefined)
                     return;
-                PlayingStatusChanged?.Invoke(this, PlayingStatus);
+                PlayingStatusChanged?.Invoke();
             };
             Timer = new Timer() { Interval = 50 };
             Timer.Elapsed += (s, e) =>
             {
-                ProgressChanged?.Invoke(this, Position);
+                ProgressChanged?.Invoke();
 
                 if (PlayingStatus == Status.Stopped || PlayingStatus == Status.Ended)
                     ((Timer)s).Stop();
@@ -107,6 +108,7 @@ namespace dipl.Models
 
         public void SelectAudio(int index)
         {
+
             CurrentIndex = index;
 
             if (Queue.Count==0)
@@ -118,9 +120,22 @@ namespace dipl.Models
             if (CurrentIndex < 0)
                 CurrentIndex = Queue.Count - 1;
 
+            if (!File.Exists(CurrentAudio.SourceUrl))
+            {
+                DataHandler.DeleteAudio(CurrentAudio);
+                Queue.RemoveAt(CurrentIndex);
+                SelectAudio(CurrentIndex);
+            }
+
             wmp.currentMedia = wmp.newMedia(CurrentAudio.SourceUrl);
-            ProgressChanged?.Invoke(this, Position);
+            ProgressChanged?.Invoke();
             AudioSelected?.Invoke();
+            if (App.CurrentAccount.Playlists[1].Audios.Count >= 30) App.CurrentAccount.Playlists[1].Audios.RemoveAt(29);
+            if (!App.CurrentAccount.Playlists[1].Audios.Any(x => x.SourceUrl == CurrentAudio.SourceUrl))
+            {
+                App.CurrentAccount.Playlists[1].Audios.Add(CurrentAudio);
+                DataHandler.AddAudio(App.CurrentAccount.Playlists[1], CurrentAudio);
+            }
             Timer.Start();
             AutoNext = true;
         }
@@ -178,9 +193,9 @@ namespace dipl.Models
 
         #region Events
 
-        public event Action<object, Status> PlayingStatusChanged;
+        public event Action PlayingStatusChanged;
 
-        public event Action<object, double> ProgressChanged;
+        public event Action ProgressChanged;
 
         public event Action AudioSelected;
 

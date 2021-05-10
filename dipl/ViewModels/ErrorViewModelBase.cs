@@ -11,7 +11,7 @@ namespace dipl.ViewModels
 {
     public class ErrorViewModelBase : ViewModelBase, INotifyDataErrorInfo
     {
-        internal ResourceDictionary mergedDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.Contains("lang")).FirstOrDefault();
+        internal ResourceDictionary mergedDict = Application.Current.Resources.MergedDictionaries.FirstOrDefault(md => md.Source.OriginalString.Contains("lang"));
         private readonly Dictionary<string, List<string>> _errorsByPropertyName = new Dictionary<string, List<string>>();
 
         public bool HasErrors => _errorsByPropertyName.Any();
@@ -76,7 +76,7 @@ namespace dipl.ViewModels
                 {
                     OnErrorsChanged(propertyName);
                 }
-                mergedDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.Contains("lang")).FirstOrDefault();
+                mergedDict = Application.Current.Resources.MergedDictionaries.FirstOrDefault(md => md.Source.OriginalString.Contains("lang"));
             };
         }
     }

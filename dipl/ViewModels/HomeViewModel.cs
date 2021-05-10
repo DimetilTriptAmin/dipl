@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace dipl.ViewModels
 {
-    class HomeViewModel : ViewModelBase
+    class HomeViewModel : ErrorViewModelBase
     {
         private readonly NavigationStore _navigationStore;
 
@@ -46,6 +47,18 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand LikeCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    Recent[(int)obj].IsLiked = !Recent[(int)obj].IsLiked;
+                    DataHandler.UpdateAudio(Recent[(int)obj]);
+                });
+            }
+        }
+
         public ICommand ShowPlaylistCommand
         {
             get
@@ -69,6 +82,18 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand AudioPlayCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.Queue = Recent;
+                    App.AudioPlayer.SelectAudio((int)obj);
+                });
+            }
+        }
+
         public ICommand QueueAddCommand
         {
             get
@@ -78,17 +103,37 @@ namespace dipl.ViewModels
                     foreach(Audio audio in Playlists[(int)obj].Audios)
                     {
                         App.CurrentAccount.Playlists[0].Audios.Add(audio);
-                    }
-                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
-                    {
-                        //TODO ошибка
+                        if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audio))
+                        {
+                            Notification = "";
+                            Notification = mergedDict["g_DBerror"].ToString();
+                        }
                     }
                 });
             }
         }
 
+        public ICommand QueueAudioAddCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.CurrentAccount.Playlists[0].Audios.Add(Recent[(int)obj]);
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], Recent[(int)obj]))
+                    {
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
+                    }
+                });
+            }
+        }
+
+        public ImageSource Image => App.AudioPlayer.CurrentAudio.Image.ToImage();
+
         public HomeViewModel(NavigationStore navigationStore)
         {
+            App.AudioPlayer.AudioSelected += () => { OnPropertyChanged(nameof(Image)); };
             Playlists = new ObservableCollection<Playlist>(App.CurrentAccount.Playlists.Skip(2));
             Recent = App.CurrentAccount.Playlists[1].Audios;
             _navigationStore = navigationStore;

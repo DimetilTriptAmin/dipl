@@ -89,56 +89,6 @@
                 </WrapPanel>
             </DockPanel>
         </StackPanel>
-        <Grid x:Name="grid" VerticalAlignment="Top" Height="130">
-            <Grid.RenderTransform>
-                <TranslateTransform x:Name="t1" />
-            </Grid.RenderTransform>
-          
-            <TextBox
-                 Foreground="{DynamicResource MainTextColor}"
-                Text="{DynamicResource l_SuccessReg}" IsReadOnly="True" 
-                 FontSize="20">
-                <TextBox.Background>
-                    <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.4"/>
-                </TextBox.Background>
-                <TextBox.Triggers>
-                    <EventTrigger RoutedEvent="TextBoxBase.TextChanged">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard TargetProperty="Margin">
-                                    <DoubleAnimation
-                                        From="-170" To="0"
-                                        Storyboard.TargetName="t1"
-                                        Storyboard.TargetProperty="Y"
-                                        Duration="0:0:0.75" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </TextBox.Triggers>
-            </TextBox>
-            <Button Height="30"
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Foreground="Red" BorderBrush="Red" Background="{x:Null}">
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="FocusManager.GotFocus">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard TargetProperty="Margin">
-                                    <DoubleAnimation
-                                        From="0" To="-170"
-                                        Storyboard.TargetName="t1"
-                                        Storyboard.TargetProperty="Y"
-                                        Duration="0:0:0.75" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
-                <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" 
-                                         Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
-            </Button>
-        </Grid>
+        <uc:Notification Message="{Binding Notification}"/>
     </Grid>
 </Page>

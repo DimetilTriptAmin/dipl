@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -27,10 +28,12 @@ namespace dipl.ViewModels
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
+                ClearErrors(nameof(Password));
             }
         }
 
         private SecureString _newPassword;
+
         public SecureString NewPassword
         {
             get => _newPassword;
@@ -55,6 +58,12 @@ namespace dipl.ViewModels
             }
         }
 
+        public ImageSource BgImage => App.AudioPlayer.CurrentAudio.Image.ToImage();
+        public ProfileViewModel()
+        {
+            App.AudioPlayer.AudioSelected += () => { OnPropertyChanged(nameof(BgImage)); };
+        }
+
         public ICommand ChangePicCommand
         {
             get
@@ -68,7 +77,8 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        //todo ошибка
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }
@@ -102,7 +112,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.Theme = "dark";
+                    App.SetTheme("dark");
                 });
             }
         }
@@ -113,7 +123,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.Theme = "light";
+                    App.SetTheme("light");
                 });
             }
         }
@@ -141,7 +151,58 @@ namespace dipl.ViewModels
                     if (DataHandler.UpdateProfilePassword(App.CurrentAccount.User, NewPassword))
                     {
                         App.CurrentAccount.User.PasswordHash = HashGenerator.GetHash(NewPassword);
+                        Notification = "";
+                        Notification = mergedDict["p_PassChanged"].ToString();
                     }
+                });
+            }
+        }
+
+        private Visibility _isDeleting;
+
+        public Visibility IsDeleting
+        {
+            get
+            {
+                return _isDeleting;
+            }
+            set
+            {
+                _isDeleting = value;
+                OnPropertyChanged(nameof(IsDeleting));
+            }
+        }
+
+        public ICommand ShowDeleteCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    IsDeleting = Visibility.Hidden;
+                });
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    IsDeleting = Visibility.Visible;
+                });
+            }
+        }
+
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    DataHandler.DeleteAccount(App.CurrentAccount);
+                    App.CurrentAccount = null;
                 });
             }
         }

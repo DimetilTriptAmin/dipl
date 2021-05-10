@@ -51,6 +51,9 @@
       <HintPath>..\packages\WMPLib.1.0.0\lib\Interop.WMPLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -62,7 +65,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -90,9 +96,12 @@
     <Compile Include="Assets\UserControls\BindingPasswordBox.xaml.cs">
       <DependentUpon>BindingPasswordBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105090824436_Player.cs" />
-    <Compile Include="Migrations\202105090824436_Player.designer.cs">
-      <DependentUpon>202105090824436_Player.cs</DependentUpon>
+    <Compile Include="Assets\UserControls\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105091312536_Player.cs" />
+    <Compile Include="Migrations\202105091312536_Player.designer.cs">
+      <DependentUpon>202105091312536_Player.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -105,6 +114,9 @@
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Sleeper.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Converters\WidthConverter.cs" />
     <Compile Include="Pages\PlaylistEditPage.xaml.cs">
       <DependentUpon>PlaylistEditPage.xaml</DependentUpon>
@@ -129,6 +141,7 @@
     </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\AuthViewModel.cs" />
     <Compile Include="ViewModels\ErrorViewModelBase.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -162,6 +175,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\UserControls\BindingPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\UserControls\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,8 +255,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202105090824436_Player.resx">
-      <DependentUpon>202105090824436_Player.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105091312536_Player.resx">
+      <DependentUpon>202105091312536_Player.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -251,15 +272,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\anime.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\lp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\account-default.jpg" />
+    <Resource Include="Assets\playlist-default.jpg" />
+    <Resource Include="Assets\song-default.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -45,11 +45,10 @@ namespace dipl.Models
                 }
                 else
                 {
-                    return ((ImageSource)(new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative)))).ToBytes();
+                    return ((ImageSource)(new BitmapImage(new Uri("../../Assets/song-default.jpg", UriKind.Relative)))).ToBytes();
                 }
             }
-            ///////////////////////////////////////////////////////////////////////////////////убрать когда подключу плеер
-            catch { return ((ImageSource)(new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative)))).ToBytes(); }
+            catch { return ((ImageSource)(new BitmapImage(new Uri("../../Assets/song-default.jpg", UriKind.Relative)))).ToBytes(); }
         }
     }
 }

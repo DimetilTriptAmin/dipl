@@ -25,8 +25,7 @@ namespace dipl.Models
         {
             Name = name;
             Audios = new ObservableCollection<Audio>();
-            // TODO: Добавить картинку по умолчанию
-            Image = ((ImageSource)(new BitmapImage(new Uri("../../Assets/anime.jpg", UriKind.Relative)))).ToBytes();
+            Image = ((ImageSource)(new BitmapImage(new Uri("../../Assets/playlist-default.jpg", UriKind.Relative)))).ToBytes();
         }
 
         public Playlist(string name, ObservableCollection<Audio> audios, byte[] imageSource)

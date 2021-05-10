@@ -1,4 +1,6 @@
-﻿using dipl.Pages;
+﻿using dipl.Models;
+using dipl.Models.Data;
+using dipl.Pages;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using dipl.Windows;
@@ -91,9 +93,14 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    MainWindow mw = new MainWindow();
-                    Application.Current.MainWindow.Close();
-                    mw.ShowDialog();
+                    User user = new User() { Username = "Guest" };
+                    Account account = DataHandler.GetAccount(user);
+                    if(account == null)
+                    {
+                        DataHandler.Register(user);
+                        account = DataHandler.GetAccount(user);
+                    }
+                    App.CurrentAccount = account;
                 });
             }
         }
@@ -126,7 +133,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.Theme = "dark";
+                    App.SetTheme("dark");
                 });
             }
         }
@@ -137,7 +144,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.Theme = "light";
+                    App.SetTheme("light");
                 });
             }
         }

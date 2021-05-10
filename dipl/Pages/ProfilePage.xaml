@@ -20,7 +20,7 @@
             <Border>
                 <Rectangle x:Name="BlurringShape" Margin="3,3,3,-130">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" />
+                        <ImageBrush ImageSource="{Binding BgImage}" Stretch="UniformToFill" />
                     </Rectangle.Fill>
                     <Rectangle.Effect>
                         <BlurEffect KernelType="Gaussian" Radius="3" />
@@ -203,21 +203,39 @@
                     <Button Content="{DynamicResource p_Logout}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="{DynamicResource MainTextColor}"
-                            IsEnabled="{Binding CanValidate}"
                             Command="{Binding LogoutCommand}"
                             BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
                             Margin="100,20,100,20" FontSize="20">
                     </Button>
-                    <Button Content="{DynamicResource p_Delete}" Height="50"
+                    <Grid>
+                        <Grid>
+                            <Button Content="{DynamicResource p_Confirm}" Height="50"
                             Style="{StaticResource MaterialDesignFlatLightBgButton}"
                             Foreground="{DynamicResource MainTextColor}"
-                            IsEnabled="{Binding CanValidate}"
-                            Command="{Binding ChangePassword}"
+                                    Command="{Binding DeleteCommand}"
                             BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
-                            Margin="100,20,100,20" FontSize="20">
-                    </Button>
+                            Margin="100,20,100,20" FontSize="20" HorizontalAlignment="Left">
+                            </Button>
+                            <Button Content="{DynamicResource p_Cancel}" Height="50"
+                                    Command="{Binding CancelCommand}"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                            Foreground="{DynamicResource MainTextColor}"
+                            BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
+                            Margin="100,20,100,20" FontSize="20" HorizontalAlignment="Right">
+                            </Button>
+                        </Grid>
+                        <Button Content="{DynamicResource p_Delete}" Height="50"
+                            Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                            Foreground="{DynamicResource MainTextColor}"
+                            Command="{Binding ShowDeleteCommand}"
+                            BorderBrush="{x:Null}" Background="{DynamicResource ButtonBgColor}"
+                            Margin="100,20,100,20" FontSize="20"
+                                Visibility="{Binding IsDeleting}"/>
+
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <uc:Notification Message="{Binding Notification}"/>
     </Grid>
 </Page>

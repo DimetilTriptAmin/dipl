@@ -1,4 +1,5 @@
 ﻿<Page x:Class="dipl.Pages.PlaylistsPage"
+      xmlns:uc="clr-namespace:dipl.Assets.UserControls"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -25,7 +26,7 @@
             <Border>
                 <Rectangle x:Name="BlurringShape" Margin="3,3,3,-130">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="/dipl;component/Assets/anime.jpg" Stretch="UniformToFill" />
+                        <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
                     </Rectangle.Fill>
                     <Rectangle.Effect>
                         <BlurEffect KernelType="Gaussian" Radius="3" />
@@ -134,14 +135,18 @@
                                                 <Button Margin="5"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Height="50" Width="50"
+                                                        DataContext="{Binding DataContext, ElementName=Playlists}"
                                                     materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            Background="#00000000" BorderBrush="#00000000">
+                                            Background="#00000000" BorderBrush="#00000000"
+                                                          Command="{Binding PlaylistPlayCommand}"  
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}">
                                                     <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                                 </Button>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <Button
+                                                     
                                                 materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
@@ -201,5 +206,6 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
+        <uc:Notification Message="{Binding Notification}"/>
     </Grid>
 </Page>

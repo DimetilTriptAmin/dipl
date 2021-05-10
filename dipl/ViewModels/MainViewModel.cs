@@ -4,15 +4,10 @@ using dipl.Pages;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace dipl.ViewModels
 {
@@ -22,7 +17,6 @@ namespace dipl.ViewModels
 
         private readonly PlaylistsViewModel playlistsViewModel;
         private readonly ProfileViewModel profileViewModel;
-        private readonly HomeViewModel homeViewModel;
 
         private readonly Sleeper sleeper;
 
@@ -31,21 +25,33 @@ namespace dipl.ViewModels
             get => _navigationStore.CurrentViewModel;
         }
 
+        private void notifyProgress()
+        {
+            OnPropertyChanged(nameof(Position));
+            OnPropertyChanged(nameof(PositionTime));
+        }
+
         public MainViewModel(NavigationStore navigationStore)
         {
 
             App.AudioPlayer.AudioSelected += () =>
             {
-
+                OnPropertyChanged(nameof(DurationTime));
+                OnPropertyChanged(nameof(Duration));
+                OnPropertyChanged(nameof(CurrentAudioName));
+                OnPropertyChanged(nameof(Image));
             };
+
+            App.AudioPlayer.PlayingStatusChanged += () => OnPropertyChanged(nameof(IsPlaying));
+
+            App.AudioPlayer.ProgressChanged += notifyProgress;
 
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
-            homeViewModel = new HomeViewModel(_navigationStore);
             playlistsViewModel = new PlaylistsViewModel(_navigationStore);
             profileViewModel = new ProfileViewModel();
-            _navigationStore.CurrentViewModel = homeViewModel;
+            _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
 
             sleeper = new Sleeper();
             sleeper.PropertyChanged += (s, arg) => RemainingTime = sleeper.RemainingTime.ToString(@"mm\:ss");
@@ -69,26 +75,13 @@ namespace dipl.ViewModels
             });
         }
 
-        private bool _isPlaying = false;
         public string IsPlaying
         {
             get
             {
-                return _isPlaying? "Pause":"Play";
+                if (App.AudioPlayer.PlayingStatus == Status.Paused) return "Play";
+                else return "Pause";
             }
-            set
-            {
-                if (value == "Pause")
-                {
-                    _isPlaying = true;
-                }
-                else
-                {
-                    _isPlaying = false;
-                }
-                OnPropertyChanged("IsPlaying");
-            }
-
         }
 
         public double Position
@@ -100,9 +93,11 @@ namespace dipl.ViewModels
                 OnPropertyChanged(nameof(Position));
             }
         }
-        public TimeSpan PositionTime => App.AudioPlayer.PositionTime;
-        public double Duration => App.AudioPlayer.CurrentAudio.DurationTime == null?0: TimeSpan.Parse(App.AudioPlayer.CurrentAudio.DurationTime).TotalSeconds;
+        public string PositionTime => App.AudioPlayer.PositionTime.ToString(@"hh\:mm");
+        public double Duration => App.AudioPlayer.CurrentAudio.DurationTime == null? 0: TimeSpan.Parse(App.AudioPlayer.CurrentAudio.DurationTime).TotalMinutes;
         public string DurationTime => App.AudioPlayer.CurrentAudio.DurationTime;
+        public ImageSource Image => App.AudioPlayer.CurrentAudio.Image.ToImage();
+        public string CurrentAudioName => App.AudioPlayer.CurrentAudio.Name;
 
         private double _frameOpacity = 1;
         public double FrameOpacity
@@ -182,13 +177,10 @@ namespace dipl.ViewModels
                 {
                     if(App.AudioPlayer.PlayingStatus == Status.Paused)
                     {
-                        App.AudioPlayer.SelectAudio(App.AudioPlayer.CurrentIndex);
-                        IsPlaying = "Pause";
                         App.AudioPlayer.Play();
                     }
-                    if (App.AudioPlayer.PlayingStatus == Status.Playing)
+                    else
                     {
-                        IsPlaying = "Play";
                         App.AudioPlayer.Pause();
                     }
                 });
@@ -296,7 +288,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = homeViewModel;
+                    _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
                 });
             }
         }
@@ -319,6 +311,41 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = new ReservedPlaylistViewModel(false);
+                });
+            }
+        }
+
+        public ICommand ThumbDragStarted
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.ProgressChanged -= notifyProgress;
+                    App.AudioPlayer.Pause();
+                });
+            }
+        }
+
+        public ICommand ThumbDragCompleted
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.Play();
+                    App.AudioPlayer.ProgressChanged += notifyProgress;
+                });
+            }
+        }
+
+        public ICommand ThumbDragDelta
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    OnPropertyChanged(nameof(PositionTime));
                 });
             }
         }

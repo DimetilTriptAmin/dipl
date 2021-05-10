@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace dipl.ViewModels
 {
-    class ReservedPlaylistViewModel : ViewModelBase
+    class ReservedPlaylistViewModel : ErrorViewModelBase
     {
         public ICollectionView PlaylistView { get; }
 
@@ -85,7 +86,8 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        //TODO: error
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }
@@ -98,10 +100,23 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.CurrentAccount.Playlists[0].Audios.Add(Playlist[(int)obj]);
-                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], (Playlist[(int)obj])))
                     {
-                        //TODO ошибка
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
+                });
+            }
+        }
+
+        public ICommand AudioPlayCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.Queue = Playlist;
+                    App.AudioPlayer.SelectAudio((int)obj);
                 });
             }
         }
@@ -115,7 +130,8 @@ namespace dipl.ViewModels
                     App.CurrentAccount.Playlists[0].Audios.Clear();
                     if (!DataHandler.DeletePlaylist(App.CurrentAccount.Playlists[0], false))
                     {
-                        //TODO ошибка
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }
@@ -137,28 +153,32 @@ namespace dipl.ViewModels
         {
             get
             {
-                return new RelayCommand((obj) => {
-                    Playlist Queue = new Playlist("Queue");
-                    Queue.Audios = Playlist;
+                return new RelayCommand((obj) =>
+                {
+                    Playlist Queue = App.CurrentAccount.Playlists[0];
                     foreach (string filename in (string[])obj)
                     {
                         Queue.Audios.Add(new Audio(filename, false));
+                        if (DataHandler.AddAudio(Queue, new Audio(filename, false)))
+                        {
+
+                            Playlist = Queue.Audios;
+                        }
+                        else
+                        {
+                            Notification = mergedDict["g_DBerror"].ToString();
+                        }
                     }
-                    if (DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], Queue))
-                    {
-                        Playlist = Queue.Audios;
-                    }
-                    else
-                    {
-                        //TODO ошибка
-                    }
+
                 });
             }
         }
 
+        public ImageSource Image => App.AudioPlayer.CurrentAudio.Image.ToImage();
+
         public ReservedPlaylistViewModel(bool isLiked)
         {
-
+            App.AudioPlayer.AudioSelected += () => { OnPropertyChanged(nameof(Image)); };
             if (isLiked)
             {
                 Playlist = DataHandler.LoadLiked();

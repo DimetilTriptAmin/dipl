@@ -34,5 +34,19 @@ namespace dipl.Windows
                 this.WindowState = System.Windows.WindowState.Normal;
             }
         }
+
+        private void ProgressBar_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            ((MainViewModel)(this.DataContext)).ThumbDragStarted.Execute(null);
+        }
+
+        private void ProgressBar_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            ((MainViewModel)(this.DataContext)).ThumbDragCompleted.Execute(null);
+        }
+        private void ProgressBar_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            ((MainViewModel)(this.DataContext)).ThumbDragDelta.Execute(null);
+        }
     }
 }

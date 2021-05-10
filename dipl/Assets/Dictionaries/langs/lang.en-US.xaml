@@ -9,6 +9,8 @@
     <v:String x:Key="g_Search">Search</v:String>
     <v:String x:Key="g_Profile">Profile</v:String>
     <v:String x:Key="g_Queue">Queue</v:String>
+    <v:String x:Key="g_DBerror">Error occured while updating database.</v:String>
+    <v:String x:Key="g_NoFile">File not found.</v:String>
 
 
     <!--main-->
@@ -40,6 +42,9 @@
     <v:String x:Key="p_Logout">Log out</v:String>
     <v:String x:Key="p_Delete">Delete account</v:String>
     <v:String x:Key="p_Wrong">Incorrect password.</v:String>
+    <v:String x:Key="p_PassChanged">Password have been changed.</v:String>
+    <v:String x:Key="p_Confirm">Confirm</v:String>
+    <v:String x:Key="p_Cancel">Cancel</v:String>
 
     <!-- login&register -->
 
@@ -63,4 +68,8 @@
     <v:String x:Key="l_ShortPass">The password must be at least 5 characters long.</v:String>
     <v:String x:Key="l_EqualPass">Passwords must be equal.</v:String>
     <v:String x:Key="l_Wrong">Wrong username or password.</v:String>
+
+    <!--Admin-->
+    <v:String x:Key="a_Admin">Admin panel</v:String>
+    
 </ResourceDictionary>

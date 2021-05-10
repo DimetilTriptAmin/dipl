@@ -10,10 +10,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace dipl.ViewModels
 {
-    class PlaylistsViewModel : ViewModelBase
+    class PlaylistsViewModel : ErrorViewModelBase
     {
         private readonly NavigationStore _navigationStore;
 
@@ -65,7 +66,7 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        //TODO: error
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }
@@ -86,7 +87,8 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        //TODO: ошибка
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }
@@ -98,20 +100,36 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    foreach (Audio audio in Playlists[(int)obj+2].Audios)
+                    foreach (Audio audio in Playlists[(int)obj + 2].Audios)
                     {
                         Playlists[0].Audios.Add(audio);
-                    }
-                    if (!DataHandler.UpdatePlaylist(Playlists[0], Playlists[0]))
-                    {
-                        //TODO ошибка
+                        if (!DataHandler.AddAudio(Playlists[0], audio))
+                        {
+                            Notification = "";
+                            Notification = mergedDict["g_DBerror"].ToString();
+                        }
                     }
                 });
             }
         }
 
+        public ICommand PlaylistPlayCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.Queue = Playlists[Convert.ToInt32(obj)+2].Audios;
+                    App.AudioPlayer.SelectAudio(0);
+                });
+            }
+        }
+
+        public ImageSource Image => App.AudioPlayer.CurrentAudio.Image.ToImage();
+
         public PlaylistsViewModel(NavigationStore navigationStore)
         {
+            App.AudioPlayer.AudioSelected += () => { OnPropertyChanged(nameof(Image)); };
             _navigationStore = navigationStore;
             _playlists = App.CurrentAccount.Playlists;
             PlaylistsView = CollectionViewSource.GetDefaultView(Playlists.Skip(2));

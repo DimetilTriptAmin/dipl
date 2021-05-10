@@ -37,6 +37,7 @@ namespace dipl
             {
 				if(value == null)
                 {
+					AudioPlayer.Pause();
 					_currentAccount = null;
 					AuthWindow aw = new AuthWindow();
 					Application.Current.MainWindow.Close();
@@ -148,42 +149,39 @@ namespace dipl
 			}
 		}
 
-		public static string Theme
-		{
-			set
-			{
+        public static void SetTheme(string value)
+        {
 
-				if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException("value");
 
-				ResourceDictionary dict = new ResourceDictionary();
-				switch (value)
-				{
-					case "light":
-						dict.Source = new Uri("Assets/Dictionaries/themes/theme.light.xaml", UriKind.Relative);
-						break;
-					default:
-						dict.Source = new Uri("Assets/Dictionaries/themes/theme.dark.xaml", UriKind.Relative);
-						break;
-				}
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (value)
+            {
+                case "light":
+                    dict.Source = new Uri("Assets/Dictionaries/themes/theme.light.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("Assets/Dictionaries/themes/theme.dark.xaml", UriKind.Relative);
+                    break;
+            }
 
-				//3. Находим старую ResourceDictionary и удаляем его и добавляем новую ResourceDictionary
-				ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
-											  where d.Source != null && d.Source.OriginalString.StartsWith("Assets/Dictionaries/themes/theme.")
-											  select d).First();
-				if (oldDict != null)
-				{
-					int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
-					Application.Current.Resources.MergedDictionaries.Remove(oldDict);
-					Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
-				}
-				else
-				{
-					Application.Current.Resources.MergedDictionaries.Add(dict);
-				}
+            //3. Находим старую ResourceDictionary и удаляем его и добавляем новую ResourceDictionary
+            ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
+                                          where d.Source != null && d.Source.OriginalString.StartsWith("Assets/Dictionaries/themes/theme.")
+                                          select d).First();
+            if (oldDict != null)
+            {
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDict);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
+            }
+            else
+            {
+                Application.Current.Resources.MergedDictionaries.Add(dict);
+            }
 
-			}
-		}
-	}
+        }
+    }
 	public static class SecureStringExtension
 	{
 		public static bool IsEqualTo(this SecureString ss1, SecureString ss2)

@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 
 namespace dipl.ViewModels
 {
-    class PlaylistViewModel : ViewModelBase
+    class PlaylistViewModel : ErrorViewModelBase
     {
         private readonly NavigationStore _navigationStore;
 
@@ -64,7 +64,8 @@ namespace dipl.ViewModels
                     }
                     else
                     {
-                        //TODO: error
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }
@@ -82,6 +83,18 @@ namespace dipl.ViewModels
             }
         }
 
+        public ICommand AudioPlayCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    App.AudioPlayer.Queue = Playlist.Audios;
+                    App.AudioPlayer.SelectAudio((int)obj);
+                });
+            }
+        }
+
         public ICommand QueueAddCommand
         {
             get
@@ -89,9 +102,10 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.CurrentAccount.Playlists[0].Audios.Add(Playlist.Audios[(int)obj]);
-                    if (!DataHandler.UpdatePlaylist(App.CurrentAccount.Playlists[0], App.CurrentAccount.Playlists[0]))
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], Playlist.Audios[(int)obj]))
                     {
-                        //TODO ошибка
+                        Notification = "";
+                        Notification = mergedDict["g_DBerror"].ToString();
                     }
                 });
             }

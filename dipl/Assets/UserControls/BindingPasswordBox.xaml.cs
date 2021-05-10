@@ -36,7 +36,6 @@ namespace dipl.Assets.UserControls
 
             TextBox.TextChanged += (sender, args) => {
                 PasswordBox.Password = TextBox.Text;
-                
             };
 
             PasswordBox.PasswordChanged += (sender, args) => {

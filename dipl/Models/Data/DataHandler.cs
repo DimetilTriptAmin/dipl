@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Security;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace dipl.Models.Data
 {
-    class DataHandler
+    public static class DataHandler
     {
         public static User CheckUser(string username, SecureString password)
         {
@@ -22,10 +24,66 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return user;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return null;
+                    }
+                }
+            }
+        }
+
+        public static bool DeleteAccount(Account accountToDelete)
+        {
+            using (PlayerContext pc = new PlayerContext())
+            {
+                using (var transaction = pc.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var account = pc.Accounts
+                            .Include(x => x.Playlists.Select(y => y.Audios))
+                            .Include(x => x.User)
+                            .Where(x => x.AccountId == accountToDelete.AccountId).FirstOrDefault();
+                        foreach (Playlist playlist in account.Playlists)
+                        {
+                            pc.Audios.RemoveRange(playlist.Audios);
+                        }
+                        pc.Playlists.RemoveRange(account.Playlists);
+                        pc.Users.Remove(account.User);
+                        pc.Accounts.Remove(account);
+                        pc.SaveChanges();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        } 
+
+        public static IQueryable<Account> GetAccounts()
+        {
+            using (PlayerContext pc = new PlayerContext())
+            {
+                using (var transaction = pc.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var accounts = pc.Accounts
+                            .Include(x => x.Playlists.Select(y => y.Audios))
+                            .Include(x => x.User)
+                            .Where(a => a.User.Username != "admin");
+                        transaction.Commit();
+                        return accounts;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return (IQueryable<Account>)(new ObservableCollection<Account>());
                     }
                 }
             }
@@ -47,7 +105,7 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return account;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return null;
@@ -64,8 +122,8 @@ namespace dipl.Models.Data
             {
                 User = user,
                 UserType = UserType.Regular,
-                Image = System.Text.Encoding.UTF8.GetBytes("../../Assets/anime.jpg"),
-                Playlists = new ObservableCollection<Playlist>()
+                Image = ((ImageSource)(new BitmapImage(new Uri("../../Assets/account-default.jpg", UriKind.Relative)))).ToBytes(),
+            Playlists = new ObservableCollection<Playlist>()
             };
             account.Playlists.Add(new Playlist("Queue") { PlaylistId = 0 });
             account.Playlists.Add(new Playlist("Recent") { PlaylistId = 1 });
@@ -85,7 +143,7 @@ namespace dipl.Models.Data
                         isRegistered = true;
 
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         isRegistered = false;
                     }
@@ -114,7 +172,7 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return false;
@@ -141,7 +199,32 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public static bool AddAudio(Playlist playlist, Audio audio)
+        {
+            using (PlayerContext pc = new PlayerContext())
+            {
+                using (var transaction = pc.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Playlist playlistToUpdate = pc.Playlists
+                            .Include(p => p.Audios)
+                            .Where(p => p.AccountId == playlist.AccountId && p.PlaylistId == playlist.PlaylistId).FirstOrDefault();
+                        playlistToUpdate.Audios.Add(audio);
+                        pc.SaveChanges();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
                     {
                         transaction.Rollback();
                         return false;
@@ -162,13 +245,14 @@ namespace dipl.Models.Data
                             .Include(p=>p.Audios)
                             .Where(p => p.AccountId == oldplaylist.AccountId && p.PlaylistId == oldplaylist.PlaylistId).FirstOrDefault();
                         playlistToUpdate.Name = newplaylist.Name;
+                        pc.Audios.RemoveRange(playlistToUpdate.Audios);
                         playlistToUpdate.Audios = newplaylist.Audios;
                         playlistToUpdate.Image = newplaylist.Image;
                         pc.SaveChanges();
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return false;
@@ -191,7 +275,7 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return false;
@@ -214,7 +298,7 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return false;
@@ -237,7 +321,7 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return false;
@@ -260,7 +344,7 @@ namespace dipl.Models.Data
                         transaction.Commit();
                         return true;
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                         return false;
