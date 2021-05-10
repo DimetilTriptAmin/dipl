@@ -13,15 +13,36 @@ namespace dipl.ViewModels
 {
     class AdminViewModel : ViewModelBase
     {
-        public ObservableCollection<Account> Accounts;
 
-        public ICommand RemoveCommand
+        private int _index = 0;
+        public int Index
+        {
+            get => _index;
+            set
+            {
+                _index = value;
+                OnPropertyChanged(nameof(Index));
+            }
+        }
+
+        private ObservableCollection<Account> _accounts;
+        public ObservableCollection<Account> Accounts
+        {
+            get => _accounts;
+            set
+            {
+                _accounts = value;
+                OnPropertyChanged(nameof(Accounts));
+            }
+        }
+
+        public ICommand LoginCommand
         {
             get
             {
                 return new RelayCommand((obj) =>
                 {
-                    Accounts.RemoveAt((int)obj);
+                    App.CurrentAccount = Accounts[Index];
                 });
             }
         }

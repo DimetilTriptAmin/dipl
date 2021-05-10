@@ -7,7 +7,8 @@
       xmlns:local="clr-namespace:dipl.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminPage">
+      Title="AdminPage"
+      Name="AdminPage">
 
     <Grid>
         <Grid Background="{DynamicResource MainBackgroundColor}">
@@ -53,79 +54,22 @@
                 <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
             </Grid>
 
-            <ScrollViewer Grid.Row="1"
-                      HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                      Style="{StaticResource MaterialDesignScrollViewer}" Margin="50">
-                <ScrollViewer.Resources>
-                    <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
-                </ScrollViewer.Resources>
-                <ItemsControl ItemsSource="{Binding Users}" AlternationCount="500">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="10" Background="#26D9EBE9">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="100"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <Border Width="50" Height="50">
-                                        <Border.Background>
-                                            <ImageBrush ImageSource="{Binding Image}"/>
-                                        </Border.Background>
-                                    </Border>
-
-                                    <TextBlock Text="{Binding User.Username}" 
-                                       FontSize="18" Foreground="{DynamicResource MainTextColor}" 
-                                       TextAlignment="Center"
-						        	   VerticalAlignment="Center"
-                                       TextWrapping="WrapWithOverflow"
-                                       FontFamily="Arial Black"
-                                       Margin="10"/>
-                                </StackPanel>
-
-                                <Border Grid.ColumnSpan="2">
-                                    <Grid>
-                                        <Grid.Style>
-                                            <Style TargetType="{x:Type Grid}">
-                                                <Setter Property="Opacity" Value="0"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Opacity" Value="1"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Grid.Style>
-                                        <Grid.Background>
-                                            <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
-                                        </Grid.Background>
-                                        <StackPanel
-                                        Name="controls"
-                                        Orientation="Horizontal" 
-                                        HorizontalAlignment="Right">
-                                            <Button
-                                            Height="50" Width="50" materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
-                                            Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                                            BorderBrush="#00000000" Background="{x:Null}"
-                                            Command="{Binding RemoveCommand}"
-                                            CommandParameter="{Binding Path=(ListView.AlternationIndex), 
-                                                    RelativeSource={RelativeSource TemplatedParent}}"
-                                            DataContext="{Binding DataContext, ElementName=Header}"
-                                            >
-                                                <materialDesign:PackIcon Kind="Remove" Height="40" Width="40"  VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Accounts}" AutoGenerateColumns="False" IsReadOnly="True" SelectedIndex="{Binding Index, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Binding="{Binding AccountId}"/>
+                    <DataGridTextColumn Header="username" Binding="{Binding User.Username}"/>
+                    <DataGridTextColumn Header="type" Binding="{Binding UserType}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button DataContext="{Binding DataContext, ElementName=AdminPage}" 
+                                    Command="{Binding LoginCommand}"
+                                        Content="Log in as"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Page>

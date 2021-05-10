@@ -1,9 +1,13 @@
 ﻿namespace dipl.Migrations
 {
+    using dipl.Models;
+    using dipl.Models.Data;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Security;
+    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<dipl.Models.Data.PlayerContext>
     {
@@ -14,10 +18,6 @@
 
         protected override void Seed(dipl.Models.Data.PlayerContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
         }
     }
 }

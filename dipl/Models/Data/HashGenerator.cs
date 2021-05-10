@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace dipl.Models.Data
 {
     public class HashGenerator
     {
         private static SHA256 _generator = SHA256.Create();
+
+        public static string GetHash(string input)
+        {
+            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+            return (input != null && input.Length > 0) ? ByteArrayToString(GenerateByteArrayHash(inputBytes)) : "";
+        }
 
         public static string GetHash(SecureString input)
         {
@@ -21,7 +24,7 @@ namespace dipl.Models.Data
                 bstr = Marshal.SecureStringToBSTR(input);
                 int length = Marshal.ReadInt32(bstr, -4);
                 byte[] inputBytes = new byte[length];
-                for (int x = 0; x < length; ++x)
+                for (int x = 1; x < length; ++x)
                 {
                     byte b = Marshal.ReadByte(bstr, x);
                     inputBytes[x] = b;

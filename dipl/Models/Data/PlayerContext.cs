@@ -1,13 +1,15 @@
-﻿using System;
+﻿using dipl.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dipl.Models.Data
 {
-    class PlayerContext : DbContext
+    public class PlayerContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }

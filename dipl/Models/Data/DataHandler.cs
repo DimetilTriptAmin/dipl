@@ -65,7 +65,7 @@ namespace dipl.Models.Data
             }
         } 
 
-        public static IQueryable<Account> GetAccounts()
+        public static ObservableCollection<Account> GetAccounts()
         {
             using (PlayerContext pc = new PlayerContext())
             {
@@ -77,13 +77,18 @@ namespace dipl.Models.Data
                             .Include(x => x.Playlists.Select(y => y.Audios))
                             .Include(x => x.User)
                             .Where(a => a.User.Username != "admin");
+                        ObservableCollection<Account> obsaccs = new ObservableCollection<Account>(); 
+                        foreach (Account account in accounts)
+                        {
+                            obsaccs.Add(account);
+                        }
                         transaction.Commit();
-                        return accounts;
+                        return obsaccs;
                     }
                     catch
                     {
                         transaction.Rollback();
-                        return (IQueryable<Account>)(new ObservableCollection<Account>());
+                        return new ObservableCollection<Account>();
                     }
                 }
             }
@@ -125,6 +130,7 @@ namespace dipl.Models.Data
                 Image = ((ImageSource)(new BitmapImage(new Uri("../../Assets/account-default.jpg", UriKind.Relative)))).ToBytes(),
             Playlists = new ObservableCollection<Playlist>()
             };
+            if (user.Username == "admin") account.UserType = UserType.Admin;
             account.Playlists.Add(new Playlist("Queue") { PlaylistId = 0 });
             account.Playlists.Add(new Playlist("Recent") { PlaylistId = 1 });
 

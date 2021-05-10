@@ -13,7 +13,7 @@ namespace dipl.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202105091312536_Player"; }
+            get { return "202105101141128_Player"; }
         }
         
         string IMigrationMetadata.Source

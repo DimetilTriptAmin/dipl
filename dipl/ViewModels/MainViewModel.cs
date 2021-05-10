@@ -13,6 +13,9 @@ namespace dipl.ViewModels
 {
     class MainViewModel : ViewModelBase
     {
+        private bool _isAdmin = false;
+        public bool IsAdmin => !_isAdmin;
+
         private readonly NavigationStore _navigationStore;
 
         private readonly PlaylistsViewModel playlistsViewModel;
@@ -33,7 +36,13 @@ namespace dipl.ViewModels
 
         public MainViewModel(NavigationStore navigationStore)
         {
-
+            _navigationStore = navigationStore;
+            if (App.CurrentAccount.UserType == UserType.Admin)
+            {
+                _isAdmin = true;
+                _navigationStore.CurrentViewModel = new AdminViewModel();
+            }
+            else _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
             App.AudioPlayer.AudioSelected += () =>
             {
                 OnPropertyChanged(nameof(DurationTime));
@@ -46,12 +55,10 @@ namespace dipl.ViewModels
 
             App.AudioPlayer.ProgressChanged += notifyProgress;
 
-            _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             playlistsViewModel = new PlaylistsViewModel(_navigationStore);
             profileViewModel = new ProfileViewModel();
-            _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
 
             sleeper = new Sleeper();
             sleeper.PropertyChanged += (s, arg) => RemainingTime = sleeper.RemainingTime.ToString(@"mm\:ss");
@@ -154,7 +161,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     sleeper.Sleep(TimeToSleep);
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -165,7 +172,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     sleeper.Stop();
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -183,7 +190,7 @@ namespace dipl.ViewModels
                     {
                         App.AudioPlayer.Pause();
                     }
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -194,7 +201,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.Back();
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -205,7 +212,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.Forward();
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -226,7 +233,7 @@ namespace dipl.ViewModels
                         App.AudioPlayer.AutoRestart = true;
                         App.AudioPlayer.AutoNext = false;
                     }
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -237,7 +244,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.MixPlaylist();
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -256,7 +263,7 @@ namespace dipl.ViewModels
                     {
                         Volume = App.AudioPlayer.SavedVolume;
                     }
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -267,7 +274,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = new ReservedPlaylistViewModel(true);
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -278,7 +285,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = profileViewModel;
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -289,7 +296,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = new HomeViewModel(_navigationStore);
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -300,7 +307,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = playlistsViewModel;
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -311,7 +318,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     _navigationStore.CurrentViewModel = new ReservedPlaylistViewModel(false);
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -323,7 +330,7 @@ namespace dipl.ViewModels
                 {
                     App.AudioPlayer.ProgressChanged -= notifyProgress;
                     App.AudioPlayer.Pause();
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -335,7 +342,7 @@ namespace dipl.ViewModels
                 {
                     App.AudioPlayer.Play();
                     App.AudioPlayer.ProgressChanged += notifyProgress;
-                });
+                }, (obj) => !_isAdmin);
             }
         }
 
@@ -346,7 +353,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     OnPropertyChanged(nameof(PositionTime));
-                });
+                }, (obj) => !_isAdmin);
             }
         }
     }
