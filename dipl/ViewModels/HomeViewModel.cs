@@ -65,7 +65,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    _navigationStore.CurrentViewModel = new PlaylistViewModel(Playlists[Convert.ToInt32(obj)], _navigationStore);
+                    _navigationStore.CurrentViewModel = new PlaylistViewModel(Playlists[Playlists.IndexOf((Playlist)obj)], _navigationStore);
                 });
             }
         }
@@ -76,7 +76,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.AudioPlayer.Queue = Playlists[Convert.ToInt32(obj)].Audios;
+                    App.AudioPlayer.Queue = Playlists[Playlists.IndexOf((Playlist)obj)].Audios;
                     App.AudioPlayer.SelectAudio(0);
                 });
             }
@@ -100,7 +100,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    foreach(Audio audio in Playlists[(int)obj].Audios)
+                    foreach(Audio audio in Playlists[Playlists.IndexOf((Playlist)obj)].Audios)
                     {
                         App.CurrentAccount.Playlists[0].Audios.Add(audio);
                         if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audio))

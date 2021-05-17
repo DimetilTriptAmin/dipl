@@ -99,8 +99,8 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.CurrentAccount.Playlists[0].Audios.Add(Playlist[(int)obj]);
-                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], (Playlist[(int)obj])))
+                    App.CurrentAccount.Playlists[0].Audios.Add(Playlist[Playlist.IndexOf((Audio)obj)]);
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], (Playlist[Playlist.IndexOf((Audio)obj)])))
                     {
                         Notification = "";
                         Notification = mergedDict["g_DBerror"].ToString();
@@ -116,7 +116,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.Queue = Playlist;
-                    App.AudioPlayer.SelectAudio((int)obj);
+                    App.AudioPlayer.SelectAudio(Playlist.IndexOf((Audio)obj));
                 });
             }
         }
@@ -143,8 +143,8 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    Playlist[(int)obj].IsLiked = !Playlist[(int)obj].IsLiked;
-                    DataHandler.UpdateAudio(Playlist[(int)obj]);
+                    Playlist[Playlist.IndexOf((Audio)obj)].IsLiked = !Playlist[Playlist.IndexOf((Audio)obj)].IsLiked;
+                    DataHandler.UpdateAudio(Playlist[Playlist.IndexOf((Audio)obj)]);
                 });
             }
         }

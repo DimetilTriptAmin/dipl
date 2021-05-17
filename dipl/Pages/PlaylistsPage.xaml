@@ -97,7 +97,7 @@
             <ScrollViewer.Resources>
                 <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
             </ScrollViewer.Resources>
-            <ItemsControl ItemsSource="{Binding PlaylistsView}" Name="Playlists" AlternationCount="500">
+            <ItemsControl ItemsSource="{Binding PlaylistsView}" Name="Playlists">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Viewbox>
@@ -129,7 +129,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
                                                 Command="{Binding DeletePlaylistCommand}"  
-                                                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}">
+                                                        CommandParameter="{Binding DataContext, ElementName=playlist}">
                                                     <materialDesign:PackIcon Kind="Delete" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                                 </Button>
                                                 <Button Margin="5"
@@ -140,7 +140,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
                                                           Command="{Binding PlaylistPlayCommand}"  
-                                                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}">
+                                                       CommandParameter="{Binding DataContext, ElementName=playlist}">
                                                     <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                                 </Button>
                                             </StackPanel>
@@ -154,7 +154,7 @@
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Background="#00000000" BorderBrush="#00000000"
                                                  Command="{Binding QueueAddCommand}"  
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}">
+                                                    CommandParameter="{Binding DataContext, ElementName=playlist}">
                                                     <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
                                                 </Button>
 
@@ -166,7 +166,7 @@
                                             Height="50" Width="50"
                                             Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             Command="{Binding ShowPlaylistCommand}"
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Path=(ItemsControl.AlternationIndex)}"
+                                            CommandParameter="{Binding DataContext, ElementName=playlist}"
                                             Background="#00000000" BorderBrush="#00000000">
                                                     <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
                                                 </Button>
@@ -179,6 +179,7 @@
                                            TextAlignment="Center" 
                                            TextWrapping="Wrap"
                                            FontFamily="Arial Black"
+                                           Name="playlist"
                                            Margin="10"/>
                             </StackPanel>
                         </Viewbox>
