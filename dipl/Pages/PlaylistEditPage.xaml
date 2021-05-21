@@ -22,7 +22,7 @@
                         <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
                     </Rectangle.Fill>
                     <Rectangle.Effect>
-                        <BlurEffect KernelType="Gaussian" Radius="3" />
+                        <BlurEffect KernelType="Gaussian" Radius="10" />
                     </Rectangle.Effect>
                 </Rectangle>
                 <Border.CacheMode>
