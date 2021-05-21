@@ -77,7 +77,6 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.Queue = Playlists[Playlists.IndexOf((Playlist)obj)].Audios;
-                    App.AudioPlayer.SelectAudio(0);
                 });
             }
         }

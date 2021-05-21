@@ -80,9 +80,9 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    if (DataHandler.DeleteAudio(Playlist[(int)obj]))
+                    if (DataHandler.DeleteAudio(Playlist[Playlist.IndexOf((Audio)obj)]))
                     {
-                        Playlist.RemoveAt((int)obj);
+                        Playlist.RemoveAt(Playlist.IndexOf((Audio)obj));
                     }
                     else
                     {

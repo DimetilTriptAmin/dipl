@@ -61,7 +61,7 @@ namespace dipl.ViewModels
                 {
                     if (DataHandler.DeletePlaylist(Playlists[Playlists.IndexOf((Playlist)obj)], true))
                     {
-                        Playlists.RemoveAt((int)obj+2);
+                        Playlists.RemoveAt(Playlists.IndexOf((Playlist)obj));
                         PlaylistsView.Refresh();
                     }
                     else

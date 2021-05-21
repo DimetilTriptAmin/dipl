@@ -13,7 +13,7 @@ namespace dipl.ViewModels
 {
     class MainViewModel : ViewModelBase
     {
-        private bool _isAdmin = false;
+        private readonly bool _isAdmin = false;
         public bool IsAdmin => !_isAdmin;
 
         private readonly NavigationStore _navigationStore;
@@ -82,12 +82,14 @@ namespace dipl.ViewModels
             });
         }
 
-        public string IsPlaying
+        public bool IsVolumeOff => Volume == 0;
+
+        public string IsPlaying 
         {
             get
             {
-                if (App.AudioPlayer.PlayingStatus == Status.Paused) return "Play";
-                else return "Pause";
+                if (App.AudioPlayer.PlayingStatus == Status.Playing) return "Pause";
+                else return "Play";
             }
         }
 
@@ -151,7 +153,7 @@ namespace dipl.ViewModels
         public int Volume
         {
             get { return App.AudioPlayer.Volume; }
-            set { App.AudioPlayer.Volume = value; OnPropertyChanged(nameof(Volume)); }
+            set { App.AudioPlayer.Volume = value; OnPropertyChanged(nameof(Volume)); OnPropertyChanged(nameof(IsVolumeOff)); }
         }
 
         public ICommand SleepClickCommand
@@ -182,13 +184,13 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    if(App.AudioPlayer.PlayingStatus == Status.Paused)
+                    if(App.AudioPlayer.PlayingStatus == Status.Playing)
                     {
-                        App.AudioPlayer.Play();
+                        App.AudioPlayer.Pause();
                     }
                     else
                     {
-                        App.AudioPlayer.Pause();
+                        App.AudioPlayer.Play();
                     }
                 }, (obj) => !_isAdmin);
             }

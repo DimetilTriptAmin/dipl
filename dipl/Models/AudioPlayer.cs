@@ -27,7 +27,19 @@ namespace dipl.Models
         public readonly Timer Timer;
 
         #region Props
-        public ObservableCollection<Audio> Queue { get; set; }
+        private ObservableCollection<Audio> _queue;
+        public ObservableCollection<Audio> Queue
+        {
+            get => _queue;
+            set
+            {
+                if (value.Count != 0)
+                {
+                    _queue = value;
+                    OnQueueChanged();
+                }
+            }
+        }
         public Audio CurrentAudio => Queue.Count == 0? new Audio() : Queue[CurrentIndex];
         public int CurrentIndex { get; set; }
         public int SavedVolume { get; set; }
@@ -86,6 +98,8 @@ namespace dipl.Models
                     return;
                 PlayingStatusChanged?.Invoke();
             };
+
+
             Timer = new Timer() { Interval = 50 };
             Timer.Elapsed += (s, e) =>
             {
@@ -104,6 +118,9 @@ namespace dipl.Models
                     SelectAudio(++CurrentIndex);
             };
             Queue = queue;
+            SelectAudio(0);
+            Pause();
+            Stop();
         }
 
         public void SelectAudio(int index)
@@ -111,7 +128,7 @@ namespace dipl.Models
 
             CurrentIndex = index;
 
-            if (Queue.Count==0)
+            if (Queue == null || Queue.Count==0)
                 return;
 
             if (CurrentIndex >= Queue.Count)
@@ -126,6 +143,9 @@ namespace dipl.Models
                 Queue.RemoveAt(CurrentIndex);
                 SelectAudio(CurrentIndex);
             }
+
+            if (Queue.Count == 0)
+                return;
 
             wmp.currentMedia = wmp.newMedia(CurrentAudio.SourceUrl);
             ProgressChanged?.Invoke();
@@ -187,6 +207,11 @@ namespace dipl.Models
                 Queue[i] = Queue[irnd];
                 Queue[irnd] = buff;
             }
+            SelectAudio(0);
+        }
+
+        public void OnQueueChanged()
+        {
             SelectAudio(0);
         }
         #endregion
