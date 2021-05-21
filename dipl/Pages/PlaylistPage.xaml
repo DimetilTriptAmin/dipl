@@ -73,10 +73,7 @@
             <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="500">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-						<Grid Margin="10">
-                            <Grid.Background>
-                                <SolidColorBrush Color="{DynamicResource MainColor}" Opacity="0.25"/>
-                            </Grid.Background>
+                        <Grid Margin="10" Background="{DynamicResource SongBackgroundColor}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="100"/>

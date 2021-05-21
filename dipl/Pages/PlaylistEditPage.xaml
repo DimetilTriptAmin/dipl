@@ -98,7 +98,7 @@
             <ItemsControl ItemsSource="{Binding Audios}" AlternationCount="500">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10" Background="#26D9EBE9">
+                        <Grid Margin="10" Background="{DynamicResource SongBackgroundColor}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="100"/>

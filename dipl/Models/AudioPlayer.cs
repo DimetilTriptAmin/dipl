@@ -40,7 +40,7 @@ namespace dipl.Models
                 }
             }
         }
-        public Audio CurrentAudio => Queue.Count == 0? new Audio() : Queue[CurrentIndex];
+        public Audio CurrentAudio => Queue?.Count == 0? new Audio() : Queue?[CurrentIndex];
         public int CurrentIndex { get; set; }
         public int SavedVolume { get; set; }
 
@@ -164,7 +164,7 @@ namespace dipl.Models
 
         public void Play()
         {
-            if (Queue.Count == 0)
+            if (Queue == null || Queue.Count == 0)
                 return;
 
             Timer.Start();
