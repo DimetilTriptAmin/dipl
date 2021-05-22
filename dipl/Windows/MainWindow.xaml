@@ -167,7 +167,7 @@
                 </ToggleButton>
 
             </StackPanel>
-            <Viewbox Margin="10" Grid.Row="2" VerticalAlignment="Bottom">
+            <Viewbox Grid.Row="2" VerticalAlignment="Bottom">
                 <Image Source="{Binding Image}" Stretch="UniformToFill"/>
             </Viewbox>
         </Grid>
