@@ -153,7 +153,7 @@ namespace dipl.Models
             if (App.CurrentAccount.Playlists[1].Audios.Count >= 30) App.CurrentAccount.Playlists[1].Audios.RemoveAt(29);
             if (!App.CurrentAccount.Playlists[1].Audios.Any(x => x.SourceUrl == CurrentAudio.SourceUrl))
             {
-                App.CurrentAccount.Playlists[1].Audios.Add(CurrentAudio);
+                App.CurrentAccount.Playlists[1].Audios.Insert(0, CurrentAudio);
                 DataHandler.AddAudio(App.CurrentAccount.Playlists[1], CurrentAudio);
             }
             Timer.Start();

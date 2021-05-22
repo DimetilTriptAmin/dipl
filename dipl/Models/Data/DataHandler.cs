@@ -225,7 +225,7 @@ namespace dipl.Models.Data
                         Playlist playlistToUpdate = pc.Playlists
                             .Include(p => p.Audios)
                             .Where(p => p.AccountId == playlist.AccountId && p.PlaylistId == playlist.PlaylistId).FirstOrDefault();
-                        playlistToUpdate.Audios.Add(audio);
+                        playlistToUpdate.Audios.Insert(0,audio);
                         pc.SaveChanges();
                         transaction.Commit();
                         return true;
