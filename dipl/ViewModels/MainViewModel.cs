@@ -4,6 +4,7 @@ using dipl.Pages;
 using dipl.Stores;
 using dipl.View.ViewModel;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -49,6 +50,7 @@ namespace dipl.ViewModels
                 OnPropertyChanged(nameof(Duration));
                 OnPropertyChanged(nameof(CurrentAudioName));
                 OnPropertyChanged(nameof(Image));
+                OnAudioSelected();
             };
 
             App.AudioPlayer.PlayingStatusChanged += () => OnPropertyChanged(nameof(IsPlaying));
@@ -330,8 +332,7 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.AudioPlayer.ProgressChanged -= notifyProgress;
-                    App.AudioPlayer.Pause();
+                    App.AudioPlayer.Stop();
                 }, (obj) => !_isAdmin);
             }
         }
@@ -343,7 +344,6 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.Play();
-                    App.AudioPlayer.ProgressChanged += notifyProgress;
                 }, (obj) => !_isAdmin);
             }
         }
@@ -357,6 +357,19 @@ namespace dipl.ViewModels
                     OnPropertyChanged(nameof(PositionTime));
                 }, (obj) => !_isAdmin);
             }
+        }
+
+        private void OnAudioSelected()
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                if (App.CurrentAccount.Playlists[1].Audios.Count > 30) App.CurrentAccount.Playlists[1].Audios.RemoveAt(29);
+                if (!App.CurrentAccount.Playlists[1].Audios.Any(x => x.SourceUrl == App.AudioPlayer.CurrentAudio.SourceUrl))
+                {
+                    App.CurrentAccount.Playlists[1].Audios.Insert(0, App.AudioPlayer.CurrentAudio);
+                    DataHandler.AddAudio(App.CurrentAccount.Playlists[1], App.AudioPlayer.CurrentAudio);
+                }
+            });
         }
     }
 }

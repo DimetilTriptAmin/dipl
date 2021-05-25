@@ -1,5 +1,8 @@
-﻿using dipl.Stores;
+﻿using dipl.Models.Data;
+using dipl.Stores;
 using dipl.ViewModels;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 

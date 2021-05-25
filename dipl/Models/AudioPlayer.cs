@@ -49,22 +49,29 @@ namespace dipl.Models
         {
             get
             {
-                switch (wmp.playState)
+                try
                 {
-                    case WMPPlayState.wmppsStopped:
-                        return Status.Stopped;
-                    case WMPPlayState.wmppsPaused:
-                        return Status.Paused;
-                    case WMPPlayState.wmppsPlaying:
-                        return Status.Playing;
-                    case WMPPlayState.wmppsMediaEnded:
-                        return Status.Ended;
-                    case WMPPlayState.wmppsTransitioning:
-                        return Status.Transitioning;
-                    case WMPPlayState.wmppsReady:
-                        return Status.Ready;
-                    default:
-                        return Status.Undefined;
+                    switch (wmp.playState)
+                    {
+                        case WMPPlayState.wmppsStopped:
+                            return Status.Stopped;
+                        case WMPPlayState.wmppsPaused:
+                            return Status.Paused;
+                        case WMPPlayState.wmppsPlaying:
+                            return Status.Playing;
+                        case WMPPlayState.wmppsMediaEnded:
+                            return Status.Ended;
+                        case WMPPlayState.wmppsTransitioning:
+                            return Status.Transitioning;
+                        case WMPPlayState.wmppsReady:
+                            return Status.Ready;
+                        default:
+                            return Status.Undefined;
+                    }
+                }
+                catch
+                {
+                    return Status.Undefined;
                 }
             }
         }
@@ -119,7 +126,6 @@ namespace dipl.Models
             };
             Queue = queue;
             SelectAudio(0);
-            Pause();
             Stop();
         }
 
@@ -150,12 +156,6 @@ namespace dipl.Models
             wmp.currentMedia = wmp.newMedia(CurrentAudio.SourceUrl);
             ProgressChanged?.Invoke();
             AudioSelected?.Invoke();
-            if (App.CurrentAccount.Playlists[1].Audios.Count >= 30) App.CurrentAccount.Playlists[1].Audios.RemoveAt(29);
-            if (!App.CurrentAccount.Playlists[1].Audios.Any(x => x.SourceUrl == CurrentAudio.SourceUrl))
-            {
-                App.CurrentAccount.Playlists[1].Audios.Insert(0, CurrentAudio);
-                DataHandler.AddAudio(App.CurrentAccount.Playlists[1], CurrentAudio);
-            }
             Timer.Start();
             AutoNext = true;
         }
@@ -185,7 +185,7 @@ namespace dipl.Models
 
         public void Back()
         {
-            if (this.PositionTime.TotalSeconds > 10) this.SelectAudio(this.CurrentIndex);
+            if (this.PositionTime.TotalMinutes > 10) this.SelectAudio(this.CurrentIndex);
             else SelectAudio(CurrentIndex - 1);
         }
 

@@ -136,7 +136,7 @@
                                        Margin="10"/>
                             </StackPanel>
 
-                            <TextBlock Text="04:12" Grid.Column="1" 
+                            <TextBlock Text="{Binding DurationTime}" Grid.Column="1" 
                                        FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                        TextAlignment="Center"
 						        	   VerticalAlignment="Center"
@@ -228,6 +228,6 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-        <uc:Notification Message="{Binding Notification}"/>
+        <uc:Notification Message="{Binding Notification}" Focusable="False"/>
     </Grid>
 </Page>

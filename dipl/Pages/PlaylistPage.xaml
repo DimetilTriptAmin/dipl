@@ -188,6 +188,6 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-        <uc:Notification Message="{Binding Notification}"/>
+        <uc:Notification Message="{Binding Notification}" Focusable="False"/>
     </Grid>
 </Page>
