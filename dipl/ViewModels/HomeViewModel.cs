@@ -101,8 +101,9 @@ namespace dipl.ViewModels
                 {
                     foreach(Audio audio in Playlists[Playlists.IndexOf((Playlist)obj)].Audios)
                     {
-                        App.CurrentAccount.Playlists[0].Audios.Add(audio);
-                        if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audio))
+                        Audio audioToInsert = new Audio(audio.SourceUrl, audio.IsLiked);
+                        App.CurrentAccount.Playlists[0].Audios.Add(audioToInsert);
+                        if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audioToInsert))
                         {
                             Notification = "";
                             Notification = mergedDict["g_DBerror"].ToString();
@@ -118,8 +119,9 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.CurrentAccount.Playlists[0].Audios.Add(Recent[(int)obj]);
-                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], Recent[(int)obj]))
+                    Audio audioToInsert = new Audio(Recent[(int)obj].SourceUrl, Recent[(int)obj].IsLiked);
+                    App.CurrentAccount.Playlists[0].Audios.Add(audioToInsert);
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audioToInsert))
                     {
                         Notification = "";
                         Notification = mergedDict["g_DBerror"].ToString();

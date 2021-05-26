@@ -102,8 +102,9 @@ namespace dipl.ViewModels
                 {
                     foreach (Audio audio in Playlists[Playlists.IndexOf((Playlist)obj)].Audios)
                     {
-                        Playlists[0].Audios.Add(audio);
-                        if (!DataHandler.AddAudio(Playlists[0], audio))
+                        Audio audioToInsert = new Audio(audio.SourceUrl, audio.IsLiked);
+                        Playlists[0].Audios.Add(audioToInsert);
+                        if (!DataHandler.AddAudio(Playlists[0], audioToInsert))
                         {
                             Notification = "";
                             Notification = mergedDict["g_DBerror"].ToString();

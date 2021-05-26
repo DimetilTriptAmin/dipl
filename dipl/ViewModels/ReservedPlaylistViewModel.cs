@@ -99,8 +99,9 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.CurrentAccount.Playlists[0].Audios.Add(Playlist[Playlist.IndexOf((Audio)obj)]);
-                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], (Playlist[Playlist.IndexOf((Audio)obj)])))
+                    Audio audioToInsert = new Audio(Playlist[Playlist.IndexOf((Audio)obj)].SourceUrl, Playlist[Playlist.IndexOf((Audio)obj)].IsLiked);
+                    App.CurrentAccount.Playlists[0].Audios.Add(audioToInsert);
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audioToInsert))
                     {
                         Notification = "";
                         Notification = mergedDict["g_DBerror"].ToString();

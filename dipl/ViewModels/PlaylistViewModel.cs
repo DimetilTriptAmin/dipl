@@ -58,9 +58,9 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    if (DataHandler.DeleteAudio(Audios[(int)obj]))
+                    if (DataHandler.DeleteAudio(Playlist.Audios[Playlist.Audios.IndexOf((Audio)obj)]))
                     {
-                        _playlist.Audios.RemoveAt((int)obj);
+                        Playlist.Audios.RemoveAt(Playlist.Audios.IndexOf((Audio)obj));
                     }
                     else
                     {
@@ -77,8 +77,8 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    Playlist.Audios[(int)obj].IsLiked = !Playlist.Audios[(int)obj].IsLiked;
-                    DataHandler.UpdateAudio(Playlist.Audios[(int)obj]);
+                    Playlist.Audios[Playlist.Audios.IndexOf((Audio)obj)].IsLiked = !Playlist.Audios[Playlist.Audios.IndexOf((Audio)obj)].IsLiked;
+                    DataHandler.UpdateAudio(Playlist.Audios[Playlist.Audios.IndexOf((Audio)obj)]);
                 });
             }
         }
@@ -90,7 +90,7 @@ namespace dipl.ViewModels
                 return new RelayCommand((obj) =>
                 {
                     App.AudioPlayer.Queue = Playlist.Audios;
-                    App.AudioPlayer.SelectAudio((int)obj);
+                    App.AudioPlayer.SelectAudio(Playlist.Audios.IndexOf((Audio)obj));
                 });
             }
         }
@@ -101,8 +101,10 @@ namespace dipl.ViewModels
             {
                 return new RelayCommand((obj) =>
                 {
-                    App.CurrentAccount.Playlists[0].Audios.Add(Playlist.Audios[(int)obj]);
-                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], Playlist.Audios[(int)obj]))
+                    Audio audioToInsert = new Audio(Playlist.Audios[Playlist.Audios.IndexOf((Audio)obj)].SourceUrl,
+                        Playlist.Audios[Playlist.Audios.IndexOf((Audio)obj)].IsLiked);
+                    App.CurrentAccount.Playlists[0].Audios.Add(audioToInsert);
+                    if (!DataHandler.AddAudio(App.CurrentAccount.Playlists[0], audioToInsert))
                     {
                         Notification = "";
                         Notification = mergedDict["g_DBerror"].ToString();
