@@ -363,7 +363,12 @@ namespace dipl.ViewModels
         {
             App.Current.Dispatcher.Invoke((Action)delegate
             {
-                if (App.CurrentAccount.Playlists[1].Audios.Count > 30) App.CurrentAccount.Playlists[1].Audios.RemoveAt(29);
+                if (App.CurrentAccount.Playlists[1].Audios.Count > 30)
+                {
+                    DataHandler.DeleteAudio(App.CurrentAccount.Playlists[1].Audios[30]);
+                    App.CurrentAccount.Playlists[1].Audios.RemoveAt(30);
+                }
+
                 if (!App.CurrentAccount.Playlists[1].Audios.Any(x => x.SourceUrl == App.AudioPlayer.CurrentAudio.SourceUrl))
                 {
                     App.CurrentAccount.Playlists[1].Audios.Insert(0, App.AudioPlayer.CurrentAudio);
