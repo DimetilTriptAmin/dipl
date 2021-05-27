@@ -11,6 +11,7 @@
         mc:Ignorable="d"
         MinHeight="550"
         MinWidth="710"
+        WindowState="{Binding WindowState}"
         Title="MainWindow" Height="650" Width="1000">
 
     <WindowChrome.WindowChrome>
@@ -26,8 +27,6 @@
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" 
                     Executed="MinimizeWindow_Exec"/>
-        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}"
-                        Executed="MaximizeWindow_Exec"/>
     </Window.CommandBindings>
 
     <Grid Background="{DynamicResource MenuBackgroundColor}">
@@ -209,17 +208,20 @@
                    Background="{DynamicResource MenuBackgroundColor}">
             <Button Height="30" Foreground="{DynamicResource MainTextColor}"
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Command="{x:Static SystemCommands.MinimizeWindowCommand}">
+                    Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                    materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}">
                 <materialDesign:PackIcon Kind="Minus" Height="15" Width="15" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
             </Button>
-            <ToggleButton Height="30" Foreground="{DynamicResource MainTextColor}"
+            <Button Height="30" Foreground="{DynamicResource MainTextColor}"
                           Style="{StaticResource MaterialDesignFlatButton}"
-                          Command="{x:Static SystemCommands.MaximizeWindowCommand}" >
-                <materialDesign:PackIcon Kind="SquareOutline" Height="15" Width="15" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
-            </ToggleButton>
+                          Command="{Binding ChangeWindowStateCommand}"
+                    materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}">
+                <materialDesign:PackIcon Kind="{Binding WindowStateIcon}" Height="15" Width="15" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
+            </Button>
             <Button Height="30" 
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    Foreground="Red" BorderBrush="Red" Background="{x:Null}">
+                    Foreground="Red" BorderBrush="Red" Background="{x:Null}"
+                    materialDesign:RippleAssist.Feedback="Red">
                 <materialDesign:PackIcon Kind="Close" Height="17" Width="17" VerticalAlignment="Center" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"/>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">

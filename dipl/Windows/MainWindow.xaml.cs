@@ -26,18 +26,6 @@ namespace dipl.Windows
             SystemCommands.MinimizeWindow(this);
         }
 
-        private void MaximizeWindow_Exec(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (this.WindowState == System.Windows.WindowState.Normal)
-            {
-                this.WindowState = System.Windows.WindowState.Maximized;
-            }
-            else
-            {
-                this.WindowState = System.Windows.WindowState.Normal;
-            }
-        }
-
         private void ProgressBar_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
             ((MainViewModel)(this.DataContext)).ThumbDragStarted.Execute(null);

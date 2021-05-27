@@ -84,6 +84,48 @@ namespace dipl.ViewModels
             });
         }
 
+        private System.Windows.WindowState _windowState;
+        public System.Windows.WindowState WindowState
+        {
+            get => _windowState;
+            set
+            {
+                _windowState = value;
+                OnPropertyChanged(nameof(WindowState));
+            }
+        }
+
+        private string _windowStateIcon = "SquareOutline";
+        public string WindowStateIcon
+        {
+            get => _windowStateIcon;
+            set
+            {
+                _windowStateIcon = value;
+                OnPropertyChanged(nameof(WindowStateIcon));
+            }
+        }
+
+        public ICommand ChangeWindowStateCommand
+        {
+            get
+            {
+                return new RelayCommand((obj) =>
+                {
+                    if (WindowState == System.Windows.WindowState.Normal)
+                    {
+                        WindowState = System.Windows.WindowState.Maximized;
+                        WindowStateIcon = "CheckboxMultipleBlankOutline";
+                    }
+                    else
+                    {
+                        WindowState = System.Windows.WindowState.Normal;
+                        WindowStateIcon = "SquareOutline";
+                    }
+                });
+            }
+        }
+
         public bool IsVolumeOff => Volume == 0;
 
         public string IsPlaying 

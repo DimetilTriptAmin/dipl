@@ -91,38 +91,38 @@
             </Grid>
             <Line X1="0" Y1="150" X2="{Binding ActualWidth, ElementName=Header}" Y2="150" Stroke="{DynamicResource MainTextColor}" Margin="40,0,40,0"/>
         </Grid>
-        <ScrollViewer Grid.Row="1"  Margin="50"
-                      HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Auto">
-            <ScrollViewer.Resources>
+        <ListView ItemsSource="{Binding PlaylistsView}" 
+                  Name="Playlists" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Grid.Row="1"  Margin="50">
+            <ListView.Resources>
                 <SolidColorBrush x:Key="MaterialDesignBody" Color="{DynamicResource MainColor}"/>
-            </ScrollViewer.Resources>
-            <ItemsControl ItemsSource="{Binding PlaylistsView}" Name="Playlists">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Viewbox>
-                            <StackPanel Width="200" Height="270" Margin="10">
-                                <Border Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Image}"/>
-                                    </Border.Background>
-                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
-                                        <Grid.Style>
-                                            <Style TargetType="{x:Type Grid}">
-                                                <Setter Property="Opacity" Value="0"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Opacity" Value="1"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Grid.Style>
-                                        <Grid.Background>
-                                            <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
-                                        </Grid.Background>
-                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
+            </ListView.Resources>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <StackPanel Width="200" Height="270" Margin="10">
+                            <Border Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Image}"/>
+                                </Border.Background>
+                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Setter Property="Opacity" Value="0"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="1"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{DynamicResource MainBgColor}" Opacity="0.75"/>
+                                    </Grid.Background>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Top" HorizontalAlignment="Center"
                                             Height="50" Width="50" Margin="5" 
@@ -130,9 +130,9 @@
                                             Background="#00000000" BorderBrush="#00000000"
                                                 Command="{Binding DeletePlaylistCommand}"  
                                                         CommandParameter="{Binding DataContext, ElementName=playlist}">
-                                                    <materialDesign:PackIcon Kind="Delete" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
-                                                </Button>
-                                                <Button Margin="5"
+                                                <materialDesign:PackIcon Kind="Delete" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
+                                            </Button>
+                                            <Button Margin="5"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Height="50" Width="50"
                                                         DataContext="{Binding DataContext, ElementName=Playlists}"
@@ -141,11 +141,11 @@
                                             Background="#00000000" BorderBrush="#00000000"
                                                           Command="{Binding PlaylistPlayCommand}"  
                                                        CommandParameter="{Binding DataContext, ElementName=playlist}">
-                                                    <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
-                                                </Button>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button
+                                                <materialDesign:PackIcon Kind="Play" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
+                                            </Button>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button
                                                      
                                                 materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                                 DataContext="{Binding DataContext, ElementName=Playlists}"
@@ -155,10 +155,10 @@
                                             Background="#00000000" BorderBrush="#00000000"
                                                  Command="{Binding QueueAddCommand}"  
                                                     CommandParameter="{Binding DataContext, ElementName=playlist}">
-                                                    <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
-                                                </Button>
+                                                <materialDesign:PackIcon Kind="PlaylistAdd" Height="50" Width="50" Foreground="{DynamicResource MainTextColor}"/>
+                                            </Button>
 
-                                                <Button
+                                            <Button
                                                 materialDesign:RippleAssist.Feedback="{DynamicResource MainTextColor}"
                                             DataContext="{Binding DataContext, ElementName=Playlists}"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
@@ -168,45 +168,44 @@
                                             Command="{Binding ShowPlaylistCommand}"
                                             CommandParameter="{Binding DataContext, ElementName=playlist}"
                                             Background="#00000000" BorderBrush="#00000000">
-                                                    <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
-                                                </Button>
-                                            </StackPanel>
+                                                <materialDesign:PackIcon Kind="Menu" Height="40" Width="40" Foreground="{DynamicResource MainTextColor}"/>
+                                            </Button>
                                         </StackPanel>
-                                    </Grid>
-                                </Border>
-                                <TextBlock Text="{Binding Name}" 
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="{Binding Name}" 
                                            FontSize="18" Foreground="{DynamicResource MainTextColor}" 
                                            TextAlignment="Center" 
                                            TextWrapping="Wrap"
                                            FontFamily="Arial Black"
                                            Name="playlist"
                                            Margin="10"/>
-                            </StackPanel>
-                        </Viewbox>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Name="MediaPanel">
-                            <UniformGrid.Style>
-                                <Style TargetType="{x:Type UniformGrid}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
+                        </StackPanel>
+                    </Viewbox>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Name="MediaPanel">
+                        <UniformGrid.Style>
+                            <Style TargetType="{x:Type UniformGrid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
                                  Value="true">
-                                            <Setter Property="Columns" Value="3"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
+                                        <Setter Property="Columns" Value="3"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ActualWidth, ElementName=MediaPanel, Converter={StaticResource WidthConverter}}" 
                                  Value="false">
-                                            <Setter Property="Columns" Value="5"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </UniformGrid.Style>
-                        </UniformGrid>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </ScrollViewer>
+                                        <Setter Property="Columns" Value="5"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </UniformGrid.Style>
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ListView>
         <uc:Notification Message="{Binding Notification}" Focusable="False"/>
     </Grid>
 </Page>
