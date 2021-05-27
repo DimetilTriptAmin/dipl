@@ -196,6 +196,7 @@ namespace dipl.Models
 
         public void MixPlaylist()
         {
+            if (Queue == null || Queue.Count == 0) return;
             Random rnd = new Random();
             int irnd;
             Audio buff;
